@@ -30,7 +30,20 @@ class FilaController
         // Obtém todas as filas do banco de dados via DAO
         $filas = $this->filaDAOl->getAllFilas();
         $_SESSION['filas'] = $filas;
-        // Inclui a View, passando os dados das filas
+
+        echo("A");
+        header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
+        exit();
+    }
+    public function listarFilaUsuario()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Obtém todas as filas do banco de dados via DAO
+        $filas = $this->filaDAOl->getAllFilas();
+        $_SESSION['filasuser'] = $filas;
+        
         echo("A");
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();

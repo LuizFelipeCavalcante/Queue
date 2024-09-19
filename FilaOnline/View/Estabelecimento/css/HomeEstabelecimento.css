@@ -84,6 +84,10 @@
     text-decoration: none;
     color: inherit; 
 }
+a {
+    text-decoration: none;
+    color: black;   
+}
 a:hover, a:focus {
 text-decoration: none; /* Evita o sublinhado ao passar o mouse */
 color: inherit; /* Mantém a cor ao passar o mouse */

@@ -15,7 +15,7 @@ create table users(
     id int AUTO_INCREMENT not null PRIMARY KEY,
     numeroFila VARCHAR(10),
     tempoEspera float 
-)
+);
 create table estabelecimento(
     id INT AUTO_INCREMENT not null PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
@@ -29,21 +29,25 @@ create table estabelecimento(
 
 create table funcionario(
     id INT AUTO_INCREMENT not null  PRIMARY KEY,
+    idEstabelecimento INT not null,
     cargo varchar(20) not null,
-    idEstabelecimento int not null foreign key REFERENCES estabelcimento(id),
     name VARCHAR(60) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    telefone INT NOT NULL
+    telefone INT NOT NULL,
+	FOREIGN KEY (idEstabelecimento) REFERENCES estabelecimento(id)
 );
 
 create table fila(
     id INT AUTO_INCREMENT not null PRIMARY KEY,
-    idEstabelecimento int not null foreign key REFERENCES estabelcimento(id),
+    idEstabelecimento INT not null,
     nome text not null,
-    tempoMedio FLOAT NOT NULL,
-    qntPessoasFila INT NOT NULL,
+    tempoMedio FLOAT NULL,
+    qntPessoasFila INT  NULL,
     endereco text NOT NULL,
-    img text
+    img text,
+    inicio time,
+    termino time,
+     FOREIGN KEY (idEstabelecimento) REFERENCES estabelcimento(id)
 );
 
 CREATE TABLE fila_usuario (

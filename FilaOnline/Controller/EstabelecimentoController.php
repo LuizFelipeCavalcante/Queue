@@ -116,7 +116,7 @@ switch ($action) {
                 $_SESSION['user_endereco'] = $estabelecimento->getEndereco();
                 $_SESSION['user_descricao'] = $estabelecimento->getDescricao();
                 $_SESSION['estabelecimento'] = true;
-                header('Location: ../View/Estabelecimento/index.php');
+                header('Location: ../View/Estabelecimento/HomeEstabelecimento.php');
                 exit();
             }
         }
