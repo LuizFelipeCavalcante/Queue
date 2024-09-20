@@ -88,7 +88,7 @@
 
 <body>
 <?php
-    include "../Layout/FilaExistente.php"
+    include "../Layout/HeaderEstabelecimento.php"
 ?>
 
     <!-- jQuery and Bootstrap JS -->

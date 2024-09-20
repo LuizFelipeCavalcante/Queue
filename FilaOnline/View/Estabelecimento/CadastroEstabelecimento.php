@@ -8,18 +8,164 @@
 <link rel="stylesheet" href="css/CadastroEstabelecimento.css">
 <script src="js/Cadastro.js" type="text/javascript" defer></script>
 <style>
-       
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    background-color: white;
+}
+
+
+.big-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+}
+.signup-container {
+	text-align: center;
+}
+.signup-box {
+    width: 400px;
+    background-color: #ffffff;
+    color: #808080;
+    padding: 30px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #2e9fea;
+    text-align: center;
+}
+
+    .signup-box h2 {
+        margin-bottom: 20px;
+    }
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+    }
+
+    .btnsenha{
+        width: 10%;
+    }
+
+.btn-entrar {
+    width: 100%;
+    padding: 10px;
+    background-color: #66b1e3;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-entrar:hover {
+        background-color: #4fa7e2;
+    }
+
+.bottom-text {
+    margin-top: 20px;
+}
+
+    .bottom-text p {
+        color: #66b1e3;
+        font-size: 0.9rem;
+    }
+
+    .bottom-text a {
+        color: #808080;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+    }
+
+        .bottom-text a:hover {
+            color: #9a9a9a;
+        }
+
+/* Estilo para o botão */
+.btnsenha {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Estilo para SVGs */
+svg {
+    display: inline-block;
+}
+.navbar-nav .nav-link {
+    color: #2e9fea !important; /* Cor personalizada para os links */
+    border: 1px solid #d3d3d3; /* Borda cinza claro */
+    border-radius: 4px; /* Borda arredondada */
+    padding: 8px 12px; /* Espaçamento interno */
+    margin: 2px; /* Espaçamento entre os links */
+    transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
+}
+.navbar-nav .nav-link:hover {
+    background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
+    border-color: #2e9fea; /* Cor da borda ao passar o mouse */
+    color: #2e9fea !important; /* Cor do texto ao passar o mouse */
+}
+.navbar-brand img {
+    max-height: 50px; /* Ajuste a altura da imagem do logotipo */
+}
+.navbar {
+    text-align: center; /* Centraliza o texto no header */
+}
+.navbar-collapse {
+    justify-content: center; /* Centraliza o conteúdo da barra de navegação */
+}
+/* media tela de signup para celulares */
+@media (max-width: 400px) {
+    .signup-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .btn-entrar {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
+
+.big-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* changed from 150vh to 100vh */
+    margin: 0 auto; /* added to center horizontally */
+}
     </style>
 </head>
 
 <body>
 <?php
-    include "../Layout/CadastroEstabelecimento.php"
+    include "../Layout/HeaderEstabelecimento.php"
 ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+	<div class="big-container">
 	<div class="signup-container">
         
 	    <div class="signup-box">
@@ -64,7 +210,7 @@
 	        </form>
 	    </div>
 	</div>
-
+</div>
 </body>
 
 

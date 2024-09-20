@@ -6,10 +6,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(Página atual)</span></a>
+          
                 <a class="nav-item nav-link" href="../Usuario/Login.php">Login</a>
-                <a class="nav-item nav-link" href="Estabelecimentos">Estabelecimentos</a>
-
+                <a class="nav-item nav-link" href="../Usuario/Estabelecimentos">Estabelecimentos</a>
+                <a class="nav-item nav-link" href="../Estabelecimento/HomeEstabelecimento">Filas</a>
                 <?php
                 if (!isset($_SESSION['user_id'])) {
                     echo '<a class="nav-item nav-link"><b>Deslogado</b></a>';

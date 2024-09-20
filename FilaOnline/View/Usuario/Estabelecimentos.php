@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h5 class="card-title">McDonalds</h5>
 
-                        <a href="/PaginaFila/1" class="btn btn-primary">Entrar na Fila</a>
+                        <a href="FilasPEstabelecimento.php" class="btn btn-primary">Entrar na Fila</a>
                     </div>
                 </div>
             </div>
