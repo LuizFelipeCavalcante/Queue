@@ -110,33 +110,9 @@ if (!isset($_SESSION['user_id'])) {
     </style>
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="../"><img src="../img/logo01.png" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="../">Home <span class="sr-only">(Página atual)</span></a>
-                <a class="nav-item nav-link" href="Login">Login</a>
-                <a class="nav-item nav-link" href="Estabelecimentos">Estabelecimentos</a>
-
-                <?php
-                if (!isset($_SESSION['user_id'])) {
-                    echo '<a class="nav-item nav-link"><b>Deslogado</b></a>';
-                } else {
-                    echo '<a class="nav-item nav-link" href="Perfil">Perfil</a><a class="nav-item nav-link" href="Logout">Sair</a><a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
-                    if (!isset($_SESSION['estabelecimento'])) {
-                        echo '';
-                    } else {
-                        echo '<a class="nav-item nav-link"><b>Estabelecimento</b></a>';
-                    }
-                }
-                ?>
-            </div>
-        </div>
-    </header>
+    <?php
+        include "../Layout/HeaderUsuario.php"
+    ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

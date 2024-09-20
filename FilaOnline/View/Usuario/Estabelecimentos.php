@@ -50,33 +50,9 @@
     </style>
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="../"><img src="../img/logo01.png" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="../">Home <span class="sr-only">(Página atual)</span></a>
-                <a class="nav-item nav-link" href="Login">Login</a>
-                <a class="nav-item nav-link" href="Estabelecimentos">Estabelecimentos</a>
-
-                <?php
-                if (!isset($_SESSION['user_id'])) {
-                    echo '<a class="nav-item nav-link"><b>Deslogado</b></a>';
-                } else {
-                    echo '<a class="nav-item nav-link" href="Perfil">Perfil</a><a class="nav-item nav-link" href="Logout">Sair</a><a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
-                    if (!isset($_SESSION['estabelecimento'])) {
-                        echo '';
-                    } else {
-                        echo '<a class="nav-item nav-link"><b>Estabelecimento</b></a>';
-                    }
-                }
-                ?>
-            </div>
-        </div>
-    </header>
+    <?php
+        include "../Layout/HeaderUsuario.php"
+    ?>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -87,7 +63,7 @@
         <main class="container"> <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/mcdonalds.png" class="card-img-top" alt="...">
+                    <img src="../../Img/mcdonalds.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">McDonalds</h5>
 
@@ -97,7 +73,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/bk.png" class="card-img-top" alt="...">
+                    <img src="../../Img/bk.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Burguer King</h5>
                         <a href="/PaginaFila/2" class="btn btn-primary">Entrar na Fila</a>
@@ -106,7 +82,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/Itau.png" class="card-img-top" alt="...">
+                    <img src="../../Img/Itau.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Banco Itau</h5>
 
@@ -116,7 +92,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/Santander.png" class="card-img-top" alt="...">
+                    <img src="../../Img/Santander.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Banco Santander</h5>
 
@@ -126,7 +102,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/kfc.png" class="card-img-top" alt="...">
+                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">KFC</h5>
 
@@ -136,7 +112,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/kfc.png" class="card-img-top" alt="...">
+                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">KFC</h5>
 
@@ -146,7 +122,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/kfc.png" class="card-img-top" alt="...">
+                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">KFC</h5>
 
@@ -156,7 +132,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/kfc.png" class="card-img-top" alt="...">
+                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">KFC</h5>
 
@@ -169,7 +145,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/MaterDei.png" class="card-img-top" alt="...">
+                    <img src="../../Img/MaterDei.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Mater Dei</h5>
 
@@ -179,7 +155,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/BabyBeef.png" class="card-img-top" alt="...">
+                    <img src="../../Img/BabyBeef.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Baby Beef</h5>
 
@@ -189,7 +165,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/BancoBrasil.png" class="card-img-top" alt="...">
+                    <img src="../../Img/BancoBrasil.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Banco do Brasil</h5>
 
@@ -199,7 +175,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/Bh.png" class="card-img-top" alt="...">
+                    <img src="../../Img/Bh.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Supermercados BH</h5>
                         <a href="/PaginaFila/12" class="btn btn-primary">Entrar na Fila</a>
@@ -208,7 +184,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/DetranMg.png" class="card-img-top" alt="...">
+                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Detran MG</h5>
                         <a href="/PaginaFila/13" class="btn btn-primary">Entrar na Fila</a>
@@ -217,7 +193,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/DetranMg.png" class="card-img-top" alt="...">
+                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Detran MG</h5>
                         <a href="/PaginaFila/14" class="btn btn-primary">Entrar na Fila</a>
@@ -226,7 +202,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/DetranMg.png" class="card-img-top" alt="...">
+                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Detran MG</h5>
                         <a href="/PaginaFila/15" class="btn btn-primary">Entrar na Fila</a>
@@ -235,7 +211,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../Img/DetranMg.png" class="card-img-top" alt="...">
+                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Detran MG</h5>
                         <a href="/PaginaFila/16" class="btn btn-primary">Entrar na Fila</a>
