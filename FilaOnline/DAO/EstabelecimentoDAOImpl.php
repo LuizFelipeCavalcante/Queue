@@ -101,6 +101,14 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
         return $estabelecimento;
     }
 
+    function getAllEstabelecimentos()
+    {
+
+        $sql = "SELECT * FROM estabelecimento";
+        $statement = $this->conn->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 

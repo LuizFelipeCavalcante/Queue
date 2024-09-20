@@ -59,8 +59,8 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(Página atual)</span></a>
-                <a class="nav-item nav-link" href="../FilaOnline/view/Login">Login</a>
-                <a class="nav-item nav-link" href="../FilaOnline/view/Estabelecimentos">Estabelecimentos</a>
+                <a class="nav-item nav-link" href="../FilaOnline/view/Usuario/Login">Login</a>
+                <a class="nav-item nav-link" href="../FilaOnline/view/Usuario/Estabelecimentos">Estabelecimentos</a>
 
                 <?php
                 if (!isset($_SESSION['user_id'])) {

@@ -73,7 +73,7 @@ switch ($action) {
                     $conta->getSenha()
                 )
             ) {
-                displayMessage('Registro inserido com sucesso!', '../View/Estabelecimentos.php');
+                displayMessage('Registro inserido com sucesso!', '../View/Usuario/Estabelecimentos.php');
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
@@ -104,7 +104,7 @@ switch ($action) {
                 $_SESSION['user_name'] = $conta->getName();
                 $_SESSION['user_email'] = $conta->getEmail();
                 $_SESSION['user_telefone'] = $conta->getTelefone();
-                header('Location: ../View/Estabelecimentos.php');
+                header('Location: ../View/Usuario/Estabelecimentos.php');
                 exit();
             }
         }

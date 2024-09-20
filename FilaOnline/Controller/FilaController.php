@@ -22,30 +22,30 @@ class FilaController
         $this->filaDAOl = new FilaDAOImpl($conn);
     }
 
-    public function listarFilas()
+    public function listarFilas($idEstabelecimento)
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         // Obtém todas as filas do banco de dados via DAO
-        $filas = $this->filaDAOl->getAllFilas();
+        $filas = $this->filaDAOl->getAllFilas($idEstabelecimento);
         $_SESSION['filas'] = $filas;
 
         echo("A");
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
-    public function listarFilaUsuario()
+    public function listarFilaUsuario($idFila)
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         // Obtém todas as filas do banco de dados via DAO
-        $filas = $this->filaDAOl->getAllFilas();
-        $_SESSION['filasuser'] = $filas;
+        $filauser = $this->filaDAOl->getFilaUsuario($idFila);
+        $_SESSION['filasuser'] = $filauser;
         
         echo("A");
-        header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
+        header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
 }
@@ -88,7 +88,16 @@ switch ($action) {
         }
         $conn = Database::getConnection();
         $filaController = new FilaController($conn);
-        $filaController->listarFilas();
+        $filaController->listarFilas($_SESSION['user_id']);
+        break;
+
+    case 'readfila_usuario':
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+         }
+        $conn = Database::getConnection();
+        $filaController = new FilaController($conn);
+        $filaController->listarFilaUsuario($id);
         break;
 
     default:

@@ -17,212 +17,92 @@
 
 <body>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        .navbar-nav .nav-link {
-            color: #2e9fea !important; /* Cor personalizada para os links */
-            border: 1px solid #d3d3d3; /* Borda cinza claro */
-            border-radius: 4px; /* Borda arredondada */
-            padding: 8px 12px; /* Espaçamento interno */
-            margin: 2px; /* Espaçamento entre os links */
-            transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
-        }
-        .navbar-nav .nav-link:hover {
-            background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
-            border-color: #2e9fea; /* Cor da borda ao passar o mouse */
-            color: #2e9fea !important; /* Cor do texto ao passar o mouse */
-        }
-        .navbar-brand img {
-            max-height: 50px; /* Ajuste a altura da imagem do logotipo */
-        }
-        .navbar {
-            text-align: center; /* Centraliza o texto no header */
-        }
-        .navbar-collapse {
-            justify-content: center; /* Centraliza o conteúdo da barra de navegação */
-        }
-    </style>
-</head>
-<body>
-    <?php
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Navbar</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <style>
+            .navbar-nav .nav-link {
+                color: #2e9fea !important;
+                /* Cor personalizada para os links */
+                border: 1px solid #d3d3d3;
+                /* Borda cinza claro */
+                border-radius: 4px;
+                /* Borda arredondada */
+                padding: 8px 12px;
+                /* Espaçamento interno */
+                margin: 2px;
+                /* Espaçamento entre os links */
+                transition: background-color 0.3s, border-color 0.3s;
+                /* Transição suave para o hover */
+            }
+
+            .navbar-nav .nav-link:hover {
+                background-color: #e9f5fc;
+                /* Cor de fundo ao passar o mouse */
+                border-color: #2e9fea;
+                /* Cor da borda ao passar o mouse */
+                color: #2e9fea !important;
+                /* Cor do texto ao passar o mouse */
+            }
+
+            .navbar-brand img {
+                max-height: 50px;
+                /* Ajuste a altura da imagem do logotipo */
+            }
+
+            .navbar {
+                text-align: center;
+                /* Centraliza o texto no header */
+            }
+
+            .navbar-collapse {
+                justify-content: center;
+                /* Centraliza o conteúdo da barra de navegação */
+            }
+        </style>
+    </head>
+
+    <body>
+        <?php
         include "../Layout/HeaderUsuario.php"
-    ?>
+            ?>
 
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- jQuery and Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <div class="page">
-        <main class="container"> <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/mcdonalds.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">McDonalds</h5>
+        <div class="page">
 
-                        <a href="FilasPEstabelecimento.php" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/bk.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Burguer King</h5>
-                        <a href="/PaginaFila/2" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/Itau.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Banco Itau</h5>
+            <main class="container">
+                <div class="row justify-content-center">
 
-                        <a href="/PaginaFila/3" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/Santander.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Banco Santander</h5>
+                    <?php if (!empty($estabelecimentos)): ?>
+                        <?php foreach (array_reverse($estabelecimentos) as $fila): ?>
 
-                        <a href="/PaginaFila/4" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">KFC</h5>
+                            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
+                                    <img src="../../Img/mcdonalds.png" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo htmlspecialchars($fila['name']); ?></h5>
 
-                        <a href="/PaginaFila/5" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">KFC</h5>
+                                        <a href="/PaginaFila/1" class="btn btn-primary">Entrar na Fila</a>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <a href="/PaginaFila/6" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">KFC</h5>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum estabelecimento encontrado</p>
+                    <?php endif; ?>
 
-                        <a href="/PaginaFila/7" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/kfc.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">KFC</h5>
-
-                        <a href="/PaginaFila/8" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-
+            </main>
+            <br>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/MaterDei.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Mater Dei</h5>
-
-                        <a href="/PaginaFila/9" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/BabyBeef.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Baby Beef</h5>
-
-                        <a href="/PaginaFila/10" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/BancoBrasil.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Banco do Brasil</h5>
-
-                        <a href="/PaginaFila/11" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/Bh.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Supermercados BH</h5>
-                        <a href="/PaginaFila/12" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Detran MG</h5>
-                        <a href="/PaginaFila/13" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Detran MG</h5>
-                        <a href="/PaginaFila/14" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Detran MG</h5>
-                        <a href="/PaginaFila/15" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 15rem; border-radius: 20px; padding: 10px; margin-bottom: 30px">
-                    <img src="../../Img/DetranMg.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Detran MG</h5>
-                        <a href="/PaginaFila/16" class="btn btn-primary">Entrar na Fila</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-    <br>
-</div>
-</body>
+    </body>
 
 </html>

@@ -58,10 +58,10 @@ class FilaDAOImpl implements FilaDAO
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    function getAllFilas()
+    function getAllFilas($idEstabelecimento)
     {
 
-        $sql = "SELECT * FROM fila";
+        $sql = "SELECT * FROM fila WHERE idEstabelecimento = $idEstabelecimento";
 
         $statement = $this->conn->query($sql);
 
@@ -70,13 +70,12 @@ class FilaDAOImpl implements FilaDAO
     function getFilaUsuario($idFila)
     {
 
-        $sql = "SELECT * FROM fila_usuario WHERE idFila = ";
+        $sql = "SELECT * from fila left join fila_usuario on(fila.id = idFila) join users on(users.id = idUsuario) WHERE fila.id = $idFila;";
 
-        $statement = $this->conn->prepare($sql);
-        $statement->bindParam(':idFila', $idFila);
-        $statement->execute();
+        $statement = $this->conn->query($sql);
 
-        return $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function deleteFila($idFila)

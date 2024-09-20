@@ -8,13 +8,13 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="../../index.php">Home <span class="sr-only">(Página atual)</span></a>
                 <a class="nav-item nav-link" href="Login">Login</a>
-                <a class="nav-item nav-link" href="Estabelecimentos">Estabelecimentos</a>
+                <a class="nav-item nav-link" href="../../Controller/EstabelecimentoController?action=readall_estabelecimento">Estabelecimentos</a>
 
                 <?php
                 if (!isset($_SESSION['user_id'])) {
                     echo '<a class="nav-item nav-link"><b>Deslogado</b></a>';
                 } else {
-                    echo '<a class="nav-item nav-link" href="Perfil">Perfil</a><a class="nav-item nav-link" href="Logout">Sair</a><a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
+                    echo '<a class="nav-item nav-link" href="Perfil">Perfil</a><a class="nav-item nav-link" href="../Logout">Sair</a><a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
                     if (!isset($_SESSION['estabelecimento'])) {
                         echo '';
                     } else {
