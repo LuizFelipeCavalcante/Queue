@@ -106,7 +106,7 @@
 
 <body>
     <?php
-    include "../Layout/HeaderEstabelecimento.php"
+    include "../Layout/HeaderEstabelecimento.php";
         ?>
 
     <!-- jQuery and Bootstrap JS -->

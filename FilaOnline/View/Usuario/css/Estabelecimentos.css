@@ -43,6 +43,10 @@
     padding: 10px 20px;
     font-size: 0.875rem; 
 }
+.fds{
+    background-color: white;
+    border: none;
+}
 
 .card:hover {
     transform: translateY(-5px); 

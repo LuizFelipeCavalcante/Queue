@@ -79,6 +79,12 @@ class Fila {
     public function setTermino($termino) {
         $this->termino = $termino;
     }
+
+    // Metodos
+
+    public function entrarFila($userId, $filaId) {
+        
+    }
 }
 
 ?>

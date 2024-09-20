@@ -31,7 +31,7 @@ class FilaController
         $filas = $this->filaDAOl->getAllFilas($idEstabelecimento);
         $_SESSION['filas'] = $filas;
 
-        echo("A");
+        echo ("A");
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
@@ -43,11 +43,22 @@ class FilaController
         // Obtém todas as filas do banco de dados via DAO
         $filauser = $this->filaDAOl->getFilaUsuario($idFila);
         $_SESSION['filasuser'] = $filauser;
-        
-        echo("A");
+
+        echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
+    // public function gerarnumerofila($idusuario)
+    // {
+
+
+    //     $this->filaDAOl->gerarnumerofila($idusuario);
+
+
+    //     exit();
+    // }
+
+
 }
 
 
@@ -94,10 +105,26 @@ switch ($action) {
     case 'readfila_usuario':
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
-         }
+        }
         $conn = Database::getConnection();
         $filaController = new FilaController($conn);
         $filaController->listarFilaUsuario($id);
+        break;
+    case 'entrar_fila':
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $userid = $_SESSION['user_id'];
+        $filaid = $id;
+        if ($filaDao->entrarFila($userid, $filaid)) {
+
+            displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
+        
+        } else {
+            displayMessage('Erro ao entrar na fila.');
+        }
+
         break;
 
     default:

@@ -5,5 +5,6 @@ interface EstabelecimentoDAO {
     public function validaConta($email, $senha);
     public function createConta($nome, $email, $cnpj, $endereco, $descricao, $senha);
     public function getAllEstabelecimentos();
+    function getFilaEstabelecimento($idEstabelecimento);
 }
 

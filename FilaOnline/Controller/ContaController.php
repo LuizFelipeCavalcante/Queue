@@ -131,6 +131,7 @@ switch ($action) {
             }
         }
         break;
+        
 
     default:
         displayMessage('Ação não reconhecida.');

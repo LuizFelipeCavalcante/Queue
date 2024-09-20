@@ -88,4 +88,32 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->execute();
     }
+    function entrarFila($idUsuario, $idFila)
+    {
+        try {
+            $sql = "INSERT into fila_usuario (idfila ,idusuario) values (:idFila, :idUsuario);";
+
+            $statement = $this->conn->prepare($sql);
+            $statement->bindParam(':idFila', $idFila);
+            $statement->bindParam(':idUsuario', $idUsuario);
+
+            return $statement->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    // function gerarnumerofila($idUsuario, $idFila)
+    // {
+    //     try {
+    //         $sql = "insert into users (numerofila) values ();";
+
+    //         $statement = $this->conn->prepare($sql);
+    //         $statement->bindParam(':idFila', $idFila);
+    //         $statement->bindParam(':idUsuario', $idUsuario);
+
+    //         return $statement->execute();
+    //     } catch (PDOException $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+    // }
 }

@@ -28,7 +28,20 @@ class EstabelecimentoController
         $_SESSION['estabelecimentos'] = $estabelecimentos;
 
         echo("A");
-        header("Location: ../View/Usuario/Estabelecimento.php");
+        header("Location: ../View/Usuario/Estabelecimentos.php");
+        exit();
+    }
+    public function listarFilaEstabelecimento($idEstabelecimento)
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Obtém todas as filas do banco de dados via DAO
+        $filaestabelecimento = $this->estabelecimentoDAOl->getFilaEstabelecimento($idEstabelecimento);
+        $_SESSION['filasestabelecimento'] = $filaestabelecimento;
+        
+        echo("A");
+        header("Location: ../View/Usuario/FilasPEstabelecimento.php");
         exit();
     }
     
@@ -135,6 +148,7 @@ switch ($action) {
             }
         }
         break;
+        
         case 'readall_estabelecimento':
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
@@ -143,6 +157,15 @@ switch ($action) {
             $estabelecimentoController = new EstabelecimentoController($conn);
             $estabelecimentoController->listarEstabelecimentos();
             break;
+
+            case 'readfila_estabelecimento':
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                 }
+                $conn = Database::getConnection();
+                $estabelecimentoController = new EstabelecimentoController($conn);
+                $estabelecimentoController->listarFilaEstabelecimento($id);
+                break;
 
     default:
         displayMessage('Ação não reconhecida.');
