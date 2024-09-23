@@ -119,13 +119,17 @@ if (!isset($_SESSION['user_id'])) {
 <main>
     <div class="profile-container">
         <div class="profile-card">
-            <form class="form-horizontal" action="../Controller/ContaController?action=update_img" method="post">
-                <div class="profile-img-container">
-                    <img class="profile-img" src="" alt="Foto do perfil" />
-                    <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
-                    <button type="submit" class="btn btn-primary btn-block">Editar foto</button>
-                </div>
-            </form>
+        <form class="form-horizontal" action="../Controller/ContaController?action=update_img" method="post" enctype="multipart/form-data">
+            <div class="profile-img-container">
+                <img class="profile-img" src="" alt="Foto do perfil" />
+                <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
+                <label class="btn btn-primary btn-block">
+                    Trocar foto de perfil
+                    <input type="file" name="profile_img" accept="image/*" style="display: none;">
+                </label>
+
+            </div>
+        </form>
             <form class="form-horizontal" action="../Controller/ContaController?action=update_conta" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
