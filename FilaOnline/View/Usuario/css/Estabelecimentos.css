@@ -43,7 +43,8 @@
     padding: 10px 20px;
     font-size: 0.875rem; 
 }
-.fds{
+
+.fds {
     background-color: white;
     border: none;
 }
@@ -55,19 +56,70 @@
 
 @media (max-width: 1024px) {
     .col {
-        flex: 1 1 calc(20% - 20px);
+        flex: 1 1 calc(20% - 10px);
+    }
+    element.style {
+        width: 10rem;
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 30px;
     }
 }
 
 @media (max-width: 768px) {
     .col {
-        flex: 1 1 calc(45% - 20px);
+        flex: 1 1 calc(45% - 10px);
+    }
+    element.style {
+        width: 10rem;
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 30px;
     }
 }
 
 @media (max-width: 576px) {
     .col {
-        flex: 1 1 calc(100% - 20px);
+        flex: 1 1 calc(50% - 10px); /* Dois containers lado a lado */
+    }
+    
+}
+
+@media only screen and (max-width: 576px) {
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%; /* Ajuste para 100% */
+    }
+    .col-sm-12.col-md-6.col-lg-4.mb-4 {
+        width: 50%; /* Cada coluna ocupará metade da largura */
     }
 }
 
+a.btn.btn-primary {
+    background-color: white;
+    border-color: white;
+    padding: 0px;
+}
+
+.card-title {
+    color: rgb(121, 121, 121);
+}
+.card {
+    border-radius: 20px;
+    padding: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+}
+
+@media (max-width: 576px) {
+    .col-6 {
+        flex: 0 0 50%; /* Força duas colunas em dispositivos móveis */
+        max-width: 50%; /* Limita a largura máxima */
+    }
+}

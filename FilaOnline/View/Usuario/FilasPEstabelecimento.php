@@ -13,7 +13,7 @@
     <title>Lista de Filas</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/HomeEstabelecimento.css">
+    <link rel="stylesheet" href="css/FilasPEstabelecimento.css">
 
 </head>
 
@@ -25,27 +25,19 @@
 <!-- Lista de Filas -->
 <div class="container">
     <div class="row">
-
-
-
-
-
         <?php if (!empty($_SESSION['filasestabelecimento'])): ?>
-            <?php foreach ( array_reverse($_SESSION['filasestabelecimento']) as $estabelecimentofila): ?>
-                <div class="col-md-6 col-lg-3">
-                    <a  class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
+            <?php foreach (array_reverse($_SESSION['filasestabelecimento']) as $estabelecimentofila): ?>
+                <div class="col-6 col-sm-6 col-md-4 mb-4"> <!-- Alterado para col-6 -->
+                    <a href="../../Controller/FilaController?action=entrar_fila&id=<?php echo htmlspecialchars($estabelecimentofila['idFila']); ?>" class="card">
+                        <img src="../../img/mcdonalds.png" class="card-img-top" alt="Fila 1">
                         <div class="card-header"><?php echo htmlspecialchars($estabelecimentofila['nomefila']); ?></div>
-                        <div class="fila-info">
-                            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($estabelecimentofila['enderecofila']); ?></p>
-                            <p class="tempo-espera">Tempo de espera: </p>
-                            <p class="num-pessoas">Pessoas na fila: </p>
-                            <p><strong>Inicio:</strong> <?php echo htmlspecialchars($estabelecimentofila['inicio']); ?> </p>
-                            <p><strong>Termino:</strong> <?php echo htmlspecialchars($estabelecimentofila['termino']); ?> </p>
-                            <p><strong>Prévia das pessoas:</strong> </p>
-                            <a  href="../../Controller/FilaController?action=entrar_fila&id=<?php echo htmlspecialchars($estabelecimentofila['idFila']); ?>" class="btn btn-primary">Entrar na Fila</a>
-                        </div>
-                        
+                        <p class="spc01"><strong>Endereço:</strong> <?php echo htmlspecialchars($estabelecimentofila['enderecofila']); ?></p>
+                        <p class="tempo-espera">Tempo de espera: </p>
+                        <p class="num-pessoas">Pessoas na fila: </p>
+                        <p><strong>Inicio:</strong> <?php echo htmlspecialchars($estabelecimentofila['inicio']); ?> </p>
+                        <p><strong>Termino:</strong> <?php echo htmlspecialchars($estabelecimentofila['termino']); ?> </p>
+                        <p><strong>Prévia das pessoas:</strong> </p>
+                        <p class="btn btn-primary"><strong>Entrar na Fila</strong></p>
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -54,6 +46,7 @@
         <?php endif; ?>
     </div>
 </div>
+
 
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
