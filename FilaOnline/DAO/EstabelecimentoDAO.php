@@ -1,10 +1,10 @@
 <?php
 
 interface EstabelecimentoDAO {  
-    public function updateConta($nome, $email, $telefone, $cnpj, $endereco, $descricao, $logo, $senha); // This should update a User object
-    public function validaConta($email, $senha);
-    public function createConta($nome, $email, $cnpj, $endereco, $descricao, $senha);
-    public function getAllEstabelecimentos();
+    public function updateEstabelecimento($estabelecimento); // This should update a User object
+    public function validaEstabelecimento($email, $senha);
+    public function createEstabelecimento($estabelecimento);
+    public function getAllEstabelecimento();
     function getFilaEstabelecimento($idEstabelecimento);
 }
 

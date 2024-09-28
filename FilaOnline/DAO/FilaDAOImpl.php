@@ -11,34 +11,40 @@ class FilaDAOImpl implements FilaDAO
     {
         $this->conn = Database::getConnection();
     }
-    public function createFila($idEstabelecimento, $nome, $endereco, $inicio, $termino)
-    {
-        try {
-            $statement = $this->conn->prepare("INSERT INTO fila (idEstabelecimento, nome, endereco, img, inicio, termino) VALUES (:idEstabelecimento, :nome, :endereco, '', :inicio, :termino)");
-            $statement->bindParam(':idEstabelecimento', $idEstabelecimento);
-            $statement->bindParam(':nome', $nome);
-            $statement->bindParam(':endereco', $endereco);
-            // $statement->bindParam(':img', $img);
-            $statement->bindParam(':inicio', $inicio);
-            $statement->bindParam(':termino', $termino);
-            return $statement->execute();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+    public function createFila($fila)
+{
+    try {
+        $statement = $this->conn->prepare("INSERT INTO fila (idEstabelecimento, nome, endereco, img, inicio, termino) 
+                                           VALUES (:idEstabelecimento, :nome, :endereco, '', :inicio, :termino)");
 
+        // Use bindValue para associar os valores
+        $statement->bindValue(':idEstabelecimento', $fila->getEstabelecimentoFila());
+        $statement->bindValue(':nome', $fila->getNome());
+        $statement->bindValue(':endereco', $fila->getEndereco());
+        //$statement->bindValue(':inicio', $fila->getInicio());
+        $statement->bindValue(':inicio', $fila->getInicio());
+        $statement->bindValue(':termino', $fila->getTermino());
+
+        // Executa e retorna o resultado da operação
+        return $statement->execute();
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
+}
 
-    function updateFila($idFila, $nome, $endereco, $img)
+
+    function updateFila($fila)
     {
         try {
             $sql = "UPDATE fila SET nome = :nome, endereco = :endereco, img = :img WHERE id = :idFila";
 
             $statement = $this->conn->prepare($sql);
 
-            $statement->bindParam(':nome', $nome);
-            $statement->bindParam(':endereco', $endereco);
-            $statement->bindParam(':img', $img);
-            $statement->bindParam(':idFila', $idFila);
+            $statement->bindParam(':nome', $fila->getNome());
+            $statement->bindParam(':endereco', $fila->getFila());
+            $statement->bindParam(':img', $fila->getImg());
+            $statement->bindParam(':idFila', $fila->getId());
 
             return $statement->execute();
 
@@ -102,18 +108,4 @@ class FilaDAOImpl implements FilaDAO
             echo "Error: " . $e->getMessage();
         }
     }
-    // function gerarnumerofila($idUsuario, $idFila)
-    // {
-    //     try {
-    //         $sql = "insert into users (numerofila) values ();";
-
-    //         $statement = $this->conn->prepare($sql);
-    //         $statement->bindParam(':idFila', $idFila);
-    //         $statement->bindParam(':idUsuario', $idUsuario);
-
-    //         return $statement->execute();
-    //     } catch (PDOException $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-    // }
 }

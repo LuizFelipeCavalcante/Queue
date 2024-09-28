@@ -81,10 +81,18 @@ class Fila {
     }
 
     // Metodos
+    private FilaDAO $filaDAO; // Propriedade declarada com tipo
+
+    public function __construct($conn)
+    {
+        // Injeção de dependência do DAO
+        $this->filaDAO = new FilaDAOImpl($conn);
+    }
 
     public function entrarFila($userId, $filaId) {
-        
+        $this->filaDAO->entrarFila($userId, $filaId);
     }
+    
 }
 
 ?>

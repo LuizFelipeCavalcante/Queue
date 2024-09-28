@@ -70,7 +70,7 @@ session_start();
                     if (!isset($_SESSION['estabelecimento'])) {
                         echo '';
                     } else {
-                      header('Location: View/Estabelecimento/index.php');
+                      header('Location: View/Estabelecimento/HomeEstabelecimento.php');
                         echo '<a class="nav-item nav-link"><b>Estabelecimento</b></a>';
                     }
                 }

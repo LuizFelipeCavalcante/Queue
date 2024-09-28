@@ -121,28 +121,31 @@ if (!isset($_SESSION['user_id'])) {
         <div class="profile-card">
         <form class="form-horizontal" action="../Controller/ContaController?action=update_img" method="post" enctype="multipart/form-data">
             <div class="profile-img-container">
-                <img class="profile-img" src="" alt="Foto do perfil" />
+                <img class="profile-img" src="<?php echo $_SESSION['foto']; ?>" alt="Foto do perfil" />
                 <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
-                <label class="btn btn-primary btn-block">
-                    Trocar foto de perfil
-                    <input type="file" name="profile_img" accept="image/*" style="display: none;">
-                </label>
 
             </div>
         </form>
-            <form class="form-horizontal" action="../Controller/ContaController?action=update_conta" method="post">
+            <form class="form-horizontal" action="../../Controller/ContaController?action=update_conta" method="post" enctype="multipart/form-data">
+                <label class="btn btn-primary btn-block">
+                    Trocar foto de perfil
+                    <input type="file" name="profile_img" accept="image/*" style="display: none;">
+                </label>    
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $_SESSION['user_name']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['email']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="telefone">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" value="<?php echo $_SESSION['user_telefone']; ?>" maxlength="15">
-                </div>
+                    <input type="tel" class="form-control" id="telefone" name="telefone" value="<?php echo $_SESSION['telefone']; ?>" maxlength="15">
+                </div> <div class="form-group">
+                <label for="foto">Foto:</label>
+                <input type="file" name="foto" id="foto" accept="image/*" required>                </div>
+                
                 <button type="submit" class="btn btn-danger">Salvar alterações</button>
             </form>
         </div>

@@ -12,7 +12,7 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
     }
 
     
-    public function validaConta($email, $senha) {
+    public function validaEstabelecimento($email, $senha) {
         $estabelecimento = new Estabelecimento();
         try {
             $statement = $this->conn->prepare("SELECT * FROM estabelecimento WHERE email = :email AND senha = :senha");
@@ -30,7 +30,7 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
                 $estabelecimento->setCnpj($row['cnpj']);
                 $estabelecimento->setEndereco($row['endereco']);
                 $estabelecimento->setDescricao($row['descricao']);
-                $estabelecimento->setLogo($row['logo']);
+                // $estabelecimento->setLogo($row['logo']);
                 $estabelecimento->setSenha($row['senha']);
                 return $estabelecimento;
             } else {
@@ -44,64 +44,58 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
 
     
 
-    public function createConta($nome, $email, $cnpj, $endereco, $descricao, $senha) {
+    public function createEstabelecimento($estabelecimento) {
         try {
-            $statement = $this->conn->prepare("INSERT INTO estabelecimento (name, email, cnpj, endereco, descricao, senha) VALUES (:name, :email, :cnpj, :endereco, :descricao, :senha)");
-            $statement->bindParam(':name', $nome);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':cnpj', $cnpj);
-            $statement->bindParam(':endereco', $endereco);
-            $statement->bindParam(':descricao', $descricao);
-            $statement->bindParam(':senha', $senha);
-            if ($statement->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            $statement = $this->conn->prepare("INSERT INTO estabelecimento (name, email, cnpj, endereco, descricao, senha) 
+                                               VALUES (:nome, :email, :cnpj, :endereco, :descricao, :senha)");
+    
+            // Use bindValue para passar os valores diretamente
+            $statement->bindValue(':nome', $estabelecimento->getNome());
+            $statement->bindValue(':email', $estabelecimento->getEmail());
+            $statement->bindValue(':cnpj', $estabelecimento->getCnpj());
+            $statement->bindValue(':endereco', $estabelecimento->getEndereco());
+            $statement->bindValue(':descricao', $estabelecimento->getDescricao());
+            $statement->bindValue(':senha', $estabelecimento->getSenha());
+    
+            // Execute a query e retorne o resultado
+            return $statement->execute();
+            
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-
-    public function updateConta($id, $nome, $email, $cnpj, $endereco, $descricao, $logo, $senha) {
-        $estabelecimento = new Estabelecimento();
+    
+    public function updateEstabelecimento($estabelecimento) {
         try {
-            $statement = $this->conn->prepare("UPDATE estabelecimento SET name = :nome, email = :email, cnpj = :cnpj, :endereco = endereco, :descricao = descricao, :logo = logo WHERE id = :id");
-            $statement->bindParam(':name', $nome);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':cnpj', $cnpj);
-            $statement->bindParam(':endereco', $endereco);
-            $statement->bindParam(':descricao', $descricao);
-            $statement->bindParam(':logo', $logo);
-            $statement->bindParam(':senha', $senha);
-            $statement->bindParam(':id', $id);
-
-
+            $statement = $this->conn->prepare("UPDATE estabelecimento SET name = :nome, email = :email, cnpj = :cnpj, endereco = :endereco, descricao = :descricao WHERE id = :id");
+    
+            // Use bindValue para passar os valores diretamente
+            $statement->bindValue(':nome', $estabelecimento->getNome());
+            $statement->bindValue(':email', $estabelecimento->getEmail());
+            $statement->bindValue(':cnpj', $estabelecimento->getCnpj());
+            $statement->bindValue(':endereco', $estabelecimento->getEndereco());
+            $statement->bindValue(':descricao', $estabelecimento->getDescricao());
+            $statement->bindValue(':id', $estabelecimento->getId());
+    
+            // Executa a query
             $statement->execute();
-
-            
+    
+            // Verifica se alguma linha foi afetada
             if ($statement->rowCount() > 0) {
-                // passa as informações para o controller para ir pra uma sessão
-                $row = $statement->fetch(PDO::FETCH_ASSOC);
-                $estabelecimento->setId($row['id']);
-                $estabelecimento->setNome($row['name']);
-                $estabelecimento->setEmail($row['email']);
-                $estabelecimento->setCnpj($row['cnpj']);
-                $estabelecimento->setEndereco($row['endereco']);
-                $estabelecimento->setDescricao($row['descricao']);
-                $estabelecimento->setLogo($row['logo']);
-                $estabelecimento->setSenha($row['senha']);
+                // Atualização bem-sucedida, você pode retornar o objeto atualizado
                 return $estabelecimento;
             } else {
+                // Nenhuma linha foi atualizada
                 return null;
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+    
         return $estabelecimento;
     }
 
-    function getAllEstabelecimentos()
+    function getAllEstabelecimento()
     {
 
         $sql = "SELECT * FROM estabelecimento";

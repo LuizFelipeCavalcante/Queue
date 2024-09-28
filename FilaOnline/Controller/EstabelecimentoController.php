@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once(__DIR__ . '/../Model/Estabelecimento.php');
 include_once(__DIR__ . '/../DAO/EstabelecimentoDAOImpl.php');
 
@@ -8,6 +10,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $estabelecimentoDao = new EstabelecimentoDAOImpl();
 $estabelecimento = new Estabelecimento();
 
+$conn = Database::getConnection();
+$estabelecimentoController = new EstabelecimentoController($conn);
 class EstabelecimentoController
 {
 
@@ -20,31 +24,23 @@ class EstabelecimentoController
     }
     public function listarEstabelecimentos()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
         // Obtém todas as filas do banco de dados via DAO
-        $estabelecimentos = $this->estabelecimentoDAOl->getAllEstabelecimentos();
-        $_SESSION['estabelecimentos'] = $estabelecimentos;
+        $allestabelecimentos = $this->estabelecimentoDAOl->getAllEstabelecimento();
+        $_SESSION['estabelecimentos'] = $allestabelecimentos;
 
-        echo("A");
         header("Location: ../View/Usuario/Estabelecimentos.php");
         exit();
     }
     public function listarFilaEstabelecimento($idEstabelecimento)
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
         // Obtém todas as filas do banco de dados via DAO
         $filaestabelecimento = $this->estabelecimentoDAOl->getFilaEstabelecimento($idEstabelecimento);
         $_SESSION['filasestabelecimento'] = $filaestabelecimento;
-        
-        echo("A");
+
         header("Location: ../View/Usuario/FilasPEstabelecimento.php");
         exit();
     }
-    
+
 }
 
 
@@ -58,30 +54,17 @@ switch ($action) {
             $estabelecimento->setDescricao($_POST['descricao']);
             $estabelecimento->setSenha($_POST['senha']);
 
-            if ($estabelecimentoDao->createConta(
-                $estabelecimento->getNome(),
-                $estabelecimento->getEmail(),
-                $estabelecimento->getCnpj(),
-                $estabelecimento->getEndereco(),
-                $estabelecimento->getDescricao(),
-                $estabelecimento->getSenha()
-            )) {
+            if ($estabelecimentoDao->createEstabelecimento($estabelecimento)) {
+                $estabelecimentos = $estabelecimentoDao->validaEstabelecimento($estabelecimento->getEmail(), $estabelecimento->getSenha());
 
-                $estabelecimentos = $estabelecimentoDao->validaConta($estabelecimento->getEmail(),$estabelecimento->getSenha());
-            if ($estabelecimentos == null) {
-                displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
-            } else
-                session_start();
-                $_SESSION['user_id'] = $estabelecimentos->getId();
-                $_SESSION['user_name'] = $estabelecimentos->getNome();
-                $_SESSION['user_email'] = $estabelecimentos->getEmail();
-                $_SESSION['user_cnpj'] = $estabelecimentos->getCnpj();
-                $_SESSION['user_endereco'] = $estabelecimentos->getEndereco();
-                $_SESSION['user_descricao'] = $estabelecimentos->getDescricao();
+                if ($estabelecimentos == null) {
+                    displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
+                } else
+                    $_SESSION['user_id'] = $estabelecimento->getId();
+                $_SESSION['infoEstabelecimento'] = $estabelecimento;
                 $_SESSION['estabelecimento'] = true;
-                header('Location: ../View/Estabelecimento/HomeEstabelecimento.php');
-                exit();
-                // displayMessage('Registro inserido com sucesso!', '../View/Estabelecimento/index.php');
+
+                displayMessage('Registro inserido com sucesso!', '../View/Estabelecimento/HomeEstabelecimento.php');
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
@@ -93,18 +76,26 @@ switch ($action) {
             $email = $_POST['email'];
             $senha = $_POST['senha'];
 
-            $estabelecimento = $estabelecimentoDao->validaConta($email, $senha);
-            if ($estabelecimento == null) {
+            $estabelecimentos = $estabelecimentoDao->validaEstabelecimento($email, $senha);
+            if ($estabelecimentos == null) {
                 displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
             } else {
-                session_start();
-                $_SESSION['user_id'] = $estabelecimento->getId();
-                $_SESSION['user_name'] = $estabelecimento->getNome();
-                $_SESSION['user_email'] = $estabelecimento->getEmail();
-                $_SESSION['user_cnpj'] = $estabelecimento->getCnpj();
-                $_SESSION['user_endereco'] = $estabelecimento->getEndereco();
-                $_SESSION['user_descricao'] = $estabelecimento->getDescricao();
+                $_SESSION['user_id'] = $estabelecimentos->getId();
+                $_SESSION['user_name'] = $estabelecimentos->getNome();
                 $_SESSION['estabelecimento'] = true;
+
+                session_start();  // Iniciar a sessão
+
+                // Supondo que você já tenha o objeto $estabelecimento
+                $_SESSION['nomeEstabelecimento'] = $estabelecimentos->getNome();
+                $_SESSION['emailEstabelecimento'] = $estabelecimentos->getEmail();
+                $_SESSION['cnpjEstabelecimento'] = $estabelecimentos->getCnpj();
+                $_SESSION['enderecoEstabelecimento'] = $estabelecimentos->getEndereco();
+                $_SESSION['descricaoEstabelecimento'] = $estabelecimentos->getDescricao();
+                $_SESSION['logoEstabelecimento'] = $estabelecimentos->getLogo();
+                $_SESSION['senhaEstabelecimento'] = $estabelecimentos->getSenha();
+
+
                 header('Location: ../Controller/FilaController?action=readall_fila');
                 exit();
             }
@@ -113,66 +104,54 @@ switch ($action) {
 
     case 'update_conta':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $telefone = $_POST['telefone'];
-            $cnpj = $_POST['cnpj'];
-            $endereco = $_POST['endereco'];
-            $descricao = $_POST['descricao'];
-            $logo = $_POST['logo'];
 
-            session_start();
-            $id = $_SESSION['user_id'];
+            $estabelecimento->setNome($_POST['nome']);
+            $estabelecimento->setEmail($_POST['email']);
+            $estabelecimento->setCnpj($_POST['cnpj']);
+            $estabelecimento->setEndereco($_POST['endereco']);
+            $estabelecimento->setDescricao($_POST['descricao']);
+            // $estabelecimento->setLogo($_POST['logo']);
+            $estabelecimento->setSenha($_POST['senha']);
 
-            $estabelecimento = $estabelecimentoDao->updateConta(
-                $id,
-                $nome,
-                $email,
-                $telefone,
-                $cnpj,
-                $endereco,
-                $descricao,
-                $logo
-            );
-            if ($estabelecimento) {
+            $estabelecimento->setId( $_SESSION['user_id']);
+
+            $estabelecimentos = $estabelecimentoDao->updateEstabelecimento($estabelecimento);
+            if ($estabelecimentos) {
                 $_SESSION['user_id'] = $estabelecimento->getId();
-                $_SESSION['user_name'] = $estabelecimento->getNome();
-                $_SESSION['user_email'] = $estabelecimento->getEmail();
-                $_SESSION['user_cnpj'] = $estabelecimento->getCnpj();
-                $_SESSION['user_endereco'] = $estabelecimento->getEndereco();
-                $_SESSION['user_descricao'] = $estabelecimento->getDescricao();
-                header('Location: ../View/Perfil.php');
+                $_SESSION['user_name'] = $estabelecimentos->getNome();
+
+                $_SESSION['nomeEstabelecimento'] = $estabelecimentos->getNome();
+                $_SESSION['emailEstabelecimento'] = $estabelecimentos->getEmail();
+                $_SESSION['cnpjEstabelecimento'] = $estabelecimentos->getCnpj();
+                $_SESSION['enderecoEstabelecimento'] = $estabelecimentos->getEndereco();
+                $_SESSION['descricaoEstabelecimento'] = $estabelecimentos->getDescricao();
+                $_SESSION['logoEstabelecimento'] = $estabelecimentos->getLogo();
+                $_SESSION['senhaEstabelecimento'] = $estabelecimentos->getSenha();
+                header('Location: ../View/Estabelecimento/Perfil.php');
                 exit();
             } else {
                 displayMessage('Erro ao atualizar o registro.');
             }
         }
         break;
-        
-        case 'readall_estabelecimento':
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            $conn = Database::getConnection();
-            $estabelecimentoController = new EstabelecimentoController($conn);
-            $estabelecimentoController->listarEstabelecimentos();
-            break;
 
-            case 'readfila_estabelecimento':
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                 }
-                $conn = Database::getConnection();
-                $estabelecimentoController = new EstabelecimentoController($conn);
-                $estabelecimentoController->listarFilaEstabelecimento($id);
-                break;
+    case 'readall_estabelecimento':
+
+        $estabelecimentoController->listarEstabelecimentos();
+        break;
+
+    case 'readfila_estabelecimento':
+        $estabelecimentoController->listarFilaEstabelecimento($id);
+        break;
 
     default:
         displayMessage('Ação não reconhecida.');
         break;
 }
 
-function displayMessage($message, $redirectUrl = null) {
+
+function displayMessage($message, $redirectUrl = null)
+{
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }

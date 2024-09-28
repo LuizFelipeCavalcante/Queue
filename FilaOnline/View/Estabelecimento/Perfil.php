@@ -130,18 +130,30 @@ if (!isset($_SESSION['user_id'])) {
 
             </div>
         </form>
-            <form class="form-horizontal" action="../Controller/ContaController?action=update_conta" method="post">
+            <form class="form-horizontal" action="../../Controller/EstabelecimentoController?action=update_conta" method="post">
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $_SESSION['user_name']; ?>">
+                    <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $_SESSION['nomeEstabelecimento']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['emailEstabelecimento']; ?>">
                 </div>
                 <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" value="<?php echo $_SESSION['user_telefone']; ?>" maxlength="15">
+                    <label for="cnpj">Cnpj</label>
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo $_SESSION['cnpjEstabelecimento']; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="Endereco">Endereco</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $_SESSION['enderecoEstabelecimento']; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descricao</label>
+                    <input type="text" class="form-control" id="descricao" name="descricao" value="<?php echo $_SESSION['descricaoEstabelecimento']; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="text" class="form-control" id="senha" name="senha" value="<?php echo $_SESSION['senhaEstabelecimento']; ?>">
                 </div>
                 <button type="submit" class="btn btn-danger">Salvar alterações</button>
             </form>

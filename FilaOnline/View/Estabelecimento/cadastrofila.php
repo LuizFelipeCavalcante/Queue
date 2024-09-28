@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-    <?php
-    session_start();
-    ?>
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Fila</title>

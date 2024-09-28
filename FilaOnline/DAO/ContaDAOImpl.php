@@ -25,7 +25,7 @@ class ContaDAOImpl Implements ContaDAO{
                 // passa as informações para o controller para ir pra uma sessão
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
                 $conta->setId($row['id']);
-                $conta->setName($row['name']);
+                $conta->setNome($row['name']);
                 $conta->setEmail($row['email']);
                 $conta->setTelefone($row['telefone']);
                 $conta->setSenha($row['senha']);
@@ -41,13 +41,14 @@ class ContaDAOImpl Implements ContaDAO{
 
     
 
-    public function createConta($nome, $email, $telefone, $senha) {
+    public function createConta($conta) {
         try {
-            $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone,senha) VALUES (:name, :email, :telefone, :senha)");
-            $statement->bindParam(':name', $nome);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':telefone', $telefone);
-            $statement->bindParam(':senha', $senha);
+            $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone,senha,foto) VALUES (:name, :email, :telefone, :senha, :foto)");
+            $statement->bindValue(':name', $conta->getNome());
+            $statement->bindValue(':email', $conta->getEmail());
+            $statement->bindValue(':telefone', $conta->getTelefone());
+            $statement->bindValue(':senha', $conta->getSenha());
+            $statement->bindValue(':foto', $conta->getFoto());
             if ($statement->execute()) {
                 return true;
             } else {
@@ -58,14 +59,14 @@ class ContaDAOImpl Implements ContaDAO{
         }
     }
 
-    public function updateConta($id, $nome, $email, $telefone) {
-        $conta = new Conta();
+    public function updateConta($conta) {
         try {
-            $statement = $this->conn->prepare("UPDATE conta SET name = :nome, email = :email, telefone = :telefone WHERE id = :id");
-            $statement->bindParam(':nome', $nome);
-            $statement->bindParam(':email', $email);
-            $statement->bindParam(':telefone', $telefone);
-            $statement->bindParam(':id', $id);
+            $statement = $this->conn->prepare("UPDATE conta SET name = :nome, email = :email, telefone = :telefone, foto = :foto WHERE id = :id");
+            $statement->bindValue(':name', $conta->getNome());
+            $statement->bindValue(':email', $conta->getEmail());
+            $statement->bindValue(':telefone', $conta->getTelefone());
+            $statement->bindValue(':foto', $conta->getFoto());
+            $statement->bindValue(':id', $conta->getId());
 
             $statement->execute();
 
@@ -73,10 +74,6 @@ class ContaDAOImpl Implements ContaDAO{
             if ($statement->rowCount() > 0) {
                 // passa as informações para o controller para ir pra uma sessão
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
-                $conta->setId($id);
-                $conta->setName($nome);
-                $conta->setEmail($email);
-                $conta->setTelefone($telefone);
                 return $conta;
             } else {
                 return null;

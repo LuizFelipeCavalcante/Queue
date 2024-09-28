@@ -7,9 +7,12 @@ include_once '../DAO/FilaDAOImpl.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
-$fila = new Fila();
+
 $filaDao = new FilaDAOImpl();
 
+$conn = Database::getConnection();
+$filaController = new FilaController($conn);
+$fila = new Fila($conn );
 
 class FilaController
 {
@@ -37,10 +40,6 @@ class FilaController
     }
     public function listarFilaUsuario($idFila)
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        // Obtém todas as filas do banco de dados via DAO
         $filauser = $this->filaDAOl->getFilaUsuario($idFila);
         $_SESSION['filasuser'] = $filauser;
 
@@ -48,27 +47,20 @@ class FilaController
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
-    // public function gerarnumerofila($idusuario)
-    // {
-
-
-    //     $this->filaDAOl->gerarnumerofila($idusuario);
-
-
-    //     exit();
-    // }
-
 
 }
+
+
+
 
 
 switch ($action) {
 
     case 'create_fila':
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
             $fila->setEstabelecimentoFila($_SESSION['user_id']);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
@@ -77,47 +69,34 @@ switch ($action) {
             $fila->setTermino($_POST['termino']);
 
             if (
-                $filaDao->createFila(
-                    $fila->getEstabelecimentoFila(),
-                    $fila->getNome(),
-                    $fila->getEndereco(),
-                    // $fila->getImg(),
-                    $fila->getInicio(),
-                    $fila->getTermino()
-                )
+                $filaDao->createFila($fila)
             ) {
-                header('Location: ../Controller/FilaController?action=readall_fila');
-                // displayMessage('Fila criada com sucesso!', '../View/Estabelecimento/HomeEstabelecimento.php');
+                displayMessage('Fila criada com sucesso!', '../Controller/FilaController?action=readall_fila');
             } else {
                 displayMessage('Erro ao criar a fila.');
             }
         }
         break;
+
+
     case 'readall_fila':
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $conn = Database::getConnection();
-        $filaController = new FilaController($conn);
+
         $filaController->listarFilas($_SESSION['user_id']);
         break;
 
+
+
     case 'readfila_usuario':
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $conn = Database::getConnection();
-        $filaController = new FilaController($conn);
+    
         $filaController->listarFilaUsuario($id);
         break;
-    case 'entrar_fila':
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
+
+    case 'entrar_fila':
         $userid = $_SESSION['user_id'];
         $filaid = $id;
-        if ($filaDao->entrarFila($userid, $filaid)) {
+
+        if ($fila->entrarFila($userid, $filaid)) {
 
             displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
         
@@ -127,6 +106,26 @@ switch ($action) {
 
         break;
 
+        case 'update_fila':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $fila->setNome($_POST['nome']);
+                $fila->setEndereco($_POST['endereco']);
+                // $fila->setImg($_POST['img']);
+                $fila->setInicio($_POST['inicio']);
+                $fila->setTermino($_POST['termino']);
+    
+                $conta = $contaDao->updateConta($fila);
+                if ($conta) {
+                    $_SESSION['infoFila'] = $fila;
+                    header('Location: ../View/Estabelecimento/Perfil.php');
+                    exit();
+                } else {
+                    displayMessage('Erro ao atualizar o registro.');
+                }
+            }
+            break;
+    
+
     default:
         displayMessage('Ação não reconhecida.');
         break;
@@ -134,9 +133,12 @@ switch ($action) {
 }
 
 
-
+// Mensagem 
 function displayMessage($message, $redirectUrl = null)
 {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     echo '<!DOCTYPE html>
 <html lang="pt-BR">
 <head>

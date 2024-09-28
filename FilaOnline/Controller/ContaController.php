@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once '../Model/Conta.php';
 include_once '../DAO/ContaDAOImpl.php';
 
@@ -8,6 +10,123 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $contaDao = new ContaDAOImpl();
 $conta = new Conta();
 
+
+
+switch ($action) {
+    case 'create_conta':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $conta->setNome($_POST['nome']);
+            $conta->setEmail($_POST['email']);
+            $conta->setTelefone($_POST['telefone']);
+            $conta->setSenha($_POST['senha']);
+
+            $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
+            $conta->setFoto($caminhoImagem);
+
+            if (
+                $contaDao->createConta($conta)
+            ) {
+                displayMessage('Registro inserido com sucesso!', '../View/Usuario/Estabelecimentos.php');
+            } else {
+                displayMessage('Erro ao inserir o registro.');
+            }
+            $contas = $contaDao->validaConta($conta->getEmail(), $conta->getSenha());
+
+            $_SESSION['user_id'] = $conta->getId();
+            $_SESSION['infoConta'] = $conta;
+
+            exit();
+
+        }
+        break;
+
+    case 'valida_conta':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+
+            $contas = $contaDao->validaConta($email, $senha);
+            if ($contas == null) {
+                displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
+            } else {
+                session_start();
+                $_SESSION['user_id'] = $contas->getId();
+                $_SESSION['user_name'] = $contas->getNome();
+                $_SESSION['email'] = $contas->getEmail();
+                $_SESSION['telefone'] = $contas->getTelefone();
+                $_SESSION['senha'] = $contas->getSenha();
+                $_SESSION['foto'] = $contas->getFoto();
+
+                header('Location: ../View/Usuario/Estabelecimentos.php');
+                exit();
+            }
+        }
+        break;
+
+    case 'update_conta':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $conta->setNome($_POST['nome']);
+            $conta->setEmail($_POST['email']);
+            $conta->setTelefone($_POST['telefone']);
+            $conta->setId($_SESSION['user_id']);
+
+              // Processar o upload da imagem
+              
+            // $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
+            // $conta->setFoto($caminhoImagem);
+
+
+            $contas = $contaDao->updateConta($conta);
+            if ($contas) {
+                $_SESSION['user_id'] = $contas->getId();
+                $_SESSION['user_name'] = $contas->getNome();
+                $_SESSION['email'] = $contas->getEmail();
+                $_SESSION['telefone'] = $contas->getTelefone();
+                $_SESSION['senha'] = $contas->getSenha();
+                $_SESSION['foto'] = $contas->getFoto();
+
+                header('Location: ../View/Usuario/Perfil.php');
+                exit();
+            } else {
+                displayMessage('Erro ao atualizar o registro.');
+            }
+        }
+        break;
+
+
+    default:
+        displayMessage('Ação não reconhecida.');
+        break;
+}
+
+
+//Processar Imagem
+function uploadImagem($imagem, $targetDir) {
+    // Gera o caminho completo para o arquivo
+    $targetFile = $targetDir . basename($imagem["name"]);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Verifica se o arquivo é uma imagem
+    $check = getimagesize($imagem["tmp_name"]);
+    if ($check !== false) {
+        // Verifica se o diretório existe, caso contrário cria
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        // Faz o upload da imagem
+        if (move_uploaded_file($imagem["tmp_name"], $targetFile)) {
+            return $targetFile; // Retorna o caminho completo da imagem
+        } else {
+            throw new Exception("Erro ao fazer upload da imagem.");
+        }
+    } else {
+        throw new Exception("Arquivo enviado não é uma imagem.");
+    }
+}
+;
+
+// Mensagem 
 function displayMessage($message, $redirectUrl = null)
 {
     echo '<!DOCTYPE html>
@@ -56,86 +175,4 @@ function displayMessage($message, $redirectUrl = null)
 </body>
 </html>';
 }
-
-switch ($action) {
-    case 'create_conta':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $conta->setName($_POST['nome']);
-            $conta->setEmail($_POST['email']);
-            $conta->setTelefone($_POST['telefone']);
-            $conta->setSenha($_POST['senha']);
-
-            if (
-                $contaDao->createConta(
-                    $conta->getName(),
-                    $conta->getEmail(),
-                    $conta->getTelefone(),
-                    $conta->getSenha()
-                )
-            ) {
-                displayMessage('Registro inserido com sucesso!', '../View/Usuario/Estabelecimentos.php');
-            } else {
-                displayMessage('Erro ao inserir o registro.');
-            }
-            $conta = $contaDao->validaConta($conta->getEmail(), $conta->getSenha());
-            
-                session_start();
-                $_SESSION['user_id'] = $conta->getId();
-                $_SESSION['user_name'] = $conta->getName();
-                $_SESSION['user_email'] = $conta->getEmail();
-                $_SESSION['user_telefone'] = $conta->getTelefone();
-                
-                exit();
-            
-        }
-        break;
-
-    case 'valida_conta':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-
-            $conta = $contaDao->validaConta($email, $senha);
-            if ($conta == null) {
-                displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
-            } else {
-                session_start();
-                $_SESSION['user_id'] = $conta->getId();
-                $_SESSION['user_name'] = $conta->getName();
-                $_SESSION['user_email'] = $conta->getEmail();
-                $_SESSION['user_telefone'] = $conta->getTelefone();
-                header('Location: ../View/Usuario/Estabelecimentos.php');
-                exit();
-            }
-        }
-        break;
-
-    case 'update_conta':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $telefone = $_POST['telefone'];
-            session_start();
-            $id = $_SESSION['user_id'];
-
-            $conta = $contaDao->updateConta($id, $nome, $email, $telefone);
-            if ($conta) {
-                $_SESSION['user_id'] = $conta->getId();
-                $_SESSION['user_name'] = $conta->getName();
-                $_SESSION['user_email'] = $conta->getEmail();
-                $_SESSION['user_telefone'] = $conta->getTelefone();
-                header('Location: ../View/Perfil.php');
-                exit();
-            } else {
-                displayMessage('Erro ao atualizar o registro.');
-            }
-        }
-        break;
-        
-
-    default:
-        displayMessage('Ação não reconhecida.');
-        break;
-}
-
 ?>

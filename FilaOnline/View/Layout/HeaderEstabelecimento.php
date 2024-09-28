@@ -8,7 +8,6 @@
             <div class="navbar-nav">
           
                 <a class="nav-item nav-link" href="../Usuario/Login.php">Login</a>
-                <a class="nav-item nav-link" href="../Usuario/Estabelecimentos">Estabelecimentos</a>
                 <a class="nav-item nav-link" href="../Estabelecimento/HomeEstabelecimento">Filas</a>
                 <?php
                 if (!isset($_SESSION['user_id'])) {

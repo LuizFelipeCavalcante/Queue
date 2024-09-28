@@ -10,17 +10,7 @@ class UsuarioDAOImpl implements UsuarioDAO
     {
         $this->conn = Database::getConnection();
     }
-    public function entrarFila($idFila, $idUsuario)
-    {
-        $sql = "INSERT INTO fila_usuario (fila_id, usuario_id) VALUES (:idFila, :idUsuario)";
-
-        $statement = $this->conn->prepare($sql);
-        $statement->bindParam(':idFila', $idFila);
-        $statement->bindParam(':idUsuario', $idUsuario);
-
-        return $statement->execute();
-
-    }
+    
     public function IniciarTimer($idUsuario)
     {
         $tempoInicio = microtime(true);
@@ -29,6 +19,7 @@ class UsuarioDAOImpl implements UsuarioDAO
         $statement->bindParam(':tempoInicio', $tempoInicio);
         $statement->bindParam(':idUsuario', $idUsuario);
     }
+    
     public function CalcularTempoMedio($idUsuario)
     {
         $TempoFim = microtime(true);

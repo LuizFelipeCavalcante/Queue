@@ -21,7 +21,7 @@ class Conta
         return $this->id;
     }
     
-    public function getName() 
+    public function getNome() 
     {
         return $this->nome;
     }
@@ -41,12 +41,13 @@ class Conta
     {
         return $this->foto;
     }
+    
     // Setters
     public function setId($id) 
     {
         $this->id = $id;
     }
-    public function setName($nome) 
+    public function setNome($nome) 
     {
         $this->nome = $nome;
     }

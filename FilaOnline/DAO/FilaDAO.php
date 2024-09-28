@@ -2,11 +2,11 @@
 
 interface FilaDAO {  
 
-    public function createFila($idEstabelecimento, $nome, $endereco, $inicio, $termino);
-    function updateFila($idFila, $nome, $endereco, $img);
+    public function createFila($fila);
+    function updateFila($fila);
     function getFila($idFila);
     function getAllFilas($idEstabelecimento);
     function deleteFila($idFila);
     function getFilaUsuario($idFila);
+    function entrarFila($userId, $filaId);
 }
-
