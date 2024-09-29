@@ -39,6 +39,7 @@ switch ($action) {
             $_SESSION['telefone'] = $contas->getTelefone();
             $_SESSION['senha'] = $contas->getSenha();
             $_SESSION['foto'] = $contas->getFoto();
+            $_SESSION['estabelecimento'] = false;
             $_SESSION['infoConta'] = $conta;
             exit();
         }
@@ -59,6 +60,7 @@ switch ($action) {
                 $_SESSION['email'] = $contas->getEmail();
                 $_SESSION['telefone'] = $contas->getTelefone();
                 $_SESSION['senha'] = $contas->getSenha();
+                $_SESSION['estabelecimento'] = false;
                 if ($contas->getFoto() != null) {
                     $_SESSION['foto'] = $contas->getFoto();
                 };

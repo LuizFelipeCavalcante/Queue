@@ -20,28 +20,31 @@
 <!-- header include-->
 
 <?php
-include "../Layout/HeaderEstabelecimento.php"
+if (($_SESSION['estabelecimento'])) {
+    include "../Layout/HeaderEstabelecimento.php";
+} else {
+    include "../Layout/HeaderUsuario.php";
+}
+if (($_SESSION['estabelecimento'])):
     ?>
-<!-- Lista de Filas -->
-<div class="container">
-    <div class="row">
+    <!-- Lista de Filas -->
+    <div class="container">
+        <div class="row">
 
 
-        <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-lg-3">
 
-            <div class="card">
-                <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
-                    <p>+</p>
-                </a>
+                <div class="card">
+                    <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
+                        <p>+</p>
+                    </a>
+                </div>
             </div>
-        </div>
-
-
-
-        <?php if (isset($_SESSION['filaatual'])) {
-            unset($_SESSION['filaatual']);
-        }
-
+        <?php endif; ?>
+        <?php
+        // if (isset($_SESSION['filaatual'])) {
+        //    unset($_SESSION['filaatual']);
+        //} 
         if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">

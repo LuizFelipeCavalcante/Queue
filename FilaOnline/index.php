@@ -63,14 +63,16 @@ session_start();
                 <a class="nav-item nav-link" href="../FilaOnline/view/Usuario/Estabelecimentos">Estabelecimentos</a>
 
                 <?php
+                
                 if (!isset($_SESSION['user_id'])) {
                     echo '<a class="nav-item nav-link"><b>Deslogado</b></a>';
                 } else {
                     echo '<a class="nav-item nav-link" href="../FilaOnline/view/Perfil">Perfil</a><a class="nav-item nav-link" href="Logout">Sair</a><a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
-                    if (!isset($_SESSION['estabelecimento'])) {
+                    if ($_SESSION['estabelecimento']) {
                         echo '';
                     } else {
-                      header('Location: View/Estabelecimento/HomeEstabelecimento.php');
+                      //header('Location: View/Estabelecimento/HomeEstabelecimento.php');
+                      //
                         echo '<a class="nav-item nav-link"><b>Estabelecimento</b></a>';
                     }
                 }
@@ -78,27 +80,7 @@ session_start();
             </div>
         </div>
     </header>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="./Img/mcdonalds.png" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">McDonalds</h5>
-          <h1>2 </h1>
-          <p class="card-text"><small class="text-body-secondary">Tempo de espera aproximado: 10min</small></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button type="button" onclick="EntrarFila" class="btn btn-primary" disabled="$desativadoEntrar">entrar na
-    fila</button>
-  <button type="button" $onclick="SairFila" class="btn btn-primary" disabled="$desativadoSair">sair da fila</button>
-
+    Quero q o McDonalds se foda kkkkkk mo raiva dessa tela
 </body>
 
 </html>

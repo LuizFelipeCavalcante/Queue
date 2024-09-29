@@ -17,7 +17,7 @@
                 echo '<a class="nav-item nav-link" href="../Perfil">Perfil</a>
                       <a class="nav-item nav-link" href="Logout">Sair</a>
                       <a class="nav-item nav-link"><b>' . $_SESSION['user_name'] . '</b></a>';
-                if (isset($_SESSION['estabelecimento'])) {
+                if ($_SESSION['estabelecimento']) {
                     echo '<a class="nav-item nav-link"><b>Estabelecimento</b></a>';
                 }
             }

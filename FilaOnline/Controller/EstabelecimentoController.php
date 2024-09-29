@@ -11,16 +11,16 @@ $estabelecimentoDao = new EstabelecimentoDAOImpl();
 $estabelecimento = new Estabelecimento();
 
 $conn = Database::getConnection();
-$estabelecimentoController = new EstabelecimentoController($conn);
+$estabelecimentoController = new EstabelecimentoController();
 class EstabelecimentoController
 {
 
     private EstabelecimentoDAO $estabelecimentoDAOl; // Propriedade declarada com tipo
 
-    public function __construct($conn)
+    public function __construct()
     {
         // Injeção de dependência do DAO
-        $this->estabelecimentoDAOl = new EstabelecimentoDAOImpl($conn);
+        $this->estabelecimentoDAOl = new EstabelecimentoDAOImpl();
     }
     public function listarEstabelecimentos()
     {
