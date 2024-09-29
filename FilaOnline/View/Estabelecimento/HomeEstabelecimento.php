@@ -34,17 +34,19 @@ if (($_SESSION['estabelecimento'])):
 
             <div class="col-md-6 col-lg-3">
 
-                <div class="card">
-                    <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
-                        <p>+</p>
-                    </a>
-                </div>
+            <div class="card">
+                <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
+                    <p>+</p>
+                </a>
             </div>
-        <?php endif; ?>
-        <?php
-        // if (isset($_SESSION['filaatual'])) {
-        //    unset($_SESSION['filaatual']);
-        //} 
+        </div>
+
+
+
+        <?php endif; //if (isset($_SESSION['filaatual'])) {
+           // unset($_SESSION['filaatual']);
+        //}
+
         if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">
