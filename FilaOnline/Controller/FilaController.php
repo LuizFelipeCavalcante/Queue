@@ -11,18 +11,18 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $filaDao = new FilaDAOImpl();
 
 $conn = Database::getConnection();
-$filaController = new FilaController($conn);
-$fila = new Fila($conn);
+$filaController = new FilaController();
+$fila = new Fila();
 
 class FilaController
 {
 
     private FilaDAO $filaDAOl; // Propriedade declarada com tipo
 
-    public function __construct($conn)
+    public function __construct()
     {
         // Injeção de dependência do DAO
-        $this->filaDAOl = new FilaDAOImpl($conn);
+        $this->filaDAOl = new FilaDAOImpl();
     }
 
     public function listarFilas($idEstabelecimento)
@@ -50,7 +50,8 @@ class FilaController
     public function listarFilaId($idFila)
     {
         $fila = $this->filaDAOl->GetFilaId($idFila);
-        if (!empty($fila)) {
+        if (empty($fila)) {
+        } else {
             $_SESSION['filaatual'] = $fila;
         }
 

@@ -120,19 +120,26 @@
             <img src="../../img/logo01.png" alt="Logo do Site" width="150">
         </div>
         <div class="fila">
-            <?php if (!empty($_SESSION['filaatual'])): 
-                 foreach (array_reverse($_SESSION['filaatual']) as $filau): ?>
+            <?php // Essa sessao é do capeta, ela existe ate quando eu n crio ela 
+                  // fiz uma gambiarra pra resolver😂
+            if (!empty($_SESSION['filaatual'])):
+                $filaPaia = false;
+                foreach (array_reverse($_SESSION['filaatual']) as $filau): ?>
 
-                    <div class="fila-item"><?php echo htmlspecialchars($filau['idUsuario']); ?></div>
+                    <div class="fila-item"><?php if ($filau['idUsuario'] != null) {
+                        echo htmlspecialchars($filau['idUsuario']);
+                    } else{echo "<p>Nenhuma pessoa na fila.</p>";$filaPaia = true;};?></div>
 
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Nenhuma pessoa na fila.</p>
             <?php endif; ?>
         </div>
+        <?php if($filaPaia == null):?>
         <div class="pessoa-atendida">Pessoa sendo atendida</div>
         <button class="btn">Voltar</button>
         <button class="btn">Próximo</button>
+        <?php endif;?>
     </div>
 
 
