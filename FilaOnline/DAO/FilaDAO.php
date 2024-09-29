@@ -8,5 +8,7 @@ interface FilaDAO {
     function getAllFilas($idEstabelecimento);
     function deleteFila($idFila);
     function getFilaUsuario($idFila);
+    function getFilaId($idFila);
+    
     function entrarFila($userId, $filaId);
 }

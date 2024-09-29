@@ -4,15 +4,18 @@ require_once '../Config/Database.php';
 require_once 'ContaDAO.php';
 require_once '../Model/Conta.php';
 
-class ContaDAOImpl Implements ContaDAO{
+class ContaDAOImpl implements ContaDAO
+{
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conn = Database::getConnection();
     }
 
-    
-    public function validaConta($email, $senha) {
+
+    public function validaConta($email, $senha)
+    {
         $conta = new Conta();
         try {
             $statement = $this->conn->prepare("SELECT * FROM conta WHERE email = :email AND senha = :senha");
@@ -20,7 +23,7 @@ class ContaDAOImpl Implements ContaDAO{
             $statement->bindParam(':senha', $senha);
             $statement->execute();
 
-            
+
             if ($statement->rowCount() > 0) {
                 // passa as informações para o controller para ir pra uma sessão
                 $row = $statement->fetch(PDO::FETCH_ASSOC);
@@ -39,16 +42,19 @@ class ContaDAOImpl Implements ContaDAO{
         return $conta;
     }
 
-    
 
-    public function createConta($conta) {
+
+    public function createConta($conta)
+    {
         try {
-            $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone,senha,foto) VALUES (:name, :email, :telefone, :senha, :foto)");
+            $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone,senha) VALUES (:name, :email, :telefone, :senha)");
             $statement->bindValue(':name', $conta->getNome());
             $statement->bindValue(':email', $conta->getEmail());
             $statement->bindValue(':telefone', $conta->getTelefone());
             $statement->bindValue(':senha', $conta->getSenha());
-            $statement->bindValue(':foto', $conta->getFoto());
+            //if (!empty($_FILES['foto'])) {
+            //    $statement->bindValue(':foto', $conta->getFoto());
+            //}
             if ($statement->execute()) {
                 return true;
             } else {
@@ -59,7 +65,8 @@ class ContaDAOImpl Implements ContaDAO{
         }
     }
 
-    public function updateConta($conta) {
+    public function updateConta($conta)
+    {
         try {
             $statement = $this->conn->prepare("UPDATE conta SET name = :nome, email = :email, telefone = :telefone, foto = :foto WHERE id = :id");
             $statement->bindValue(':name', $conta->getNome());
@@ -70,7 +77,7 @@ class ContaDAOImpl Implements ContaDAO{
 
             $statement->execute();
 
-            
+
             if ($statement->rowCount() > 0) {
                 // passa as informações para o controller para ir pra uma sessão
                 $row = $statement->fetch(PDO::FETCH_ASSOC);

@@ -12,26 +12,26 @@ class FilaDAOImpl implements FilaDAO
         $this->conn = Database::getConnection();
     }
     public function createFila($fila)
-{
-    try {
-        $statement = $this->conn->prepare("INSERT INTO fila (idEstabelecimento, nome, endereco, img, inicio, termino) 
+    {
+        try {
+            $statement = $this->conn->prepare("INSERT INTO fila (idEstabelecimento, nome, endereco, img, inicio, termino) 
                                            VALUES (:idEstabelecimento, :nome, :endereco, '', :inicio, :termino)");
 
-        // Use bindValue para associar os valores
-        $statement->bindValue(':idEstabelecimento', $fila->getEstabelecimentoFila());
-        $statement->bindValue(':nome', $fila->getNome());
-        $statement->bindValue(':endereco', $fila->getEndereco());
-        //$statement->bindValue(':inicio', $fila->getInicio());
-        $statement->bindValue(':inicio', $fila->getInicio());
-        $statement->bindValue(':termino', $fila->getTermino());
+            // Use bindValue para associar os valores
+            $statement->bindValue(':idEstabelecimento', $fila->getEstabelecimentoFila());
+            $statement->bindValue(':nome', $fila->getNome());
+            $statement->bindValue(':endereco', $fila->getEndereco());
+            //$statement->bindValue(':inicio', $fila->getInicio());
+            $statement->bindValue(':inicio', $fila->getInicio());
+            $statement->bindValue(':termino', $fila->getTermino());
 
-        // Executa e retorna o resultado da operação
-        return $statement->execute();
+            // Executa e retorna o resultado da operação
+            return $statement->execute();
 
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
-}
 
 
     function updateFila($fila)
@@ -83,6 +83,14 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    function GetFilaId($idFila)
+    {
+        $sql = "SELECT * from fila left join fila_usuario on(fila.id = idFila) WHERE fila.id = $idFila;";
+
+        $statement = $this->conn->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     function deleteFila($idFila)
     {
@@ -97,7 +105,7 @@ class FilaDAOImpl implements FilaDAO
     function entrarFila($idUsuario, $idFila)
     {
         try {
-            $sql = "INSERT into fila_usuario (idfila ,idusuario) values (:idFila, :idUsuario);";
+            $sql = "INSERT into fila_usuario (idFila ,idUsuario) values (:idFila, :idUsuario);";
 
             $statement = $this->conn->prepare($sql);
             $statement->bindParam(':idFila', $idFila);

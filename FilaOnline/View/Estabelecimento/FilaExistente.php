@@ -107,7 +107,7 @@
 <body>
     <?php
     include "../Layout/HeaderEstabelecimento.php";
-        ?>
+    ?>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -120,8 +120,8 @@
             <img src="../../img/logo01.png" alt="Logo do Site" width="150">
         </div>
         <div class="fila">
-            <?php if (!empty($_SESSION['filasuser'])): ?>
-                <?php foreach (array_reverse($_SESSION['filasuser']) as $filau): ?>
+            <?php if (!empty($_SESSION['filaatual'])): 
+                 foreach (array_reverse($_SESSION['filaatual']) as $filau): ?>
 
                     <div class="fila-item"><?php echo htmlspecialchars($filau['idUsuario']); ?></div>
 

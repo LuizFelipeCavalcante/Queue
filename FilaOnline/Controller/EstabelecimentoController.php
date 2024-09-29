@@ -58,7 +58,7 @@ switch ($action) {
                 $estabelecimentos = $estabelecimentoDao->validaEstabelecimento($estabelecimento->getEmail(), $estabelecimento->getSenha());
 
                 if ($estabelecimentos == null) {
-                    displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
+                    displayMessage('Nome de usuário ou senha incorretos', '../View/Estabelecimento/LoginEstabelecimento.php');
                 } else
                     $_SESSION['user_id'] = $estabelecimento->getId();
                 $_SESSION['infoEstabelecimento'] = $estabelecimento;
@@ -78,7 +78,7 @@ switch ($action) {
 
             $estabelecimentos = $estabelecimentoDao->validaEstabelecimento($email, $senha);
             if ($estabelecimentos == null) {
-                displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
+                displayMessage('Nome de usuário ou senha incorretos', '../View/Estabelecimento/LoginEstabelecimento.php');
             } else {
                 $_SESSION['user_id'] = $estabelecimentos->getId();
                 $_SESSION['user_name'] = $estabelecimentos->getNome();
@@ -113,7 +113,7 @@ switch ($action) {
             // $estabelecimento->setLogo($_POST['logo']);
             $estabelecimento->setSenha($_POST['senha']);
 
-            $estabelecimento->setId( $_SESSION['user_id']);
+            $estabelecimento->setId($_SESSION['user_id']);
 
             $estabelecimentos = $estabelecimentoDao->updateEstabelecimento($estabelecimento);
             if ($estabelecimentos) {

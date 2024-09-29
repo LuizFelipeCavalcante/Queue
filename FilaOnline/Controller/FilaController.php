@@ -12,7 +12,7 @@ $filaDao = new FilaDAOImpl();
 
 $conn = Database::getConnection();
 $filaController = new FilaController($conn);
-$fila = new Fila($conn );
+$fila = new Fila($conn);
 
 class FilaController
 {
@@ -42,6 +42,17 @@ class FilaController
     {
         $filauser = $this->filaDAOl->getFilaUsuario($idFila);
         $_SESSION['filasuser'] = $filauser;
+
+        echo ("A");
+        header("Location: ../View/Estabelecimento/FilaExistente.php");
+        exit();
+    }
+    public function listarFilaId($idFila)
+    {
+        $fila = $this->filaDAOl->GetFilaId($idFila);
+        if (!empty($fila)) {
+            $_SESSION['filaatual'] = $fila;
+        }
 
         echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
@@ -85,9 +96,11 @@ switch ($action) {
         break;
 
 
-
+    case 'readfila_filaid':
+        $filaController->listarFilaid($id);
+        break;
     case 'readfila_usuario':
-    
+
         $filaController->listarFilaUsuario($id);
         break;
 
@@ -96,35 +109,36 @@ switch ($action) {
         $userid = $_SESSION['user_id'];
         $filaid = $id;
 
-        if ($fila->entrarFila($userid, $filaid)) {
+        if ($fila->entrarFila($userid, $filaid) != true) {
 
             displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
-        
+
         } else {
+            displayMessage("$userid , $filaid ");
             displayMessage('Erro ao entrar na fila.');
         }
 
         break;
 
-        case 'update_fila':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $fila->setNome($_POST['nome']);
-                $fila->setEndereco($_POST['endereco']);
-                // $fila->setImg($_POST['img']);
-                $fila->setInicio($_POST['inicio']);
-                $fila->setTermino($_POST['termino']);
-    
-                $conta = $contaDao->updateConta($fila);
-                if ($conta) {
-                    $_SESSION['infoFila'] = $fila;
-                    header('Location: ../View/Estabelecimento/Perfil.php');
-                    exit();
-                } else {
-                    displayMessage('Erro ao atualizar o registro.');
-                }
+    case 'update_fila':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fila->setNome($_POST['nome']);
+            $fila->setEndereco($_POST['endereco']);
+            // $fila->setImg($_POST['img']);
+            $fila->setInicio($_POST['inicio']);
+            $fila->setTermino($_POST['termino']);
+
+            $conta = $contaDao->updateConta($fila);
+            if ($conta) {
+                $_SESSION['infoFila'] = $fila;
+                header('Location: ../View/Estabelecimento/Perfil.php');
+                exit();
+            } else {
+                displayMessage('Erro ao atualizar o registro.');
             }
-            break;
-    
+        }
+        break;
+
 
     default:
         displayMessage('Ação não reconhecida.');

@@ -20,8 +20,8 @@
 <!-- header include-->
 
 <?php
-    include "../Layout/HeaderEstabelecimento.php"
-?>
+include "../Layout/HeaderEstabelecimento.php"
+    ?>
 <!-- Lista de Filas -->
 <div class="container">
     <div class="row">
@@ -38,10 +38,15 @@
 
 
 
-        <?php if (!empty($_SESSION['filas'])): ?>
-            <?php foreach ( array_reverse($_SESSION['filas']) as $fila): ?>
+        <?php if (isset($_SESSION['filaatual'])) {
+            unset($_SESSION['filaatual']);
+        }
+
+        if (!empty($_SESSION['filas'])): ?>
+            <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">
-                    <a href="../../Controller/FilaController?action=readfila_usuario&id=<?php echo htmlspecialchars($fila['id']); ?>" class="card">
+                    <a href="../../Controller/FilaController?action=readfila_filaid&id=<?php echo htmlspecialchars($fila['id']); ?>"
+                        class="card">
                         <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
                         <div class="card-header"><?php echo htmlspecialchars($fila['nome']); ?></div>
                         <div class="fila-info">

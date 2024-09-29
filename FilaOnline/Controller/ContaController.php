@@ -19,10 +19,10 @@ switch ($action) {
             $conta->setEmail($_POST['email']);
             $conta->setTelefone($_POST['telefone']);
             $conta->setSenha($_POST['senha']);
-
-            $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
-            $conta->setFoto($caminhoImagem);
-
+            if (!empty($_FILES['foto'])) {
+                $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
+                $conta->setFoto($caminhoImagem);
+            }
             if (
                 $contaDao->createConta($conta)
             ) {
@@ -32,11 +32,15 @@ switch ($action) {
             }
             $contas = $contaDao->validaConta($conta->getEmail(), $conta->getSenha());
 
-            $_SESSION['user_id'] = $conta->getId();
+
+            $_SESSION['user_id'] = $contas->getId();
+            $_SESSION['user_name'] = $contas->getNome();
+            $_SESSION['email'] = $contas->getEmail();
+            $_SESSION['telefone'] = $contas->getTelefone();
+            $_SESSION['senha'] = $contas->getSenha();
+            $_SESSION['foto'] = $contas->getFoto();
             $_SESSION['infoConta'] = $conta;
-
             exit();
-
         }
         break;
 
@@ -47,7 +51,7 @@ switch ($action) {
 
             $contas = $contaDao->validaConta($email, $senha);
             if ($contas == null) {
-                displayMessage('Nome de usuário ou senha incorretos', '../View/Login.php');
+                displayMessage('Nome de usuário ou senha incorretos', '../View/Usuario/Login.php');
             } else {
                 session_start();
                 $_SESSION['user_id'] = $contas->getId();
@@ -55,8 +59,9 @@ switch ($action) {
                 $_SESSION['email'] = $contas->getEmail();
                 $_SESSION['telefone'] = $contas->getTelefone();
                 $_SESSION['senha'] = $contas->getSenha();
-                $_SESSION['foto'] = $contas->getFoto();
-
+                if ($contas->getFoto() != null) {
+                    $_SESSION['foto'] = $contas->getFoto();
+                };
                 header('Location: ../View/Usuario/Estabelecimentos.php');
                 exit();
             }
@@ -70,8 +75,8 @@ switch ($action) {
             $conta->setTelefone($_POST['telefone']);
             $conta->setId($_SESSION['user_id']);
 
-              // Processar o upload da imagem
-              
+            // Processar o upload da imagem
+
             // $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
             // $conta->setFoto($caminhoImagem);
 
@@ -101,7 +106,8 @@ switch ($action) {
 
 
 //Processar Imagem
-function uploadImagem($imagem, $targetDir) {
+function uploadImagem($imagem, $targetDir)
+{
     // Gera o caminho completo para o arquivo
     $targetFile = $targetDir . basename($imagem["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -175,4 +181,3 @@ function displayMessage($message, $redirectUrl = null)
 </body>
 </html>';
 }
-?>
