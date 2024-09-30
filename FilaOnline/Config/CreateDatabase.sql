@@ -44,7 +44,7 @@ create table fila(
     tempoMedio FLOAT NULL,
     qntPessoasFila INT  NULL,
     endereco text NOT NULL,
-    img text,
+    img text NOT NULL,
     inicio time,
     termino time,
      FOREIGN KEY (idEstabelecimento) REFERENCES estabelcimento(id)
