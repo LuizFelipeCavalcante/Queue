@@ -71,7 +71,7 @@
                     <div class="form-group">
                         <label for="logo">Logo do Site:</label>
                         <div>
-                            <input type="file" id="logo" name="logo" accept="image/*">
+                            <input type="file" id="logo" name="logo" accept="image/*" required>
                         </div>
                     </div>
                     <div class="form-group">

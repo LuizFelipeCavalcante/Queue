@@ -76,7 +76,10 @@ switch ($action) {
             $fila->setEstabelecimentoFila($_SESSION['user_id']);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
-            // $fila->setImg($_POST['img']);
+            $file = $_FILES['logo']['tmp_name'];
+            $imageData = file_get_contents($file);
+            $base64 = base64_encode($imageData);
+            $fila->setImg($base64);
             $fila->setInicio($_POST['inicio']);
             $fila->setTermino($_POST['termino']);
 

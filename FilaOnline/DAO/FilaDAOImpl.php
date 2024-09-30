@@ -15,12 +15,13 @@ class FilaDAOImpl implements FilaDAO
     {
         try {
             $statement = $this->conn->prepare("INSERT INTO fila (idEstabelecimento, nome, endereco, img, inicio, termino) 
-                                           VALUES (:idEstabelecimento, :nome, :endereco, '', :inicio, :termino)");
+                                           VALUES (:idEstabelecimento, :nome, :endereco, :img, :inicio, :termino)");
 
             // Use bindValue para associar os valores
             $statement->bindValue(':idEstabelecimento', $fila->getEstabelecimentoFila());
             $statement->bindValue(':nome', $fila->getNome());
             $statement->bindValue(':endereco', $fila->getEndereco());
+            $statement->bindValue(':img', $fila->getImg());
             //$statement->bindValue(':inicio', $fila->getInicio());
             $statement->bindValue(':inicio', $fila->getInicio());
             $statement->bindValue(':termino', $fila->getTermino());

@@ -34,25 +34,31 @@ if (($_SESSION['estabelecimento'])):
 
             <div class="col-md-6 col-lg-3">
 
-            <div class="card">
-                <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
-                    <p>+</p>
-                </a>
+                <div class="card">
+                    <a class="adicionar" href="../Estabelecimento/cadastrofila.php">
+                        <p>+</p>
+                    </a>
+                </div>
             </div>
-        </div>
 
 
 
         <?php endif; //if (isset($_SESSION['filaatual'])) {
-           // unset($_SESSION['filaatual']);
-        //}
+// unset($_SESSION['filaatual']);
+//}
 
-        if (!empty($_SESSION['filas'])): ?>
+if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">
                     <a href="../../Controller/FilaController?action=readfila_filaid&id=<?php echo htmlspecialchars($fila['id']); ?>"
                         class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
+                        <!-- Img antiga caso precise<img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1"> -->
+                        <?php if (isset($fila['img'])): ?>
+                            <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>"
+                                class="card-img-top" alt="Fila 1">
+                        <?php else: ?>
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
+                        <?php endif; ?>
                         <div class="card-header"><?php echo htmlspecialchars($fila['nome']); ?></div>
                         <div class="fila-info">
                             <p><strong>Endereço:</strong> <?php echo htmlspecialchars($fila['endereco']); ?></p>
