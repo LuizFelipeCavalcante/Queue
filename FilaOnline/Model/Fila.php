@@ -1,5 +1,6 @@
 <?php
 class Fila {
+    private $id;
     private $numeroPessoas;
     private $estabelecimentoFila;
     private $nome;
@@ -11,6 +12,10 @@ class Fila {
     private $termino;
 
     // Getters
+     public function getId() {
+        return $this->id;
+    }
+
     public function getNumeroPessoas() {
         return $this->numeroPessoas;
     }
@@ -46,6 +51,9 @@ class Fila {
     }
 
     // Setters
+    public function setId($id) {
+        $this->id = $id;
+    }
     public function setNumeroPessoas($numeroPessoas) {
         $this->numeroPessoas = $numeroPessoas;
     }

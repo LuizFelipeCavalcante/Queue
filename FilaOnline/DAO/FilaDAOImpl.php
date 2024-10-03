@@ -38,7 +38,7 @@ class FilaDAOImpl implements FilaDAO
     function updateFila($fila)
     {
         try {
-            $sql = "UPDATE fila SET nome = :nome, endereco = :endereco, img = :img WHERE id = :idFila";
+            $sql = "UPDATE fila SET nome = :nome, endereco = :endereco, img = :img, inicio = :inicio, termino = :termino  WHERE id = :idFila";
 
             $statement = $this->conn->prepare($sql);
 
@@ -46,6 +46,8 @@ class FilaDAOImpl implements FilaDAO
             $statement->bindParam(':endereco', $fila->getFila());
             $statement->bindParam(':img', $fila->getImg());
             $statement->bindParam(':idFila', $fila->getId());
+            $statement->bindParam(':inicio', $fila->getInicio());
+            $statement->bindParam(':termino', $fila->getTermino());
 
             return $statement->execute();
 

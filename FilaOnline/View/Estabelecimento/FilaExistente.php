@@ -36,7 +36,7 @@
             /* Cor de fundo ao passar o mouse */
             border-color: #2e9fea;
             /* Cor da borda ao passar o mouse */
-            color: #2e9fea !important;
+            color: #2e9fea !important 
             /* Cor do texto ao passar o mouse */
         }
 

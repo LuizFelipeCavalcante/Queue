@@ -54,8 +54,8 @@ if (!empty($_SESSION['filas'])): ?>
                         class="card">
                         <!-- Img antiga caso precise<img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1"> -->
                         <?php if (isset($fila['img'])): ?>
-                            <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>"
-                                class="card-img-top" alt="Fila 1">
+                            <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>" class="card-img-top"
+                                alt="Fila 1">
                         <?php else: ?>
                             <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
                         <?php endif; ?>
@@ -68,6 +68,8 @@ if (!empty($_SESSION['filas'])): ?>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
                             <p><strong>Prévia das pessoas:</strong> </p>
                         </div>
+                        <button type="text">
+                        <input type="text">
                     </a>
                 </div>
             <?php endforeach; ?>

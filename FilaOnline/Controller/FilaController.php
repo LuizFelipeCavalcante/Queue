@@ -62,10 +62,6 @@ class FilaController
 
 }
 
-
-
-
-
 switch ($action) {
 
     case 'create_fila':
@@ -124,8 +120,34 @@ switch ($action) {
 
         break;
 
-    case 'update_fila':
+        case 'update_fila':
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $fila->setId($_SESSION['id']);
+                $fila->setNome($_POST['nome']);
+                $fila->setEndereco($_POST['endereco']);
+                $file = $_FILES['logo']['tmp_name'];
+                $imageData = file_get_contents($file);
+                $base64 = base64_encode($imageData);
+                $fila->setImg($base64);
+                $fila->setInicio($_POST['inicio']);
+                $fila->setTermino($_POST['termino']);
+    
+                if (
+                    $filaDao->updateFila($fila)
+                ) {
+                    displayMessage('Fila criada com sucesso!', '../Controller/FilaController?action=readall_fila');
+                } else {
+                    displayMessage('Erro ao criar a fila.');
+                }
+            }
+            break;
+
+    case 'delete_fila':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
             // $fila->setImg($_POST['img']);
@@ -142,7 +164,6 @@ switch ($action) {
             }
         }
         break;
-
 
     default:
         displayMessage('Ação não reconhecida.');
