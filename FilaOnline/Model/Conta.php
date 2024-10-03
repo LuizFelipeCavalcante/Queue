@@ -65,6 +65,11 @@ class Conta
     }
     public function setFoto($foto) 
     {
+        //so para debug
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['foto'] = $foto;
         $this->foto = $foto;
     }
 

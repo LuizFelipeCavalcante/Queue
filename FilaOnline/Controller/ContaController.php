@@ -19,9 +19,14 @@ switch ($action) {
             $conta->setEmail($_POST['email']);
             $conta->setTelefone($_POST['telefone']);
             $conta->setSenha($_POST['senha']);
-            if (!empty($_FILES['foto'])) {
-                $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
-                $conta->setFoto($caminhoImagem);
+
+            if (!isset($_FILES['foto'])) {
+                $conta->setFoto('../Img/Conta');
+            } else {
+                $file = $_FILES['foto']['tmp_name'];
+                $imageData = file_get_contents($file);
+                $base64 = base64_encode($imageData);
+                $conta->setFoto($base64);
             }
             if (
                 $contaDao->createConta($conta)
@@ -63,7 +68,8 @@ switch ($action) {
                 $_SESSION['estabelecimento'] = false;
                 if ($contas->getFoto() != null) {
                     $_SESSION['foto'] = $contas->getFoto();
-                };
+                }
+                ;
                 header('Location: ../View/Usuario/Estabelecimentos.php');
                 exit();
             }
