@@ -96,7 +96,8 @@ switch ($action) {
                 $_SESSION['senhaEstabelecimento'] = $estabelecimentos->getSenha();
 
 
-                header('Location: ../Controller/FilaController?action=readall_fila');
+                header("Location: ../Controller/FilaController?action=readfila_estabelecimentoid&id=" . htmlspecialchars($estabelecimentos->getId()));
+   
                 exit();
             }
         }

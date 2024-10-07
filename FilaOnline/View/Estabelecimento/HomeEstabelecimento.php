@@ -6,7 +6,6 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,9 +42,10 @@ if (($_SESSION['estabelecimento'])):
 
 
 
-        <?php endif; //if (isset($_SESSION['filaatual'])) {
-// unset($_SESSION['filaatual']);
-//}
+        <?php endif; 
+        //if (isset($_SESSION['filaatual'])) {
+        // unset($_SESSION['filaatual']);
+        //}
 
 if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
@@ -68,8 +68,9 @@ if (!empty($_SESSION['filas'])): ?>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
                             <p><strong>Prévia das pessoas:</strong> </p>
                         </div>
-                        <button type="text">
-                        <input type="text">
+                        <button class="btn" href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" >Editar</button>
+                        <button class="btn">Excluir</button>
+
                     </a>
                 </div>
             <?php endforeach; ?>

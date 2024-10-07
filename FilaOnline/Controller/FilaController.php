@@ -25,13 +25,21 @@ class FilaController
         $this->filaDAOl = new FilaDAOImpl();
     }
 
-    public function listarFilas($idEstabelecimento)
+    function listarAllFilas(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $filas = $this->filaDAOl->getAllFilas();
+        $_SESSION['filas'] = $filas;
+    }
+    public function listarFilasPorEstabelecimento($idEstabelecimento)
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         // Obtém todas as filas do banco de dados via DAO
-        $filas = $this->filaDAOl->getAllFilas($idEstabelecimento);
+        //mudar aqui ó
+        $filas = $this->filaDAOl->getAllFilasPorEstabelecimento($idEstabelecimento);
         $_SESSION['filas'] = $filas;
 
         echo ("A");
@@ -82,7 +90,8 @@ switch ($action) {
             if (
                 $filaDao->createFila($fila)
             ) {
-                displayMessage('Fila criada com sucesso!', '../Controller/FilaController?action=readall_fila');
+                displayMessage('Fila criada com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($fila->getEstabelecimentoFila()));
+
             } else {
                 displayMessage('Erro ao criar a fila.');
             }
@@ -92,13 +101,17 @@ switch ($action) {
 
     case 'readall_fila':
 
-        $filaController->listarFilas($_SESSION['user_id']);
+        $filaController->listarAllFilas();
+        header('Location: ../View/Estabelecimento/HomeEstabelecimento');
         break;
 
 
+    case 'readfila_estabelecimentoid':
+        $filaController->listarFilasPorEstabelecimento($id);
+        break;
     case 'readfila_filaid':
-        $filaController->listarFilaid($id);
-        break;
+            $filaController->listarFilaId($id);
+            break;
     case 'readfila_usuario':
 
         $filaController->listarFilaUsuario($id);
@@ -125,7 +138,8 @@ switch ($action) {
                 session_start();
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $fila->setId($_SESSION['id']);
+                
+                $fila->setId($_SESSION['idfila']);
                 $fila->setNome($_POST['nome']);
                 $fila->setEndereco($_POST['endereco']);
                 $file = $_FILES['logo']['tmp_name'];
@@ -138,9 +152,9 @@ switch ($action) {
                 if (
                     $filaDao->updateFila($fila)
                 ) {
-                    displayMessage('Fila criada com sucesso!', '../Controller/FilaController?action=readall_fila');
+                    displayMessage('Fila atualizada com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($fila->getEstabelecimentoFila()));
                 } else {
-                    displayMessage('Erro ao criar a fila.');
+                    displayMessage('Erro ao atualizar a fila.');
                 }
             }
             break;
@@ -148,16 +162,10 @@ switch ($action) {
     case 'delete_fila':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-            $fila->setNome($_POST['nome']);
-            $fila->setEndereco($_POST['endereco']);
-            // $fila->setImg($_POST['img']);
-            $fila->setInicio($_POST['inicio']);
-            $fila->setTermino($_POST['termino']);
-
-            $conta = $contaDao->updateConta($fila);
-            if ($conta) {
-                $_SESSION['infoFila'] = $fila;
-                header('Location: ../View/Estabelecimento/Perfil.php');
+            $fila->setId($_SESSION['idfila']);
+            $true = $filaDao->deleteFila($fila->getId());
+            if ($true) {
+                header('Location: ../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($fila->getEstabelecimentoFila()));
                 exit();
             } else {
                 displayMessage('Erro ao atualizar o registro.');

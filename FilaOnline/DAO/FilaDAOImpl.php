@@ -67,15 +67,26 @@ class FilaDAOImpl implements FilaDAO
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    function getAllFilas($idEstabelecimento)
+    function getAllFilas()
     {
 
-        $sql = "SELECT * FROM fila WHERE idEstabelecimento = $idEstabelecimento";
+        $sql = "SELECT * FROM fila";
 
         $statement = $this->conn->query($sql);
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    function getAllFilasPorEstabelecimento($idEstabelecimento)
+    {
+
+        $sql = "SELECT * FROM fila where idEstabelecimento = :idEstabelecimento";
+        $statement = $this->conn->prepare($sql);
+        $statement->bindParam(':idEstabelecimento', $idEstabelecimento);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function getFilaUsuario($idFila)
     {
 
