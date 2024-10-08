@@ -20,18 +20,20 @@
 <!-- header include-->
 
 <?php
-    include "../Layout/HeaderUsuario.php"
-?>
+include "../Layout/HeaderUsuario.php"
+    ?>
 <!-- Lista de Filas -->
 <div class="container">
     <div class="row">
         <?php if (!empty($_SESSION['filasestabelecimento'])): ?>
             <?php foreach (array_reverse($_SESSION['filasestabelecimento']) as $estabelecimentofila): ?>
                 <div class="col-6 col-sm-6 col-md-4 mb-4"> <!-- Alterado para col-6 -->
-                    <a href="../../Controller/FilaController?action=entrar_fila&id=<?php echo htmlspecialchars($estabelecimentofila['idFila']); ?>" class="card">
+                    <a href="../../Controller/FilaController?action=entrar_fila&id=<?php echo htmlspecialchars($estabelecimentofila['idFila']); ?>"
+                        class="card">
                         <img src="../../img/mcdonalds.png" class="card-img-top" alt="Fila 1">
                         <div class="card-header"><?php echo htmlspecialchars($estabelecimentofila['nomefila']); ?></div>
-                        <p class="spc01"><strong>Endereço:</strong> <?php echo htmlspecialchars($estabelecimentofila['enderecofila']); ?></p>
+                        <p class="spc01"><strong>Endereço:</strong>
+                            <?php echo htmlspecialchars($estabelecimentofila['enderecofila']); ?></p>
                         <p class="tempo-espera">Tempo de espera: </p>
                         <p class="num-pessoas">Pessoas na fila: </p>
                         <p><strong>Inicio:</strong> <?php echo htmlspecialchars($estabelecimentofila['inicio']); ?> </p>

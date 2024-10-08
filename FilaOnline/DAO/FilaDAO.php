@@ -1,6 +1,7 @@
 <?php
 
-interface FilaDAO {  
+interface FilaDAO
+{
 
     public function createFila($fila);
     function updateFila($fila);
@@ -10,6 +11,6 @@ interface FilaDAO {
     function deleteFila($idFila);
     function getFilaUsuario($idEstabelecimento);
     function getFilaId($idFila);
-    
+
     function entrarFila($userId, $filaId);
 }

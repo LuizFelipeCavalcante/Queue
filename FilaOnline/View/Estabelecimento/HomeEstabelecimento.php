@@ -42,17 +42,17 @@ if (($_SESSION['estabelecimento'])):
 
 
 
-        <?php endif; 
-        //if (isset($_SESSION['filaatual'])) {
-        // unset($_SESSION['filaatual']);
-        //}
+        <?php endif;
+//if (isset($_SESSION['filaatual'])) {
+// unset($_SESSION['filaatual']);
+//}
 
 if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">
+                    <!-- Img antiga caso precise<img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1"> -->
                     <a href="../../Controller/FilaController?action=readfila_filaid&id=<?php echo htmlspecialchars($fila['id']); ?>"
                         class="card">
-                        <!-- Img antiga caso precise<img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1"> -->
                         <?php if (isset($fila['img'])): ?>
                             <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>" class="card-img-top"
                                 alt="Fila 1">
@@ -68,10 +68,11 @@ if (!empty($_SESSION['filas'])): ?>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
                             <p><strong>Prévia das pessoas:</strong> </p>
                         </div>
-                        <button class="btn" href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" >Editar</button>
-                        <button class="btn">Excluir</button>
-
                     </a>
+                    <button class="btn"
+                        href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>">Editar</button>
+                    <button class="btn">Excluir</button>
+
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

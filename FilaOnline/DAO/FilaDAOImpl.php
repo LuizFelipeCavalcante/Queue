@@ -76,7 +76,7 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     function getAllFilasPorEstabelecimento($idEstabelecimento)
     {
 

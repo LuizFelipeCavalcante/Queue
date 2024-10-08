@@ -23,7 +23,7 @@ create table estabelecimento(
     cnpj INT NOT NULL,
     endereco VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
-    logo VARCHAR(100) NOT NULL,
+    logo text NOT NULL,
     senha VARCHAR(40) NOT NULL
 );
 
