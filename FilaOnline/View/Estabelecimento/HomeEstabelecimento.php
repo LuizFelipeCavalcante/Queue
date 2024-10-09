@@ -69,42 +69,46 @@ if (!empty($_SESSION['filas'])): ?>
                             <p><strong>Prévia das pessoas:</strong> </p>
                         </div>
                     </a>
-                    <button class="btn"
-                        href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" id="open-modal">Editar</button>
-                 
-    <div id="fade" class="hide"></div>
-    <div id="modal" class="hide">
-      <div class="modal-header">
-        <h2>Edição da Fila</h2>
-        <img width="80px"class="logo01" src="../../img/logo01.png" alt="">
+                    <button class="btn" id="open-modal">Editar</button>
 
-      </div>
-      <div class="modal-body">
-        <p>
-        <div class="container">
-  <div class="logo">
-    <img src="logo.png" alt="Logo">
-  </div>
-  <div class="form">
-    <label>Nome da Fila</label>
-    <input type="text" placeholder="Nome da Fila">
-    <label>Endereço</label>
-    <input type="text" placeholder="Endereço">
-    <label>Inicio</label>
-    <input type="text" placeholder="Inicio">
-    <label>Termino</label>
-    <input type="text" placeholder="Termino">
-    <div class="buttons">
-    <button class="btn-excluir">EXCLUIR</button>
-   
-    <button id="close-modal" class="btn-salvar">SALVAR</button>
-    </div>
-    
-  </div>
-</div>
-        </p>
-      </div>
-    </div>
+                    <div id="fade" class="hide"></div>
+                    <div id="modal" class="hide">
+                        <div class="modal-header">
+                            <h2>Edição da Fila</h2>
+                            <img width="80px" class="logo01" src="../../img/logo01.png" alt="">
+
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            <div class="container">
+                                <div class="logo">
+                                    <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>"
+                                        class="card-img-top" alt="Fila 1">
+                                </div>
+                                <form action="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" method="post">
+                                    <div class="form">
+                                        <label>Nome da Fila</label>
+                                        <input type="text" placeholder="Nome da Fila" id="nome" name="nome" value=<?php echo htmlspecialchars($fila['nome']); ?>>
+                                        <label>Endereço</label>
+                                        <input type="text" placeholder="Endereço" id="endereco" name="endereco" value=<?php echo htmlspecialchars($fila['endereco']); ?>>
+                                        <label>Inicio</label>
+                                        <input type="time" placeholder="Inicio" id="inicio" name="inicio" value=<?php echo htmlspecialchars($fila['inicio']); ?>>
+                                        <label>Termino</label>
+                                        <input type="time" placeholder="Termino" id="termino" name="termino" value=<?php echo htmlspecialchars($fila['termino']); ?>>
+                                        <div class="buttons">
+                                            <a
+                                                href="../../Controller/FilaController?action=delete_fila&id=<?php echo htmlspecialchars($fila['id']); ?>"><button
+                                                    class="btn-excluir">EXCLUIR</button></a>
+
+                                            <button id="close-modal" class="btn-salvar" type="submit">SALVAR</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

@@ -137,20 +137,20 @@ switch ($action) {
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $fila->setId($_SESSION['idfila']);
+            $fila->setId($id);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
-            $file = $_FILES['logo']['tmp_name'];
-            $imageData = file_get_contents($file);
-            $base64 = base64_encode($imageData);
-            $fila->setImg($base64);
+            //$file = $_FILES['logo']['tmp_name'];
+            //$imageData = file_get_contents($file);
+            //$base64 = base64_encode($imageData);
+            //$fila->setImg($base64);
             $fila->setInicio($_POST['inicio']);
             $fila->setTermino($_POST['termino']);
 
             if (
                 $filaDao->updateFila($fila)
             ) {
-                displayMessage('Fila atualizada com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($fila->getEstabelecimentoFila()));
+                displayMessage('Fila atualizada com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
             } else {
                 displayMessage('Erro ao atualizar a fila.');
             }
@@ -158,17 +158,15 @@ switch ($action) {
         break;
 
     case 'delete_fila':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $fila->setId($_SESSION['idfila']);
-            $true = $filaDao->deleteFila($fila->getId());
-            if ($true) {
-                header('Location: ../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($fila->getEstabelecimentoFila()));
+        
+            $filaD = $filaDao->deleteFila($id);
+            if ($filaD) {
+                header('Location: FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
                 exit();
             } else {
                 displayMessage('Erro ao atualizar o registro.');
             }
-        }
+        
         break;
 
     default:

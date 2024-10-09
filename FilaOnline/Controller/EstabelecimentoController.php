@@ -53,18 +53,30 @@ switch ($action) {
             $estabelecimento->setEndereco($_POST['endereco']);
             $estabelecimento->setDescricao($_POST['descricao']);
             $estabelecimento->setSenha($_POST['senha']);
-
-            if ($estabelecimentoDao->createEstabelecimento($estabelecimento)) {
+            $conta = $estabelecimentoDao->createEstabelecimento($estabelecimento);
+            if ($conta) {
+                header('');
                 $estabelecimentos = $estabelecimentoDao->validaEstabelecimento($estabelecimento->getEmail(), $estabelecimento->getSenha());
 
-                if ($estabelecimentos == null) {
+                if ($estabelecimentos == null || $estabelecimentos == false) {
                     displayMessage('Nome de usuário ou senha incorretos', '../View/Estabelecimento/LoginEstabelecimento.php');
-                } else
+                } else {
                     $_SESSION['user_id'] = $estabelecimento->getId();
-                $_SESSION['infoEstabelecimento'] = $estabelecimento;
-                $_SESSION['estabelecimento'] = true;
+                    $_SESSION['infoEstabelecimento'] = $estabelecimento;
+                    
+                    
+                    $_SESSION['user_name'] = $estabelecimentos->getNome();
+                    $_SESSION['estabelecimento'] = true;
+                    $_SESSION['nomeEstabelecimento'] = $estabelecimentos->getNome();
+                    $_SESSION['emailEstabelecimento'] = $estabelecimentos->getEmail();
+                    $_SESSION['cnpjEstabelecimento'] = $estabelecimentos->getCnpj();
+                    $_SESSION['enderecoEstabelecimento'] = $estabelecimentos->getEndereco();
+                    $_SESSION['descricaoEstabelecimento'] = $estabelecimentos->getDescricao();
+                    $_SESSION['logoEstabelecimento'] = $estabelecimentos->getLogo();
+                    $_SESSION['senhaEstabelecimento'] = $estabelecimentos->getSenha();
 
-                displayMessage('Registro inserido com sucesso!', '../View/Estabelecimento/HomeEstabelecimento.php');
+                    displayMessage('Registro inserido com sucesso!', '../View/Estabelecimento/HomeEstabelecimento.php');
+                }
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
@@ -83,10 +95,6 @@ switch ($action) {
                 $_SESSION['user_id'] = $estabelecimentos->getId();
                 $_SESSION['user_name'] = $estabelecimentos->getNome();
                 $_SESSION['estabelecimento'] = true;
-
-                session_start();  // Iniciar a sessão
-
-                // Supondo que você já tenha o objeto $estabelecimento
                 $_SESSION['nomeEstabelecimento'] = $estabelecimentos->getNome();
                 $_SESSION['emailEstabelecimento'] = $estabelecimentos->getEmail();
                 $_SESSION['cnpjEstabelecimento'] = $estabelecimentos->getCnpj();
@@ -97,7 +105,7 @@ switch ($action) {
 
 
                 header("Location: ../Controller/FilaController?action=readfila_estabelecimentoid&id=" . htmlspecialchars($estabelecimentos->getId()));
-   
+
                 exit();
             }
         }
@@ -120,7 +128,6 @@ switch ($action) {
             if ($estabelecimentos) {
                 $_SESSION['user_id'] = $estabelecimento->getId();
                 $_SESSION['user_name'] = $estabelecimentos->getNome();
-
                 $_SESSION['nomeEstabelecimento'] = $estabelecimentos->getNome();
                 $_SESSION['emailEstabelecimento'] = $estabelecimentos->getEmail();
                 $_SESSION['cnpjEstabelecimento'] = $estabelecimentos->getCnpj();

@@ -43,7 +43,7 @@ class FilaDAOImpl implements FilaDAO
             $statement = $this->conn->prepare($sql);
 
             $statement->bindParam(':nome', $fila->getNome());
-            $statement->bindParam(':endereco', $fila->getFila());
+            $statement->bindParam(':endereco', $fila->getEndereco());
             $statement->bindParam(':img', $fila->getImg());
             $statement->bindParam(':idFila', $fila->getId());
             $statement->bindParam(':inicio', $fila->getInicio());
