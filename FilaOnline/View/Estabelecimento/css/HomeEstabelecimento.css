@@ -190,7 +190,8 @@ color: inherit; /* Mantém a cor ao passar o mouse */
   }
 
   #modal {
-     background-color: #c2e9ff;
+     background-color: white;
+     border: 3px solid #007bff;
   }
   
   .logo {
@@ -213,9 +214,9 @@ color: inherit; /* Mantém a cor ao passar o mouse */
     height: 40px;
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #007bff;
     border-radius: 5px;
-    background-color: #38b6ff;
+    background-color: white;
   }
   
   .form input[type="text"]:focus {
@@ -231,21 +232,25 @@ color: inherit; /* Mantém a cor ao passar o mouse */
     padding: 0px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
   }
   
   .btn-excluir:hover, .btn-salvar:hover {
-    background-color: #3e8e41;
+    background-color: #007bff;
   }
   
   .btn-excluir {
-    background-color: #f44336;
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
   }
   
-  .btn-excluir:hover {
-    background-color: #e91e63;
+  .btn-excluir:hover {  
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
   }
   .buttons {
     display: flex;
@@ -262,15 +267,16 @@ color: inherit; /* Mantém a cor ao passar o mouse */
   }
   
   .excluir {
-    background-color: red;
-    color: white;
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
   }
   
   .salvar {
-    background-color: green;
+    background-color: #007bff;
     color: white;
   }
 
-  ::-webkit-input-placeholder {
-    color: white;
- }
+h2 {
+    color:black;
+}

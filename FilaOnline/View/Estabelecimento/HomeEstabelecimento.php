@@ -76,6 +76,8 @@ if (!empty($_SESSION['filas'])): ?>
     <div id="modal" class="hide">
       <div class="modal-header">
         <h2>Edição da Fila</h2>
+        <img width="80px"class="logo01" src="../../img/logo01.png" alt="">
+
       </div>
       <div class="modal-body">
         <p>
@@ -84,9 +86,13 @@ if (!empty($_SESSION['filas'])): ?>
     <img src="logo.png" alt="Logo">
   </div>
   <div class="form">
+    <label>Nome da Fila</label>
     <input type="text" placeholder="Nome da Fila">
+    <label>Endereço</label>
     <input type="text" placeholder="Endereço">
+    <label>Inicio</label>
     <input type="text" placeholder="Inicio">
+    <label>Termino</label>
     <input type="text" placeholder="Termino">
     <div class="buttons">
     <button class="btn-excluir">EXCLUIR</button>
