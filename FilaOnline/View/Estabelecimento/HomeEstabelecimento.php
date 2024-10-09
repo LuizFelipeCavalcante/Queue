@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/HomeEstabelecimento.css">
-
+    <script src="js/HomeEstabelecimento.js" defer></script>
 </head>
 
 <!-- header include-->
@@ -70,9 +70,35 @@ if (!empty($_SESSION['filas'])): ?>
                         </div>
                     </a>
                     <button class="btn"
-                        href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>">Editar</button>
-                    <button class="btn">Excluir</button>
-
+                        href="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" id="open-modal">Editar</button>
+                 
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide">
+      <div class="modal-header">
+        <h2>Edição da Fila</h2>
+      </div>
+      <div class="modal-body">
+        <p>
+        <div class="container">
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+  </div>
+  <div class="form">
+    <input type="text" placeholder="Nome da Fila">
+    <input type="text" placeholder="Endereço">
+    <input type="text" placeholder="Inicio">
+    <input type="text" placeholder="Termino">
+    <div class="buttons">
+    <button class="btn-excluir">EXCLUIR</button>
+   
+    <button id="close-modal" class="btn-salvar">SALVAR</button>
+    </div>
+    
+  </div>
+</div>
+        </p>
+      </div>
+    </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
