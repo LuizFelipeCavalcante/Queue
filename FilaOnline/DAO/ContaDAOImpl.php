@@ -32,6 +32,8 @@ class ContaDAOImpl implements ContaDAO
                 $conta->setEmail($row['email']);
                 $conta->setTelefone($row['telefone']);
                 $conta->setSenha($row['senha']);
+                $conta->setFoto($row['foto']);
+                
                 return $conta;
             } else {
                 return false;
@@ -47,19 +49,17 @@ class ContaDAOImpl implements ContaDAO
     public function createConta($conta)
     {
         try {
-            $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone,senha) VALUES (:name, :email, :telefone, :senha)");
+            if (!empty($conta->getFoto())) {
+                $statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone, senha, foto) VALUES (:name, :email, :telefone, :senha, :foto)");
+                $statement->bindValue(':foto', $conta->getFoto());
+            }else {$statement = $this->conn->prepare("INSERT INTO conta (name, email, telefone, senha) VALUES (:name, :email, :telefone, :senha)");
+            }
             $statement->bindValue(':name', $conta->getNome());
             $statement->bindValue(':email', $conta->getEmail());
             $statement->bindValue(':telefone', $conta->getTelefone());
             $statement->bindValue(':senha', $conta->getSenha());
-            //if (!empty($_FILES['foto'])) {
-            //    $statement->bindValue(':foto', $conta->getFoto());
-            //}
-            if ($statement->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            
+            return $statement->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

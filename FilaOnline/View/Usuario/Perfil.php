@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user_id'])) {
     ?>
     <!DOCTYPE html>
@@ -61,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
     <body>
         <div class="container">
             <h1>Deslogado</h1>
-            <p><a href="../index.php">Voltar para página inicial</a></p>
+            <p><a href="../../index.php">Voltar para página inicial</a></p>
         </div>
     </body>
 
@@ -136,8 +138,8 @@ if (!isset($_SESSION['user_id'])) {
 
     <body>
         <?php
-        include "../Layout/HeaderUsuario.php"
-            ?>
+        include "../Layout/HeaderUsuario.php";
+        ?>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -147,7 +149,11 @@ if (!isset($_SESSION['user_id'])) {
                     <form class="form-horizontal" action="../Controller/ContaController?action=update_img" method="post"
                         enctype="multipart/form-data">
                         <div class="profile-img-container">
-                            <img class="profile-img" src="<?php echo $_SESSION['foto']; ?>" alt="Foto do perfil" />
+                            <?php if (isset($_SESSION['foto'])): ?>
+                                <img class="profile-img"
+                                    src="data:image/jpeg;base64,<?php echo htmlspecialchars($_SESSION['foto']); ?>"
+                                    alt="Foto do perfil" id="profileImg" />
+                            <?php endif; ?>
                             <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
 
                         </div>
@@ -156,7 +162,8 @@ if (!isset($_SESSION['user_id'])) {
                         method="post" enctype="multipart/form-data">
                         <label class="btn btn-primary btn-block">
                             Trocar foto de perfil
-                            <input type="file" name="profile_img" accept="image/*" style="display: none;">
+                            <input type="file" id="foto" name="foto" accept="image/*" style="display: none;"
+                                onchange="updateImagePreview(event)">
                         </label>
                         <div class="form-group">
                             <label for="nome">Nome</label>
@@ -169,15 +176,12 @@ if (!isset($_SESSION['user_id'])) {
                                 value="<?php echo $_SESSION['email']; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="telefone">Telefone</label>
+                        <label for="telefone">Telefone:</label>
                             <input type="tel" maxlength="15" onkeyup="handlePhone(event)" class="form-control"
-                                id="telefone" name="telefone"
+                                id="telefone" name="telefone" value="<?php echo $_SESSION['telefone']; ?>"
                                 title="Número de telefone precisa ser no formato (00) 0 0000-0000" />
                         </div>
-                        <div class="form-group">
-                            <label for="foto">Foto:</label>
-                            <input type="file" name="foto" id="foto" accept="image/*" required>
-                        </div>
+
 
                         <button type="submit" class="btn btn-danger">Salvar alterações</button>
                     </form>
@@ -185,6 +189,34 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </main>
         <script>
+            function updateImagePreview(event) {
+                const file = event.target.files[0];
+                const imgElement = document.getElementById('profileImg');
+
+                // Armazena a imagem atual em uma variável
+                const currentImageSrc = imgElement.src;
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        const newImageSrc = e.target.result; // Nova imagem a ser comparada
+
+                        // Verifica se a nova imagem é igual à atual
+                        if (newImageSrc !== currentImageSrc) {
+                            imgElement.src = newImageSrc; // Atualiza o src da imagem com a nova imagem
+                        } else {
+                            console.log('A nova imagem é igual à atual.'); // Ou faça outra ação
+                        }
+                    }
+
+                    reader.readAsDataURL(file); // Lê a imagem como uma URL
+                } else {
+                    // Se o arquivo for nulo, pode-se manter a imagem atual ou fazer outra ação
+                    console.log('Nenhuma nova imagem foi selecionada.');
+                }
+            }
+
             const handlePhone = (event) => {
                 let input = event.target
                 input.value = phoneMask(input.value)

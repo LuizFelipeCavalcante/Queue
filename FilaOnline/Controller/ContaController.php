@@ -20,18 +20,19 @@ switch ($action) {
             $conta->setTelefone($_POST['telefone']);
             $conta->setSenha($_POST['senha']);
 
-            if (!isset($_FILES['foto'])) {
-                $conta->setFoto('../Img/Conta');
-            } else {
-                $file = $_FILES['foto']['tmp_name'];
+
+            $file = $_FILES['foto']['tmp_name'];
+            if (is_uploaded_file($file)) {
                 $imageData = file_get_contents($file);
                 $base64 = base64_encode($imageData);
                 $conta->setFoto($base64);
+            } else {//colocar foto padrao
             }
             if (
                 $contaDao->createConta($conta)
             ) {
                 displayMessage('Registro inserido com sucesso!', '../View/Usuario/Estabelecimentos.php');
+
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
@@ -82,13 +83,17 @@ switch ($action) {
             $conta->setEmail($_POST['email']);
             $conta->setTelefone($_POST['telefone']);
             $conta->setId($_SESSION['user_id']);
-
-            // Processar o upload da imagem
-
-            // $caminhoImagem = uploadImagem($_FILES['foto'], '../Img/Conta');
-            // $conta->setFoto($caminhoImagem);
-
-
+            $file = $_FILES['foto']['tmp_name'];
+            if ($file != null) {
+                $imageData = file_get_contents($file);
+                $base64 = base64_encode($imageData);
+                $conta->setFoto($base64);
+            } else {
+                if (!empty($_SESSION['foto'])) {
+                    $conta->setFoto($_SESSION['foto']);
+                } else {
+                }
+            }
             $contas = $contaDao->updateConta($conta);
             if ($contas) {
                 $_SESSION['user_id'] = $contas->getId();
