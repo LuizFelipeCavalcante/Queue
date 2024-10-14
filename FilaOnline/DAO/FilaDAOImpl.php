@@ -38,16 +38,16 @@ class FilaDAOImpl implements FilaDAO
     function updateFila($fila)
     {
         try {
-            $sql = "UPDATE fila SET nome = :nome, endereco = :endereco, img = :img, inicio = :inicio, termino = :termino  WHERE id = :idFila";
+            $sql = "UPDATE fila SET nome = :nome, endereco = :endereco, inicio = :inicio, termino = :termino  WHERE id = :idFila";
 
             $statement = $this->conn->prepare($sql);
 
-            $statement->bindParam(':nome', $fila->getNome());
-            $statement->bindParam(':endereco', $fila->getEndereco());
-            $statement->bindParam(':img', $fila->getImg());
-            $statement->bindParam(':idFila', $fila->getId());
-            $statement->bindParam(':inicio', $fila->getInicio());
-            $statement->bindParam(':termino', $fila->getTermino());
+            $statement->bindValue(':nome', $fila->getNome());
+            $statement->bindValue(':endereco', $fila->getEndereco());
+           
+            $statement->bindValue(':idFila', $fila->getId());
+            $statement->bindValue(':inicio', $fila->getInicio());
+            $statement->bindValue(':termino', $fila->getTermino());
 
             return $statement->execute();
 
@@ -109,10 +109,9 @@ class FilaDAOImpl implements FilaDAO
     function deleteFila($idFila)
     {
 
-        $sql = "DELETE FROM fila WHERE id = :idFila";
+        $sql = "DELETE FROM fila WHERE id = $idFila";
 
         $statement = $this->conn->prepare($sql);
-        $statement->bindParam(':idFila', $idFila);
 
         return $statement->execute();
     }

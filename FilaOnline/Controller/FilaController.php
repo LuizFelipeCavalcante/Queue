@@ -81,10 +81,12 @@ switch ($action) {
             $fila->setEstabelecimentoFila($_SESSION['user_id']);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
+
             $file = $_FILES['logo']['tmp_name'];
             $imageData = file_get_contents($file);
             $base64 = base64_encode($imageData);
             $fila->setImg($base64);
+            
             $fila->setInicio($_POST['inicio']);
             $fila->setTermino($_POST['termino']);
 
@@ -140,6 +142,7 @@ switch ($action) {
             $fila->setId($id);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
+            
             //$file = $_FILES['logo']['tmp_name'];
             //$imageData = file_get_contents($file);
             //$base64 = base64_encode($imageData);
@@ -161,10 +164,9 @@ switch ($action) {
         
             $filaD = $filaDao->deleteFila($id);
             if ($filaD) {
-                header('Location: FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
-                exit();
+                displayMessage('Fila excluida com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
             } else {
-                displayMessage('Erro ao atualizar o registro.');
+                displayMessage('Erro ao deletar o registro.');
             }
         
         break;
