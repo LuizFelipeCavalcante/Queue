@@ -10,8 +10,41 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 $contaDao = new ContaDAOImpl();
 $conta = new Conta();
 
+$conn = Database::getConnection();
+$contaController = new ContaController();
+class ContaController
+{
 
+    private ContaDAO $contaDAOl; // Propriedade declarada com tipo
 
+    public function __construct()
+    {
+        // Injeção de dependência do DAO
+        $this->contaDAOl = new ContaDAOImpl();
+    }
+    public function validaConta($email, $senha)
+    {
+        $contas = $this->contaDAOl->validaConta($email, $senha);
+        if ($contas == null) {
+            displayMessage('Nome de usuário ou senha incorretos', '../View/Usuario/Login.php');
+        } else {
+            session_start();
+            $_SESSION['user_id'] = $contas->getId();
+            $_SESSION['user_name'] = $contas->getNome();
+            $_SESSION['email'] = $contas->getEmail();
+            $_SESSION['telefone'] = $contas->getTelefone();
+            $_SESSION['senha'] = $contas->getSenha();
+            $_SESSION['estabelecimento'] = false;
+            if ($contas->getFoto() != null) {
+                $_SESSION['foto'] = $contas->getFoto();
+            }
+            ;
+            header("Location: ../Controller/EstabelecimentoController?action=readall_estabelecimento");
+            exit();
+            
+        }
+    }
+}
 switch ($action) {
     case 'create_conta':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,22 +64,13 @@ switch ($action) {
             if (
                 $contaDao->createConta($conta)
             ) {
-                displayMessage('Registro inserido com sucesso!', '../View/Usuario/Estabelecimentos.php');
+
+                $contaController->validaConta($conta->getEmail(), $conta->getSenha());
 
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
-            $contas = $contaDao->validaConta($conta->getEmail(), $conta->getSenha());
-
-
-            $_SESSION['user_id'] = $contas->getId();
-            $_SESSION['user_name'] = $contas->getNome();
-            $_SESSION['email'] = $contas->getEmail();
-            $_SESSION['telefone'] = $contas->getTelefone();
-            $_SESSION['senha'] = $contas->getSenha();
-            $_SESSION['foto'] = $contas->getFoto();
-            $_SESSION['estabelecimento'] = false;
-            $_SESSION['infoConta'] = $conta;
+            
             exit();
         }
         break;
@@ -55,26 +79,9 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $senha = $_POST['senha'];
-
-            $contas = $contaDao->validaConta($email, $senha);
-            if ($contas == null) {
-                displayMessage('Nome de usuário ou senha incorretos', '../View/Usuario/Login.php');
-            } else {
-                session_start();
-                $_SESSION['user_id'] = $contas->getId();
-                $_SESSION['user_name'] = $contas->getNome();
-                $_SESSION['email'] = $contas->getEmail();
-                $_SESSION['telefone'] = $contas->getTelefone();
-                $_SESSION['senha'] = $contas->getSenha();
-                $_SESSION['estabelecimento'] = false;
-                if ($contas->getFoto() != null) {
-                    $_SESSION['foto'] = $contas->getFoto();
-                }
-                ;
-                header('Location: ../View/Usuario/Estabelecimentos.php');
-                exit();
+            $contaController->validaConta($email, $senha);
+            break;  
             }
-        }
         break;
 
     case 'update_conta':
