@@ -19,35 +19,38 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <style>
-        .navbar-nav .nav-link {
-            color: #2e9fea !important; /* Cor personalizada para os links */
-            border: 1px solid #d3d3d3; /* Borda cinza claro */
-            border-radius: 4px; /* Borda arredondada */
-            padding: 8px 12px; /* Espaçamento interno */
-            margin: 2px; /* Espaçamento entre os links */
-            transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
-        }
-        .navbar-nav .nav-link:hover {
-            background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
-            border-color: #2e9fea; /* Cor da borda ao passar o mouse */
-            color: #2e9fea !important; /* Cor do texto ao passar o mouse */
-        }
-        .navbar-brand img {
-            max-height: 50px; /* Ajuste a altura da imagem do logotipo */
-        }
-        .navbar {
-            text-align: center; /* Centraliza o texto no header */
-        }
-        .navbar-collapse {
-            justify-content: center; /* Centraliza o conteúdo da barra de navegação */
-        }
-    </style>
+   
 </head>
 
 <body>
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.php"><img src="../../img/logo01.png" alt="Logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            
+        <?php
+            
+
+            if (isset($_SESSION['user_id'])) {
+                if (($_SESSION['estabelecimento'])) {
+                    echo '<a class="nav-item nav-link" href="../Estabelecimento/HomeEstabelecimento.php"><b>Voltar</b></a>';
+                } else {
+                    echo '<a class="nav-item nav-link" href="../Usuario/Estabelecimentos.php"><b>Voltar</b></a>';
+                }
+            }else{
+                echo '<a class="nav-item nav-link" href="../Usuario/Estabelecimentos.php"><b>Voltar</b></a>';
+            }
+            ?>
+
+        </div>
+    </div>
+</header>
     <?php
-        include "../Layout/HeaderUsuario.php"
+        // include "../Layout/HeaderUsuario.php"
     ?>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -77,6 +80,7 @@
 	            <p>Não possui conta? <a href="Cadastro">Faça seu cadastro aqui</a></p>
 	        </div>
 	    </div>
+        
 	</div>
 </div>
 </body>

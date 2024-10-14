@@ -34,46 +34,7 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="Cadastro.js">
-        <style>
-            .navbar-nav .nav-link {
-                color: #2e9fea !important;
-                /* Cor personalizada para os links */
-                border: 1px solid #d3d3d3;
-                /* Borda cinza claro */
-                border-radius: 4px;
-                /* Borda arredondada */
-                padding: 8px 12px;
-                /* Espaçamento interno */
-                margin: 2px;
-                /* Espaçamento entre os links */
-                transition: background-color 0.3s, border-color 0.3s;
-                /* Transição suave para o hover */
-            }
 
-            .navbar-nav .nav-link:hover {
-                background-color: #e9f5fc;
-                /* Cor de fundo ao passar o mouse */
-                border-color: #2e9fea;
-                /* Cor da borda ao passar o mouse */
-                color: #2e9fea !important;
-                /* Cor do texto ao passar o mouse */
-            }
-
-            .navbar-brand img {
-                max-height: 50px;
-                /* Ajuste a altura da imagem do logotipo */
-            }
-
-            .navbar {
-                text-align: center;
-                /* Centraliza o texto no header */
-            }
-
-            .navbar-collapse {
-                justify-content: center;
-                /* Centraliza o conteúdo da barra de navegação */
-            }
-        </style>
     </head>
 
     <body>
@@ -128,20 +89,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            const handlePhone = (event) => {
-                let input = event.target
-                input.value = phoneMask(input.value)
-            }
-
-            const phoneMask = (value) => {
-                if (!value) return ""
-                value = value.replace(/\D/g, '')
-                value = value.replace(/(\d{2})(\d)/, "($1) $2")
-                value = value.replace(/(\d)(\d{4})$/, "$1-$2")
-                return value
-            }
-        </script>
+        
     </body>
 
 </html>
