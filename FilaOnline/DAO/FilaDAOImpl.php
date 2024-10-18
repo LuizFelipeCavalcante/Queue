@@ -115,9 +115,9 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->execute();
     }
-    function verificarUsuario($idUsuario)
+    function verificarFilaUsuario($idUsuario)
     {
-        $sql = "select * from fila_usuario where idUsuario = $idUsuario;";
+        $sql = "SELECT * from fila_usuario where idUsuario = $idUsuario;";
 
         $statement = $this->conn->query($sql);
 
@@ -137,5 +137,10 @@ class FilaDAOImpl implements FilaDAO
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+    }
+    function contarPessoasFila($filaId){
+        
+
+
     }
 }

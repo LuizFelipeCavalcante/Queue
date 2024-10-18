@@ -68,6 +68,19 @@ class FilaController
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
+    public function contarPessoasFila($idFila)
+    {
+        $x = 0;
+        $fila = $this->filaDAOl->GetFilaId($idFila);
+        if (empty($fila)) {
+            return 0;
+        } else {
+        foreach($fila as $pessoa ){
+            $x++;
+        };
+        return $x;
+        }
+    }
 
 }
 
@@ -86,7 +99,7 @@ switch ($action) {
             $imageData = file_get_contents($file);
             $base64 = base64_encode($imageData);
             $fila->setImg($base64);
-            
+
             $fila->setInicio($_POST['inicio']);
             $fila->setTermino($_POST['termino']);
 
@@ -121,14 +134,17 @@ switch ($action) {
     case 'entrar_fila':
         $userid = $_SESSION['user_id'];
         $filaid = $id;
+        if (empty($filaDao->verificarFilaUsuario($userid))) {
+            if ($filaDao->entrarFila($userid, $filaid)) {
 
-        if ($fila->entrarFila($userid, $filaid) != true) {
+                displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
 
-            displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
-
+            } else {
+                displayMessage("$userid , $filaid ");
+                displayMessage('Erro ao entrar na fila.');
+            }
         } else {
-            displayMessage("$userid , $filaid ");
-            displayMessage('Erro ao entrar na fila.');
+            displayMessage('Você já está em uma fila', '../View/Usuario/FilasPEstabelecimento');
         }
 
         break;
@@ -142,7 +158,7 @@ switch ($action) {
             $fila->setId($id);
             $fila->setNome($_POST['nome']);
             $fila->setEndereco($_POST['endereco']);
-            
+
             //$file = $_FILES['logo']['tmp_name'];
             //$imageData = file_get_contents($file);
             //$base64 = base64_encode($imageData);
@@ -161,14 +177,14 @@ switch ($action) {
         break;
 
     case 'delete_fila':
-        
-            $filaD = $filaDao->deleteFila($id);
-            if ($filaD) {
-                displayMessage('Fila excluida com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
-            } else {
-                displayMessage('Erro ao deletar o registro.');
-            }
-        
+
+        $filaD = $filaDao->deleteFila($id);
+        if ($filaD) {
+            displayMessage('Fila excluida com sucesso!', '../Controller/FilaController?action=readfila_estabelecimentoid&id=' . htmlspecialchars($_SESSION['user_id']));
+        } else {
+            displayMessage('Erro ao deletar o registro.');
+        }
+
         break;
 
     default:

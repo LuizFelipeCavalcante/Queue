@@ -11,6 +11,6 @@ interface FilaDAO
     function deleteFila($idFila);
     function getFilaUsuario($idEstabelecimento);
     function getFilaId($idFila);
-    function verificarUsuario($userId);
+    function verificarFilaUsuario($userId);
     function entrarFila($userId, $filaId);
 }

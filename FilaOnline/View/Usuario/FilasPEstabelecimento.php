@@ -48,7 +48,13 @@ include "../Layout/HeaderUsuario.php"
         <?php endif; ?>
     </div>
 </div>
-
+<button id="carregarConteudo">aaaaaaa</button>
+<div id="conteudo"></div>
+<script>
+    //Teste de botar os dados sem atualzar a pagina
+    var tempo = window.setInterval(carrega, 100);
+    function carrega() { $("#conteudo").load("Usuario/Estabelecimentos.php"); };
+</script>
 
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

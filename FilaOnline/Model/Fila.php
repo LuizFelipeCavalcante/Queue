@@ -97,9 +97,9 @@ class Fila {
         $this->filaDAO = new FilaDAOImpl();
     }
 
-    public function entrarFila($userId, $filaId) {
-        $this->filaDAO->entrarFila($userId, $filaId);
-    }
+    //public function entrarFila($userId, $filaId) {
+    //    $this->filaDAO->entrarFila($userId, $filaId);
+    //}
     
 }
 
