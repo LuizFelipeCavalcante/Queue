@@ -44,7 +44,7 @@ class FilaDAOImpl implements FilaDAO
 
             $statement->bindValue(':nome', $fila->getNome());
             $statement->bindValue(':endereco', $fila->getEndereco());
-           
+
             $statement->bindValue(':idFila', $fila->getId());
             $statement->bindValue(':inicio', $fila->getInicio());
             $statement->bindValue(':termino', $fila->getTermino());
@@ -115,6 +115,15 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->execute();
     }
+    function verificarUsuario($idUsuario)
+    {
+        $sql = "select * from fila_usuario where idUsuario = $idUsuario;";
+
+        $statement = $this->conn->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     function entrarFila($idUsuario, $idFila)
     {
         try {

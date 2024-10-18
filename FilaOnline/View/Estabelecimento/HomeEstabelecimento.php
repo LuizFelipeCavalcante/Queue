@@ -85,7 +85,9 @@ if (!empty($_SESSION['filas'])): ?>
                                     <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($fila['img']); ?>"
                                         class="card-img-top" alt="Fila 1">
                                 </div>
-                                <form action="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>" method="post">
+                                <form
+                                    action="../../Controller/FilaController?action=update_fila&id=<?php echo htmlspecialchars($fila['id']); ?>"
+                                    method="post">
                                     <div class="form">
                                         <label>Nome da Fila</label>
                                         <input type="text" placeholder="Nome da Fila" id="nome" name="nome" value=<?php echo htmlspecialchars($fila['nome']); ?>>
@@ -95,16 +97,14 @@ if (!empty($_SESSION['filas'])): ?>
                                         <input type="time" placeholder="Inicio" id="inicio" name="inicio" value=<?php echo htmlspecialchars($fila['inicio']); ?>>
                                         <label>Termino</label>
                                         <input type="time" placeholder="Termino" id="termino" name="termino" value=<?php echo htmlspecialchars($fila['termino']); ?>>
-                                        <div class="buttons">
-                                            <a
-                                                href="../../Controller/FilaController?action=delete_fila&id=<?php echo htmlspecialchars($fila['id']); ?>"><button
-                                                    class="btn-excluir">EXCLUIR</button></a>
-
+                                        <div class="buttons">  
                                             <button id="close-modal" class="btn-salvar" type="submit">SALVAR</button>
                                         </div>
-
+                                        
                                     </div>
                                 </form>
+                                <a href="../../Controller/FilaController?action=delete_fila&id=<?php echo htmlspecialchars($fila['id']); ?>"><button
+                                type="" class="btn-excluir">EXCLUIR</button></a>
                             </div>
                             </p>
                         </div>
