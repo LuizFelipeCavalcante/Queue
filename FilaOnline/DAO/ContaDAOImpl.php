@@ -70,8 +70,8 @@ class ContaDAOImpl implements ContaDAO
         try {
             $statement = $this->conn->prepare("INSERT INTO conta () VALUES ()");
             if($statement->execute()){
-            }return 0;
-            
+                return $this->conn->lastInsertId();
+            }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
