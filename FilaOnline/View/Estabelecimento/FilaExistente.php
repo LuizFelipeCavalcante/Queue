@@ -107,6 +107,7 @@
 <body>
     <?php
     include "../Layout/HeaderEstabelecimento.php";
+    
     ?>
 
     <!-- jQuery and Bootstrap JS -->
@@ -141,6 +142,31 @@
         <button class="btn">Próximo</button>
         <?php endif;?>
     </div>
+
+<?php
+include '../../QrCode/qrcode.php';
+
+
+
+if(isset($_POST['qr'])) {   
+    $text = $_POST['qr'];
+    $name = md5(time()) . ".png";
+    $file = "Files/{$name}";
+    $options = array(
+        'w' =>500,
+        'h' =>500,
+    );
+    $generator = new QRCode($text, $options);
+    $generator->output_image();
+}
+?>
+
+<form action="" method="POST">
+        <input type="text" name="qr" placeholder="Texto">
+        <button type="submit">Gerar</button>
+    </form>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
