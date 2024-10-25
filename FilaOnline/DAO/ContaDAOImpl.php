@@ -65,6 +65,17 @@ class ContaDAOImpl implements ContaDAO
         }
     }
 
+    public function createUser()
+    {
+        try {
+            $statement = $this->conn->prepare("INSERT INTO conta () VALUES ()");
+            if($statement->execute()){
+            }return 0;
+            
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
     public function updateConta($conta)
     {
         try {

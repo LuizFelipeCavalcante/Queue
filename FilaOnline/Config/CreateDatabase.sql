@@ -3,19 +3,16 @@ create database app_fila;
 use app_fila;
 
 create table conta (
-    id INT AUTO_INCREMENT not null  PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    telefone varchar(15) NOT NULL,
-    senha VARCHAR(40) NOT NULL,
-    foto text not null
+    id INT AUTO_INCREMENT not null   PRIMARY KEY,
+    name VARCHAR(60)  ,
+    email VARCHAR(100)  ,
+    telefone varchar(15)  ,
+    senha VARCHAR(40)  ,
+    foto text ,
+    numeroFila VARCHAR(10),
+    tempoEspera float
 );
 
-create table users(
-    id int AUTO_INCREMENT not null PRIMARY KEY,
-    numeroFila VARCHAR(10),
-    tempoEspera float 
-);
 create table estabelecimento(
     id INT AUTO_INCREMENT not null PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
