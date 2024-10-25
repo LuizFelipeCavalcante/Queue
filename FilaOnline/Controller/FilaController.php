@@ -3,12 +3,16 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once '../Model/Fila.php';
+include_once '../Model/Conta.php';
 include_once '../DAO/FilaDAOImpl.php';
+include_once '../DAO/ContaDAOImpl.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 $filaDao = new FilaDAOImpl();
+$contaDao = new ContaDAOImpl();
+
 
 $conn = Database::getConnection();
 $filaController = new FilaController();
@@ -75,10 +79,11 @@ class FilaController
         if (empty($fila)) {
             return 0;
         } else {
-        foreach($fila as $pessoa ){
-            $x++;
-        };
-        return $x;
+            foreach ($fila as $pessoa) {
+                $x++;
+            }
+            ;
+            return $x;
         }
     }
 
@@ -132,21 +137,29 @@ switch ($action) {
         $filaController->listarFilaUsuario($id);
         break;
     case 'entrar_fila':
-        $userid = $_SESSION['user_id'];
         $filaid = $id;
-        if (empty($filaDao->verificarFilaUsuario($userid))) {
-            if ($filaDao->entrarFila($userid, $filaid)) {
+        if
+        ($filaDAOl->GetFilaId($idFila) != null) {
+            if (!isset($_SESSION['user_id'])) {
+                $_SESSION['user_id'] = $contaDao->createUser();
+            }
+            $userid = $_SESSION['user_id'];
 
-                displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
+            if (empty($filaDao->verificarFilaUsuario($userid))) {
+                if ($filaDao->entrarFila($userid, $filaid)) {
 
+                    displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
+
+                } else {
+                    displayMessage("$userid , $filaid ");
+                    displayMessage('Erro ao entrar na fila.');
+                }
             } else {
-                displayMessage("$userid , $filaid ");
-                displayMessage('Erro ao entrar na fila.');
+                displayMessage('Você já está em uma fila', '../View/Usuario/FilasPEstabelecimento');
             }
         } else {
-            displayMessage('Você já está em uma fila', '../View/Usuario/FilasPEstabelecimento');
+            displayMessage('Fila não existente', '../View/Usuario/FilasPEstabelecimento');
         }
-
         break;
 
     case 'update_fila':
