@@ -13,4 +13,6 @@ interface FilaDAO
     function getFilaId($idFila);
     function verificarFilaUsuario($userId);
     function entrarFila($userId, $filaId);
+    function passarUsuario($filaId);
+    function voltarUsuario($filaId);
 }

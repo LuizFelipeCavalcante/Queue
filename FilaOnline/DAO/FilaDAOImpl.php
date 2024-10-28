@@ -108,7 +108,6 @@ class FilaDAOImpl implements FilaDAO
 
     function deleteFila($idFila)
     {
-
         $sql = "DELETE FROM fila WHERE id = $idFila";
 
         $statement = $this->conn->prepare($sql);
@@ -123,7 +122,7 @@ class FilaDAOImpl implements FilaDAO
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     function entrarFila($idUsuario, $idFila)
     {
         try {
@@ -138,9 +137,29 @@ class FilaDAOImpl implements FilaDAO
             echo "Error: " . $e->getMessage();
         }
     }
-    function contarPessoasFila($filaId){
-        
 
+    function passarUsuario($filaId)
+    {
+        try {
+            $sql = "SELECT idUsuario FROM fila_usuario ORDER BY  idUsuario ASC LIMIT 1;";
+            $stmt = $this->conn->query($sql);
+            
+            $primeiro_da_fila = $stmt->fetchColumn();
 
+            if ($primeiro_da_fila != false) {
+                $sql = "delete from fila_usuario where idfila = $filaId and idusuario = $primeiro_da_fila ;";
+                $stmt = $this->conn->prepare($sql);
+
+                return $stmt->execute();
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+
+    }
+    function voltarUsuario($filaId)
+    {
     }
 }

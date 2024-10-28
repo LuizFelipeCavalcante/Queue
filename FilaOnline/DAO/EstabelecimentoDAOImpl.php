@@ -115,5 +115,3 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
     }
 
 }
-
-?>

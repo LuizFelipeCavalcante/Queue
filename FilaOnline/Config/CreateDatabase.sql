@@ -3,12 +3,12 @@ create database app_fila;
 use app_fila;
 
 create table conta (
-    id INT AUTO_INCREMENT not null   PRIMARY KEY,
-    name VARCHAR(60)  ,
-    email VARCHAR(100)  ,
-    telefone varchar(15)  ,
-    senha VARCHAR(40)  ,
-    foto text ,
+    id INT AUTO_INCREMENT not null PRIMARY KEY,
+    name VARCHAR(60),
+    email VARCHAR(100),
+    telefone varchar(15),
+    senha VARCHAR(40),
+    foto text,
     numeroFila VARCHAR(10),
     tempoEspera float
 );
@@ -25,13 +25,13 @@ create table estabelecimento(
 );
 
 create table funcionario(
-    id INT AUTO_INCREMENT not null  PRIMARY KEY,
+    id INT AUTO_INCREMENT not null PRIMARY KEY,
     idEstabelecimento INT not null,
     cargo varchar(20) not null,
     name VARCHAR(60) NOT NULL,
     email VARCHAR(100) NOT NULL,
     telefone INT NOT NULL,
-	FOREIGN KEY (idEstabelecimento) REFERENCES estabelecimento(id)
+    FOREIGN KEY (idEstabelecimento) REFERENCES estabelecimento(id)
 );
 
 create table fila(
@@ -39,12 +39,12 @@ create table fila(
     idEstabelecimento INT not null,
     nome text not null,
     tempoMedio FLOAT NULL,
-    qntPessoasFila INT  NULL,
+    qntPessoasFila INT NULL,
     endereco text NOT NULL,
     img text NOT NULL,
     inicio time,
     termino time,
-     FOREIGN KEY (idEstabelecimento) REFERENCES estabelcimento(id)
+    FOREIGN KEY (idEstabelecimento) REFERENCES estabelcimento(id)
 );
 
 CREATE TABLE fila_usuario (
@@ -54,3 +54,21 @@ CREATE TABLE fila_usuario (
     FOREIGN KEY (idFila) REFERENCES fila(id),
     FOREIGN KEY (idUsuario) REFERENCES users(id)
 );
+
+CREATE TABLE historico_fila(
+id_fila int primary key,
+id_usuario int,
+ultima_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+DELIMITER $
+CREATE TRIGGER UPDATE_FILA
+before DELETE ON fila_usuario
+FOR EACH ROW
+BEGIN
+    INSERT INTO historico_fila (id_fila, id_usuario, ultima_atualizacao)
+    VALUES (id_fila ,id_usuario , CURRENT_TIMESTAMP)
+    ON DUPLICATE KEY UPDATE ultima_atualizacao = CURRENT_TIMESTAMP;
+END$
+
+delimiter ;

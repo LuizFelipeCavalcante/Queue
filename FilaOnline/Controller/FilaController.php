@@ -139,7 +139,7 @@ switch ($action) {
     case 'entrar_fila':
         $filaid = $id;
         if
-        ($filaDAOl->GetFilaId($idFila) != null) {
+        ($filaDao->GetFilaId($id) != null) {
             if (!isset($_SESSION['user_id'])) {
                 $_SESSION['user_id'] = $contaDao->createUser();
             }
@@ -199,7 +199,12 @@ switch ($action) {
         }
 
         break;
-
+        case 'proxima_pessoa':
+            //chamar metodo do dao
+            echo("a");
+            $filaDao->passarUsuario($id);
+            $filaController->listarFilaId($id);
+            break;
     default:
         displayMessage('Ação não reconhecida.');
         break;
