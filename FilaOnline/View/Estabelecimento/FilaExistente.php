@@ -123,10 +123,19 @@
         <div class="fila">
             <?php // Essa sessao é do capeta, ela existe ate quando eu n crio ela 
             // fiz uma gambiarra pra resolver😂
+            $primeirapessoa = 1;
             if (!empty($_SESSION['filaatual'])):
                 $filaPaia = false; //isso é so pra ver se tem algum usuario na fila ou não;
-                foreach (array_reverse($_SESSION['filaatual']) as $filau): ?>
+                foreach (array_reverse($_SESSION['filaatual']) as $filau):
 
+                    if ($primeirapessoa == count($_SESSION['filaatual'])) {
+                        echo ('<div class="pessoa-atendida">Pessoa sendo atendida</div>');
+                    } else {
+                        $primeirapessoa++;
+                    }
+                    ;
+
+                    ?>
                     <div class="fila-item"><?php if ($filau['idUsuario'] != null) {
                         echo htmlspecialchars($filau['idUsuario']);
                     } else {
@@ -142,14 +151,15 @@
             <?php endif; ?>
         </div>
         <?php if ($filaPaia == null): ?>
-            <div class="pessoa-atendida">Pessoa sendo atendida</div>
-            <a href=""><button class="btn">Voltar</button></a>
-            <a
-            href="..\..\Controller\FilaController.php?action=proxima_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
+            
+            <a href="..\..\Controller\FilaController.php?action=voltar_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
             $id = $_SESSION['filaatual'][0]['id'];
-            echo ($id) ?>"><button
-            class="btn">Próximo</button></a>
+            echo ($id) ?>"><button class="btn">Voltar</button></a>
+            <a href="..\..\Controller\FilaController.php?action=proxima_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
+            $id = $_SESSION['filaatual'][0]['id'];
+            echo ($id) ?>"><button class="btn">Próximo</button></a>
         <?php endif; ?>
+        
     </div>
 
     <?php

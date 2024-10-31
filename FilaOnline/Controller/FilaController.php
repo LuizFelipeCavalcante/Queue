@@ -199,15 +199,20 @@ switch ($action) {
         }
 
         break;
-        case 'proxima_pessoa':
-            //chamar metodo do dao
-            echo("a");
-            $a = $filaDao->passarUsuario($id);
-            if($a)
-            {echo($a);}
-            else{echo('Fudeu');}
-            //$filaController->listarFilaId($id);
-            break;
+    case 'proxima_pessoa':
+
+        $filaDao->passarUsuario($id);
+        $filaController->listarFilaId($id);
+
+        break;
+    case 'voltar_pessoa':
+
+        if ($filaDao->voltarUsuario($id)) {
+            $filaController->listarFilaId($id);
+        } else {
+            displayMessage('Nenhum usuario para voltar', '../Controller/FilaController?action=readfila_filaid&id='.$id);
+        }
+        break;
     default:
         displayMessage('Ação não reconhecida.');
         break;

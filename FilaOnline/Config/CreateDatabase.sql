@@ -80,7 +80,3 @@ BEGIN
     ON DUPLICATE KEY UPDATE ultima_atualizacao = CURRENT_TIMESTAMP;
 END$
 DELIMITER ;
-
-INSERT INTO fila_usuario VALUES (1,1);
-DELETE FROM fila_usuario WHERE idFila = 1 AND idUsuario = 1;
-SELECT * FROM historico_fila;
