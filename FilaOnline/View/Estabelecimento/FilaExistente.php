@@ -143,7 +143,7 @@
         </div>
         <?php if ($filaPaia == null): ?>
             <div class="pessoa-atendida">Pessoa sendo atendida</div>
-            <button class="btn">Voltar</button>
+            <a href=""><button class="btn">Voltar</button></a>
             <a
             href="..\..\Controller\FilaController.php?action=proxima_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
             $id = $_SESSION['filaatual'][0]['id'];

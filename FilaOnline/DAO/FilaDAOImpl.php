@@ -141,14 +141,14 @@ class FilaDAOImpl implements FilaDAO
     function passarUsuario($filaId)
     {
         try {
-            $sql = "SELECT idUsuario FROM fila_usuario ORDER BY  idUsuario ASC LIMIT 1;";
+            $sql = "SELECT idUsuario FROM fila_usuario ORDER BY idUsuario ASC LIMIT 1;";
             $stmt = $this->conn->query($sql);
-            
+
             $primeiro_da_fila = $stmt->fetchColumn();
 
             if ($primeiro_da_fila != false) {
-                $sql = "delete from fila_usuario where idfila = $filaId and idusuario = $primeiro_da_fila ;";
-                $stmt = $this->conn->prepare($sql);
+                $sql = "delete from fila_usuario where idFila = $filaId and idUsuario = $primeiro_da_fila ;";
+                $stmt = $this->conn->prepare(query: $sql);
 
                 return $stmt->execute();
             } else {

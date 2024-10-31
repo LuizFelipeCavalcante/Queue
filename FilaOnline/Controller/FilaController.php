@@ -202,8 +202,11 @@ switch ($action) {
         case 'proxima_pessoa':
             //chamar metodo do dao
             echo("a");
-            $filaDao->passarUsuario($id);
-            $filaController->listarFilaId($id);
+            $a = $filaDao->passarUsuario($id);
+            if($a)
+            {echo($a);}
+            else{echo('Fudeu');}
+            //$filaController->listarFilaId($id);
             break;
     default:
         displayMessage('Ação não reconhecida.');
