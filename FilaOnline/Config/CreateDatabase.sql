@@ -58,6 +58,7 @@ CREATE TABLE fila_usuario (
 CREATE TABLE fila_usuario (
     idFila INT NOT NULL,
     idUsuario INT NOT NULL,
+    entrada_fila datetime default CURRENT_TIMESTAMP,
     PRIMARY KEY (idFila, idUsuario),
     FOREIGN KEY (idFila) REFERENCES fila(id),
     FOREIGN KEY (idUsuario) REFERENCES users(id)

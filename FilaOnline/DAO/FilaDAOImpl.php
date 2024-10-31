@@ -79,7 +79,6 @@ class FilaDAOImpl implements FilaDAO
 
     function getAllFilasPorEstabelecimento($idEstabelecimento)
     {
-
         $sql = "SELECT * FROM fila where idEstabelecimento = :idEstabelecimento";
         $statement = $this->conn->prepare($sql);
         $statement->bindParam(':idEstabelecimento', $idEstabelecimento);
@@ -99,7 +98,7 @@ class FilaDAOImpl implements FilaDAO
     }
     function GetFilaId($idFila)
     {
-        $sql = "SELECT * from fila left join fila_usuario on(fila.id = idFila) WHERE fila.id = $idFila;";
+        $sql = "SELECT * from fila left join fila_usuario on(fila.id = idFila) WHERE fila.id = $idFila order by entrada_fila ;";
 
         $statement = $this->conn->query($sql);
 
@@ -141,7 +140,7 @@ class FilaDAOImpl implements FilaDAO
     function passarUsuario($filaId)
     {
         try {
-            $sql = "SELECT idUsuario FROM fila_usuario ORDER BY idUsuario ASC LIMIT 1;";
+            $sql = "SELECT idUsuario FROM fila_usuario ORDER BY entrada_fila ASC LIMIT 1;";
             $stmt = $this->conn->query($sql);
 
             $primeiro_da_fila = $stmt->fetchColumn();
@@ -162,11 +161,11 @@ class FilaDAOImpl implements FilaDAO
     function voltarUsuario($filaId)
     {
         try {
-            $sql = "SELECT idUsuario FROM historico_fila where idFila = $filaId ORDER BY idUsuario DESC LIMIT 1;";
+            $sql = "SELECT idUsuario FROM historico_fila where idFila = $filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
             $stmt = $this->conn->query($sql);
             $ultimo_saida = $stmt->fetchColumn();
             if ($ultimo_saida !== false) {
-                $sql = "insert into fila_usuario values($filaId, $ultimo_saida);";
+                $sql = "insert into fila_usuario (idFila,idUsuario)values($filaId, $ultimo_saida);";
                 $stmt = $this->conn->prepare(query: $sql);
                 $inserir = $stmt->execute();
                 if ($inserir) {
