@@ -70,7 +70,7 @@ CREATE TRIGGER UPDATE_FILA
 BEFORE DELETE ON fila_usuario
 FOR EACH ROW
 BEGIN
-    INSERT INTO historico_fila (idFila, idUsuario,entrada_fila, ultima_atualizacao)
+    INSERT INTO historico_fila (idFila, idUsuario,entrada_fila , ultima_atualizacao)
     VALUES (OLD.idFila, OLD.idUsuario, old.entrada_fila, CURRENT_TIMESTAMP)
     ON DUPLICATE KEY UPDATE ultima_atualizacao = CURRENT_TIMESTAMP;
 END$

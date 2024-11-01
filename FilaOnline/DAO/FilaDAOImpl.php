@@ -161,31 +161,55 @@ class FilaDAOImpl implements FilaDAO
     function voltarUsuario($filaId)
     {
         try {
-            $sql = "SELECT idUsuario FROM historico_fila where idFila = $filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
-            $stmt = $this->conn->query($sql);
-            $ultimo_saida = $stmt->fetchColumn();
-            $sql = "SELECT entrada_fila FROM historico_fila where idFila = $filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
-            $stmt = $this->conn->query($sql);
-            $entrada = $stmt->fetchColumn();
-            if ($ultimo_saida !== false) {
-                $sql = "insert into fila_usuario (idFila,idUsuario,entrada_fila) values ($filaId, $ultimo_saida, $entrada);";
-                $stmt = $this->conn->prepare( $sql);
-                $inserir = $stmt->execute();
-                if ($inserir) {
-                    $sql = "delete from historico_fila where idFila =  $filaId and idUsuario = $ultimo_saida;";
-                    $stmt = $this->conn->prepare(query: $sql);
-                    $stmt->execute();
-                }
-                return $inserir;
-            } else {
-                return false;
+            $sql = "SELECT idUsuario, entrada_fila FROM historico_fila WHERE idFila = :filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':filaId', $filaId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Fetch both values in one go
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$result) {
+                return false; // Retorna falso se não houver nenhum resultado
             }
+
+            $ultimo_saida = $result['idUsuario'];
+            $entrada = $result['entrada_fila'];
+
+            // Insert na tabela fila_usuario com parâmetros
+            $sql = "INSERT INTO fila_usuario (idFila, idUsuario, entrada_fila) VALUES (:filaId, :idUsuario, :entrada_fila);";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':filaId', $filaId, PDO::PARAM_INT);
+            $stmt->bindParam(':idUsuario', $ultimo_saida, PDO::PARAM_INT);
+            $stmt->bindParam(':entrada_fila', $entrada);
+            $inserir = $stmt->execute();
+
+            if ($inserir) {
+                // Delete na tabela historico_fila com parâmetros
+                $sql = "DELETE FROM historico_fila WHERE idFila = :filaId AND idUsuario = :idUsuario;";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':filaId', $filaId, PDO::PARAM_INT);
+                $stmt->bindParam(':idUsuario', $ultimo_saida, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+
+            return $inserir;
+
         } catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
             return false;
         }
-
-
-
-
     }
+    function contarPessoasFila($filaId)
+    {
+        $sql = "SELECT count(idUsuario) FROM fila_usuario where idFila = $filaId;";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+
+
+
+
 }
+

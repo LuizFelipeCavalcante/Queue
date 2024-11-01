@@ -15,4 +15,5 @@ interface FilaDAO
     function entrarFila($userId, $filaId);
     function passarUsuario($filaId);
     function voltarUsuario($filaId);
+    function contarPessoasFila($filaId);
 }

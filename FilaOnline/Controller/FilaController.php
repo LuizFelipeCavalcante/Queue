@@ -74,17 +74,8 @@ class FilaController
     }
     public function contarPessoasFila($idFila)
     {
-        $x = 0;
-        $fila = $this->filaDAOl->GetFilaId($idFila);
-        if (empty($fila)) {
-            return 0;
-        } else {
-            foreach ($fila as $pessoa) {
-                $x++;
-            }
-            ;
-            return $x;
-        }
+        $QuantidadePessoas = $this->filaDAOl->contarPessoasFila($idFila);
+        
     }
 
 }
@@ -202,16 +193,22 @@ switch ($action) {
     case 'proxima_pessoa':
 
         $filaDao->passarUsuario($id);
+
         $filaController->listarFilaId($id);
 
         break;
     case 'voltar_pessoa':
-
-        if ($filaDao->voltarUsuario($id)) {
+        $teste = $filaDao->voltarUsuario($id);
+        if ($teste) {
             $filaController->listarFilaId($id);
         } else {
-            displayMessage('Nenhum usuario para voltar', '../Controller/FilaController?action=readfila_filaid&id='.$id);
+
+            displayMessage('Nenhum usuario para voltar', '../Controller/FilaController?action=readfila_filaid&id=' . $id);
         }
+        break;
+    case 'contarPessoasFila':
+        $filaController->contarPessoasFila($id);
+        $filaDao->contarPessoasFila($id);
         break;
     default:
         displayMessage('Ação não reconhecida.');
