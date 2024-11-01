@@ -47,13 +47,6 @@ create table fila(
     FOREIGN KEY (idEstabelecimento) REFERENCES estabelcimento(id)
 );
 
-CREATE TABLE fila_usuario (
-    idFila INT NOT NULL,
-    idUsuario INT NOT NULL,
-    PRIMARY KEY (idFila, idUsuario),
-    FOREIGN KEY (idFila) REFERENCES fila(id),
-    FOREIGN KEY (idUsuario) REFERENCES users(id)
-);
 
 CREATE TABLE fila_usuario (
     idFila INT NOT NULL,
@@ -67,6 +60,7 @@ CREATE TABLE fila_usuario (
 CREATE TABLE historico_fila(
     idFila INT NOT NULL,
     idUsuario INT NOT NULL,
+    entrada_fila datetime default CURRENT_TIMESTAMP,
     ultima_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (idFila, idUsuario)
 );
@@ -76,8 +70,8 @@ CREATE TRIGGER UPDATE_FILA
 BEFORE DELETE ON fila_usuario
 FOR EACH ROW
 BEGIN
-    INSERT INTO historico_fila (idFila, idUsuario, ultima_atualizacao)
-    VALUES (OLD.idFila, OLD.idUsuario, CURRENT_TIMESTAMP)
+    INSERT INTO historico_fila (idFila, idUsuario,entrada_fila, ultima_atualizacao)
+    VALUES (OLD.idFila, OLD.idUsuario, old.entrada_fila, CURRENT_TIMESTAMP)
     ON DUPLICATE KEY UPDATE ultima_atualizacao = CURRENT_TIMESTAMP;
 END$
 DELIMITER ;

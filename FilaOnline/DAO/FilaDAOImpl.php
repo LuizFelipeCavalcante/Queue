@@ -164,9 +164,12 @@ class FilaDAOImpl implements FilaDAO
             $sql = "SELECT idUsuario FROM historico_fila where idFila = $filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
             $stmt = $this->conn->query($sql);
             $ultimo_saida = $stmt->fetchColumn();
+            $sql = "SELECT entrada_fila FROM historico_fila where idFila = $filaId ORDER BY ultima_atualizacao DESC LIMIT 1;";
+            $stmt = $this->conn->query($sql);
+            $entrada = $stmt->fetchColumn();
             if ($ultimo_saida !== false) {
-                $sql = "insert into fila_usuario (idFila,idUsuario)values($filaId, $ultimo_saida);";
-                $stmt = $this->conn->prepare(query: $sql);
+                $sql = "insert into fila_usuario (idFila,idUsuario,entrada_fila) values ($filaId, $ultimo_saida, $entrada);";
+                $stmt = $this->conn->prepare( $sql);
                 $inserir = $stmt->execute();
                 if ($inserir) {
                     $sql = "delete from historico_fila where idFila =  $filaId and idUsuario = $ultimo_saida;";
