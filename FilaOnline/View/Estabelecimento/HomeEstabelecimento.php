@@ -46,7 +46,7 @@ if (($_SESSION['estabelecimento'])):
 //if (isset($_SESSION['filaatual'])) {
 // unset($_SESSION['filaatual']);
 //}
-
+var_dump($_SESSION['filas']);
 if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">
@@ -63,7 +63,7 @@ if (!empty($_SESSION['filas'])): ?>
                         <div class="fila-info">
                             <p><strong>Endereço:</strong> <?php echo htmlspecialchars($fila['endereco']); ?></p>
                             <p class="tempo-espera">Tempo de espera: </p>
-                            <p class="num-pessoas">Pessoas na fila: </p>
+                            <p class="num-pessoas">Pessoas na fila: <?php echo htmlspecialchars($fila['qntPessoasFila']); ?></p>
                             <p><strong>Inicio:</strong> <?php echo htmlspecialchars($fila['inicio']); ?> </p>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
                             <p><strong>Prévia das pessoas:</strong> </p>

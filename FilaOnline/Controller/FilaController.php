@@ -35,7 +35,9 @@ class FilaController
             session_start();
         }
         $filas = $this->filaDAOl->getAllFilas();
+        
         $_SESSION['filas'] = $filas;
+        unset($filas);
     }
     public function listarFilasPorEstabelecimento($idEstabelecimento)
     {
@@ -45,9 +47,14 @@ class FilaController
         // Obtém todas as filas do banco de dados via DAO
         //mudar aqui ó
         $filas = $this->filaDAOl->getAllFilasPorEstabelecimento($idEstabelecimento);
+        foreach ($filas as &$fila) {
+            $fila['qntPessoasFila'] = $this->contarPessoasFila($fila['id']);
+        };
         $_SESSION['filas'] = $filas;
-
+        
         echo ("A");
+        
+        
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
@@ -55,7 +62,7 @@ class FilaController
     {
         $filauser = $this->filaDAOl->getFilaUsuario($idFila);
         $_SESSION['filasuser'] = $filauser;
-
+        
         echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
@@ -65,17 +72,17 @@ class FilaController
         $fila = $this->filaDAOl->GetFilaId($idFila);
         if (empty($fila)) {
         } else {
+            
             $_SESSION['filaatual'] = $fila;
         }
-
+        
         echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
     public function contarPessoasFila($idFila)
     {
-        $QuantidadePessoas = $this->filaDAOl->contarPessoasFila($idFila);
-        
+        return $this->filaDAOl->contarPessoasFila($idFila);
     }
 
 }
@@ -206,10 +213,7 @@ switch ($action) {
             displayMessage('Nenhum usuario para voltar', '../Controller/FilaController?action=readfila_filaid&id=' . $id);
         }
         break;
-    case 'contarPessoasFila':
-        $filaController->contarPessoasFila($id);
-        $filaDao->contarPessoasFila($id);
-        break;
+    
     default:
         displayMessage('Ação não reconhecida.');
         break;
