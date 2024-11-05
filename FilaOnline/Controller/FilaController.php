@@ -35,9 +35,8 @@ class FilaController
             session_start();
         }
         $filas = $this->filaDAOl->getAllFilas();
-        
+
         $_SESSION['filas'] = $filas;
-        unset($filas);
     }
     public function listarFilasPorEstabelecimento($idEstabelecimento)
     {
@@ -48,13 +47,12 @@ class FilaController
         //mudar aqui ó
         $filas = $this->filaDAOl->getAllFilasPorEstabelecimento($idEstabelecimento);
         foreach ($filas as &$fila) {
-            $fila['qntPessoasFila'] = $this->contarPessoasFila($fila['id']);
-        };
+            $fila['qntPessoasFila'] = $this->filaDAOl->contarPessoasFila($fila['id']);
+            $fila['tempoMedio'] = $this->calculoTempoMedio($fila['id']);
+        }
+        ;
         $_SESSION['filas'] = $filas;
-        
-        echo ("A");
-        
-        
+
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
@@ -62,7 +60,7 @@ class FilaController
     {
         $filauser = $this->filaDAOl->getFilaUsuario($idFila);
         $_SESSION['filasuser'] = $filauser;
-        
+
         echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
@@ -72,19 +70,39 @@ class FilaController
         $fila = $this->filaDAOl->GetFilaId($idFila);
         if (empty($fila)) {
         } else {
-            
+
             $_SESSION['filaatual'] = $fila;
         }
-        
+
         echo ("A");
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
-    public function contarPessoasFila($idFila)
+    public function calculoTempoMedio($filaId)
     {
-        return $this->filaDAOl->contarPessoasFila($idFila);
-    }
 
+        $entrada = $this->filaDAOl->getTempoPor5PessoaEntrada($filaId);
+        $saida = $this->filaDAOl->getTempoPor5PessoaSaida($filaId);
+        $result = [];
+        //
+        for ($i = 0; $i < count($entrada); $i++) {
+            $primeira = new DateTime($entrada[$i]['entrada_fila']);
+            $ultima = new DateTime($saida[$i]['ultima_atualizacao']);
+            $interval = $primeira->diff($ultima);
+
+            // transforma a diferenca em segundo, precisa disso pra calcular
+            $result[] = $interval->days * 24 * 60 * 60 +
+                $interval->h * 60 * 60 +
+                $interval->i * 60 +
+                $interval->s;
+        }
+        $total = 0;
+        foreach ($result as $tempo) {
+            $total += $tempo;
+        }
+        $tempo = $total/5;
+        return $tempo;
+    }
 }
 
 switch ($action) {
@@ -213,7 +231,7 @@ switch ($action) {
             displayMessage('Nenhum usuario para voltar', '../Controller/FilaController?action=readfila_filaid&id=' . $id);
         }
         break;
-    
+
     default:
         displayMessage('Ação não reconhecida.');
         break;

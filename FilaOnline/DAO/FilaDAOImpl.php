@@ -206,11 +206,19 @@ class FilaDAOImpl implements FilaDAO
         $stmt->execute();
         return $stmt->fetchColumn();
     }
-    function getTempoPorPessoaEntrada($filaId){
-        $sql = "SELECT count(idUsuario) FROM fila_usuario where idFila = $filaId;";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchColumn();
+    function getTempoPor5PessoaEntrada($filaId){
+        $sql = "SELECT entrada_fila FROM historico_fila where idFila = $filaId limit 5;";
+
+        $statement = $this->conn->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getTempoPor5PessoaSaida($filaId){
+        $sql = "SELECT ultima_atualizacao FROM historico_fila where idFila = $filaId limit 5;";
+        
+        $statement = $this->conn->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

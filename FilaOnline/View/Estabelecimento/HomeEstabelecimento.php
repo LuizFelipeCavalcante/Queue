@@ -62,7 +62,7 @@ if (!empty($_SESSION['filas'])): ?>
                         <div class="card-header"><?php echo htmlspecialchars($fila['nome']); ?></div>
                         <div class="fila-info">
                             <p><strong>Endereço:</strong> <?php echo htmlspecialchars($fila['endereco']); ?></p>
-                            <p class="tempo-espera">Tempo de espera: </p>
+                            <p class="tempo-espera">Tempo de espera:<?php echo htmlspecialchars($fila['tempoMedio'] * $fila['qntPessoasFila']); ?> </p>
                             <p class="num-pessoas">Pessoas na fila: <?php echo htmlspecialchars($fila['qntPessoasFila']); ?></p>
                             <p><strong>Inicio:</strong> <?php echo htmlspecialchars($fila['inicio']); ?> </p>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
