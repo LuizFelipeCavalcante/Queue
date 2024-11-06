@@ -26,33 +26,17 @@ if (!isset($_SESSION['user_id'])) {
                 align-items: center;
                 margin: 0;
             }
-
             .container {
-                text-align: center;
-                background-color: #fff;
-                color: #333;
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .container h1 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #3a0647;
-            }
-
-            .container a {
-                color: #66b1e3;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: bold;
-                transition: color 0.3s ease;
-            }
-
-            .container a:hover {
-                color: #4fa7e2;
-            }
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Ajuste a posição do container */
+            margin-top: 20px;
+        }
+            
+            
         </style>
     </head>
     <body>

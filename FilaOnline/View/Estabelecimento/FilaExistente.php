@@ -2,7 +2,8 @@
     <?php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
-    } ?>
+    }
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
@@ -10,6 +11,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
+        
         * {
             margin: 0;
             padding: 0;
@@ -36,8 +38,8 @@
             /* Cor de fundo ao passar o mouse */
             border-color: #2e9fea;
             /* Cor da borda ao passar o mouse */
-            color: #2e9fea !important
-                /* Cor do texto ao passar o mouse */
+            color: #2e9fea !important;
+            /* Cor do texto ao passar o mouse */
         }
 
         .navbar-brand img {
@@ -61,7 +63,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-top: 10%;
+            /* Ajuste a posição do container */
+            margin-top: 20px;
         }
 
         .fila {
@@ -109,22 +112,23 @@
     include "../Layout/HeaderEstabelecimento.php";
     ?>
 
-    <!-- jQuery and Bootstrap JS -->
+    <!-- jQuery and Bootstrap JS (removido duplicado) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
+    <!-- Conteúdo da Página -->
     <div class="container">
         <div class="logo">
             <img src="../../img/logo01.png" alt="Logo do Site" width="150">
         </div>
         <div class="fila">
-            <?php // Essa sessao é do capeta, ela existe ate quando eu n crio ela 
-            // fiz uma gambiarra pra resolver😂
+            <?php
+            // Essa sessão é do capeta, ela existe até quando eu não crio ela
+            // Fiz uma gambiarra para resolver😂
             $primeirapessoa = 1;
             if (!empty($_SESSION['filaatual'])):
-                $filaPaia = false; //isso é so pra ver se tem algum usuario na fila ou não;
+                $filaPaia = false; // Isso é só para ver se tem algum usuário na fila ou não;
                 foreach (array_reverse($_SESSION['filaatual']) as $filau):
 
                     if ($primeirapessoa == count($_SESSION['filaatual'])) {
@@ -135,22 +139,23 @@
                     ;
 
                     ?>
-                    <div class="fila-item"><?php if ($filau['idUsuario'] != null) {
-                        echo htmlspecialchars($filau['idUsuario']);
-                    } else {
-                        echo "<p>Nenhuma pessoa na fila.</p>";
-                        $filaPaia = true;
-                        break;
-                    }
-                    ?></div>
-
+                    <div class="fila-item">
+                        <?php if ($filau['idUsuario'] != null) {
+                            echo htmlspecialchars($filau['idUsuario']);
+                        } else {
+                            echo "<p>Nenhuma pessoa na fila.</p>";
+                            $filaPaia = true;
+                            break;
+                        }
+                        ?>
+                    </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Nenhuma pessoa na fila.</p>
             <?php endif; ?>
         </div>
+
         <?php if ($filaPaia == null): ?>
-            
             <a href="..\..\Controller\FilaController.php?action=voltar_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
             $id = $_SESSION['filaatual'][0]['id'];
             echo ($id) ?>"><button class="btn">Voltar</button></a>
@@ -158,14 +163,10 @@
             $id = $_SESSION['filaatual'][0]['id'];
             echo ($id) ?>"><button class="btn">Próximo</button></a>
         <?php endif; ?>
-        
     </div>
 
     <?php
     include '../../QrCode/qrcode.php';
-
-
-
 
     if (isset($_POST['qr'])) {
         $text = $_POST['qr'];
@@ -184,15 +185,6 @@
         <input type="text" name="qr" placeholder="Texto">
         <button type="submit">Gerar</button>
     </form>
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </body>
 
 </html>

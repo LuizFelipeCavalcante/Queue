@@ -26,7 +26,15 @@
         transition: background-color 0.3s, border-color 0.3s;
         /* Transição suave para o hover */
     }
-
+    .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Ajuste a posição do container */
+            margin-top: 20px;
+        }
     .navbar-nav .nav-link:hover {
         background-color: #e9f5fc;
         /* Cor de fundo ao passar o mouse */

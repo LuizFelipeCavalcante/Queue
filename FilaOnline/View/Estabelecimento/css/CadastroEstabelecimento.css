@@ -1,3 +1,4 @@
+/* Reset básico para garantir consistência */
 * {
     margin: 0;
     padding: 0;
@@ -9,16 +10,23 @@ html {
     background-color: white;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
 
+/* Estilo do container principal (para centralizar o conteúdo) */
 .big-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150vh;
+    height: 100vh; /* Full height da tela */
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
 }
 
+/* Estilo da caixa de cadastro */
 .signup-box {
-    width: 400px;
+    width: 100%;
+    max-width: 400px; /* Tamanho máximo */
     background-color: #ffffff;
     color: #808080;
     padding: 30px;
@@ -29,35 +37,42 @@ html {
     text-align: center;
 }
 
-    .signup-box h2 {
-        margin-bottom: 20px;
-    }
+/* Cabeçalho do formulário */
+.signup-box h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
 
+/* Estilo para os campos de entrada do formulário */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
 
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-    }
-
-    .btnsenha{
-        width: 10%;
-    }
-
-.btn-entrar {
+.form-group input {
     width: 100%;
     padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+/* Estilo do botão de senha */
+.btnsenha {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Botão principal de envio */
+.btn-entrar {
+    width: 100%;
+    padding: 12px;
     background-color: #66b1e3;
     color: #ffffff;
     border: none;
@@ -67,64 +82,111 @@ html {
     transition: background-color 0.3s ease;
 }
 
-    .btn-entrar:hover {
-        background-color: #4fa7e2;
-    }
+.btn-entrar:hover {
+    background-color: #4fa7e2;
+}
 
+/* Texto abaixo do formulário */
 .bottom-text {
     margin-top: 20px;
 }
 
-    .bottom-text p {
-        color: #66b1e3;
-        font-size: 0.9rem;
-    }
-
-    .bottom-text a {
-        color: #808080;
-        text-decoration: underline;
-        transition: color 0.3s ease;
-    }
-
-        .bottom-text a:hover {
-            color: #9a9a9a;
-        }
-
-/* Estilo para o botão */
-.btnsenha {
-    border: none;
-    background: transparent;
-    cursor: pointer;
+.bottom-text p {
+    color: #66b1e3;
+    font-size: 0.9rem;
 }
 
-/* Estilo para SVGs */
-svg {
-    display: inline-block;
+.bottom-text a {
+    color: #808080;
+    text-decoration: underline;
+    transition: color 0.3s ease;
 }
+
+.bottom-text a:hover {
+    color: #9a9a9a;
+}
+
+/* Estilo para a navbar */
 .navbar-nav .nav-link {
-    color: #2e9fea !important; /* Cor personalizada para os links */
-    border: 1px solid #d3d3d3; /* Borda cinza claro */
-    border-radius: 4px; /* Borda arredondada */
-    padding: 8px 12px; /* Espaçamento interno */
-    margin: 2px; /* Espaçamento entre os links */
-    transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
+    color: #2e9fea !important;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 2px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
+
 .navbar-nav .nav-link:hover {
-    background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
-    border-color: #2e9fea; /* Cor da borda ao passar o mouse */
-    color: #2e9fea !important; /* Cor do texto ao passar o mouse */
+    background-color: #e9f5fc;
+    border-color: #2e9fea;
+    color: #2e9fea !important;
 }
+
+/* Logo na barra de navegação */
 .navbar-brand img {
-    max-height: 50px; /* Ajuste a altura da imagem do logotipo */
+    max-height: 50px;
 }
+
+/* Centraliza a navbar */
 .navbar {
-    text-align: center; /* Centraliza o texto no header */
+    text-align: center;
 }
+
+/* Alinha os itens da navbar no centro */
 .navbar-collapse {
-    justify-content: center; /* Centraliza o conteúdo da barra de navegação */
+    justify-content: center;
 }
-/* media tela de signup para celulares */
-@media (max-width: 400px) {
+
+/* Estilos responsivos para dispositivos móveis */
+@media (max-width: 1024px) {
+    /* Ajuste para dispositivos tablet (max-width: 1024px) */
+    .signup-box {
+        width: 90%;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+
+    .navbar-brand img {
+        max-height: 45px;
+    }
+    .big-container div {
+        justify-content: center;
+    }
+}
+
+/* Estilos para smartphones grandes (entre 768px e 1024px) */
+@media (max-width: 768px) {
+    .signup-box {
+        width: 85%;
+    }
+
+    .btn-entrar {
+        padding: 10px;
+    }
+
+    /* Ajusta o logo e a navbar */
+    .navbar-brand img {
+        max-height: 40px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+    .big-container div {
+        justify-content: center;
+    }
+}
+
+/* Estilos para smartphones médios (entre 480px e 768px) */
+@media (max-width: 480px) {
     .signup-box {
         width: 90%;
         padding: 20px;
@@ -132,8 +194,80 @@ svg {
 
     .btn-entrar {
         font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+
+    .navbar-brand img {
+        max-height: 35px;
+    }
+
+    .navbar {
         padding: 8px;
+    }
+    .big-container div {
+        justify-content: center;
+    }
+
+    /* Ajuste da altura da navbar e do layout em dispositivos móveis */
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+        padding: 0;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    /* Formulário em dispositivos móveis */
+    .form-group input {
+        font-size: 0.9rem;
+    }
+    .big-container div {
+        justify-content: center;
     }
 }
 
- 
+/* Estilos para smartphones pequenos (menos de 480px) */
+@media (max-width: 400px) {
+    .signup-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .btn-entrar {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .navbar-brand img {
+        max-height: 30px;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Navbar fica em coluna em telas pequenas */
+    }
+
+    /* Ajuste para os inputs no formulário */
+    .form-group input {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    .big-container div {
+        justify-content: center;
+    }
+}

@@ -14,7 +14,7 @@
     <title>Codigo Fila</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/Estabelecimentos.css">
+
 </head>
 
 <body>
@@ -65,6 +65,15 @@
                 justify-content: center;
                 /* Centraliza o conteúdo da barra de navegação */
             }
+            .container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* Ajuste a posição do container */
+  margin-top: 20px;
+}
         </style>
     </head>
 
