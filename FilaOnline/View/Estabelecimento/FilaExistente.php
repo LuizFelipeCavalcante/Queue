@@ -166,25 +166,10 @@
     </div>
 
     <?php
-    include '../../QrCode/qrcode.php';
-
-    if (isset($_POST['qr'])) {
-        $text = $_POST['qr'];
-        $name = md5(time()) . ".png";
-        $file = "Files/{$name}";
-        $options = array(
-            'w' => 500,
-            'h' => 500,
-        );
-        $generator = new QRCode($text, $options);
-        $generator->output_image();
-    }
+    $linkfila = $filau['id'];
     ?>
-
-    <form action="" method="POST">
-        <input type="text" name="qr" placeholder="Texto">
-        <button type="submit">Gerar</button>
-    </form>
+    <a href="../../QrCode/Qr?link=http://localhost/Queue/FilaOnline/Controller/EstabelecimentoController?id=<?php echo $linkfila ?>"><button class="btn">Gerar qr code</button></a>
+    
 </body>
 
 </html>
