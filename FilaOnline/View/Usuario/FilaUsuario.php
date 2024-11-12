@@ -136,6 +136,7 @@
             // Essa sessão é do capeta, ela existe até quando eu não crio ela
             // Fiz uma gambiarra para resolver😂
             $primeirapessoa = 1;
+
             if (!empty($_SESSION['filasuser'])):
                 $filaPaia = false; // Isso é só para ver se tem algum usuário na fila ou não;
                 foreach (array_reverse($_SESSION['filasuser']) as $filau):
@@ -150,11 +151,9 @@
                     ?>
                     <div class="fila-item">
                         <?php if ($filau['idUsuario'] != null) {
-                            if ($primeirapessoa == count($_SESSION['filasuser'])) {
+                            if (!isset($pessoaematendimento)) {
                                 echo htmlspecialchars($filau['idUsuario']);
-                            } else {
-                                $primeirapessoa = $filau['idUsuario'];
-                            }
+                            } 
                             ;
                         } else {
                             echo "<p>Nenhuma pessoa na fila.</p>";
@@ -169,7 +168,7 @@
             <?php endif; ?>
         </div>
         <div class="pessoa-atendida">
-            Pessoa sendo atendida <br> <span> <?php echo htmlspecialchars($primeirapessoa);?></span>
+            Pessoa sendo atendida <br> <span> <?php echo($pessoaematendimento);?></span>
         </div>
 
         <div class="info">
@@ -200,6 +199,16 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 <script>
+
+    // Usa o valor do ID PHP diretamente na URL
+    const id = <?php echo htmlspecialchars($_SESSION['user_id'])?>;
+
+    setInterval(function() {
+        fetch(`../../Controller/FilaController.php?action=readfila_usuario&id=${id}`)
+            .then(response => response.text())
+            .catch(error => console.error('Erro:', error));
+            location.reload();
+    }, 5000); // 5000 ms = 5 segundos
 
 </script>
 

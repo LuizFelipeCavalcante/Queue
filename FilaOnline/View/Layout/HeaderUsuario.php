@@ -36,6 +36,9 @@
                     <a class="nav-item nav-link" href="Perfil">
                         Perfil
                     </a>
+                    <a class="nav-item nav-link" href="../../Controller/FilaController?action=readfila_usuario&id=<?php echo htmlspecialchars($_SESSION['user_id'])?>">
+                        fila atual
+                    </a>
                     <a class="nav-item nav-link" href="../Logout">
                         Sair
                     </a>
