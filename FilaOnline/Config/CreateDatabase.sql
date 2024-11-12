@@ -10,7 +10,8 @@ create table conta (
     senha VARCHAR(40),
     foto text,
     numeroFila VARCHAR(10),
-    tempoEspera float
+    tempoEspera float,
+    filaAtual int
 );
 
 create table estabelecimento(

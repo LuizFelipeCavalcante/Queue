@@ -97,7 +97,7 @@ if (($_SESSION['estabelecimento'])):
 //if (isset($_SESSION['filaatual'])) {
 // unset($_SESSION['filaatual']);
 //}
-var_dump($_SESSION['filas']);
+
 if (!empty($_SESSION['filas'])): ?>
             <?php foreach (array_reverse($_SESSION['filas']) as $fila): ?>
                 <div class="col-md-6 col-lg-3">

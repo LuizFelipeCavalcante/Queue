@@ -10,8 +10,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        
-
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7fb;
@@ -37,14 +35,14 @@
         }
 
         .container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  /* Ajuste a posição do container */
-  margin-top: 20px;
-}
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Ajuste a posição do container */
+            margin-top: 20px;
+        }
 
         .logo img {
             width: 150px;
@@ -112,13 +110,13 @@
         .info a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 
 <body>
     <?php
     include "../Layout/HeaderUsuario.php";
+    
     ?>
 
     <!-- jQuery and Bootstrap JS -->
@@ -129,39 +127,80 @@
     <div class="container">
         <div class="logo">
             <img src="../../img/logo01.png" alt="Logo do Site">
-            <p class="text-muted">Você está na fila (nome da fila)</p>
+            <p class="text-muted">Você está na fila <?php echo htmlspecialchars($_SESSION['filasuser'][0]['nome']) ?>
+            </p>
+
         </div>
         <div class="fila">
-            <!-- Exemplo de exibição de dados da fila -->
-            <div class="fila-item">Usuário 1</div>
-            <div class="fila-item">Usuário 2</div>
-            <div class="fila-item">Usuário 3</div>
+            <?php
+            // Essa sessão é do capeta, ela existe até quando eu não crio ela
+            // Fiz uma gambiarra para resolver😂
+            $primeirapessoa = 1;
+            if (!empty($_SESSION['filasuser'])):
+                $filaPaia = false; // Isso é só para ver se tem algum usuário na fila ou não;
+                foreach (array_reverse($_SESSION['filasuser']) as $filau):
+
+                    if ($primeirapessoa == count($_SESSION['filasuser'])) {
+                        $pessoaematendimento = htmlspecialchars($filau['idUsuario']);
+                    } else {
+                        $primeirapessoa++;
+                    }
+                    ;
+
+                    ?>
+                    <div class="fila-item">
+                        <?php if ($filau['idUsuario'] != null) {
+                            if ($primeirapessoa == count($_SESSION['filasuser'])) {
+                                echo htmlspecialchars($filau['idUsuario']);
+                            } else {
+                                $primeirapessoa = $filau['idUsuario'];
+                            }
+                            ;
+                        } else {
+                            echo "<p>Nenhuma pessoa na fila.</p>";
+                            $filaPaia = true;
+                            break;
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Nenhuma pessoa na fila.</p>
+            <?php endif; ?>
         </div>
         <div class="pessoa-atendida">
-            Pessoa sendo atendida <span>— Usuário 1</span>
+            Pessoa sendo atendida <br> <span> <?php echo htmlspecialchars($primeirapessoa);?></span>
         </div>
 
         <div class="info">
+        <?php 
+            $colunaUsuarios = array_column($_SESSION['filasuser'], 'idUsuario');
+
+            // Busca o índice na coluna onde o idUsuario coincide com o valor buscado
+            $posicao = array_search($_SESSION['user_id'], $colunaUsuarios);
+
+              ?>
             <div>
-                <p><strong>Tempo para atendimento</strong></p>
-                <p>5 minutos</p>
-            </div>
+                    <p><strong>Tempo para atendimento</strong></p>
+                    <p><?php echo htmlspecialchars( round($_SESSION['filasuser'][0]['tempoMedio'] * ($posicao + 1)))?> minutos</p>
+    
+                </div>
             <div>
                 <p><strong>Lugar na fila</strong></p>
-                <p>1º lugar</p>
+                <p> <?php if ($posicao !== null) {
+                    echo $posicao + 1;
+                    unset($posicao);
+                } ?> º lugar</p>
             </div>
         </div>
-        <div>Endereço do Local</div>
+        <div>Endereço do Local: <br> <?php echo htmlspecialchars($_SESSION['filasuser'][0]['endereco']) ?></div>
 
-        <div>
-            
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+
+</script>
 
 </html>
-

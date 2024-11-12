@@ -86,10 +86,10 @@ class FilaDAOImpl implements FilaDAO
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function getFilaUsuario($idFila)
+    function getFilaUsuario($idUsuario)
     {
 
-        $sql = "SELECT * from fila left join fila_usuario on(fila.id = idFila) join users on(users.id = idUsuario) WHERE fila.id = $idFila;";
+        $sql = "SELECT filaAtual from conta WHERE id = $idUsuario;";
 
         $statement = $this->conn->query($sql);
 
@@ -125,15 +125,23 @@ class FilaDAOImpl implements FilaDAO
     function entrarFila($idUsuario, $idFila)
     {
         try {
-            $sql = "INSERT into fila_usuario (idFila ,idUsuario) values (:idFila, :idUsuario);";
+            $sql = "INSERT into fila_usuario (idFila ,idUsuario) values ($idFila, $idUsuario);";
 
             $statement = $this->conn->prepare($sql);
-            $statement->bindParam(':idFila', $idFila);
-            $statement->bindParam(':idUsuario', $idUsuario);
 
-            return $statement->execute();
+            $statement->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+        }
+        try {
+            $sql = "UPDATE conta SET filaAtual = $idFila WHERE id = $idUsuario;;";
+
+            $statement = $this->conn->prepare($sql);
+
+
+            return $statement->execute();
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 

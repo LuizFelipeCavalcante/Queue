@@ -56,13 +56,18 @@ class FilaController
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
-    public function listarFilaUsuario($idFila)
+    public function listarFilaUsuario($idUsuario)
     {
-        $filauser = $this->filaDAOl->getFilaUsuario($idFila);
+        $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
+        $filauser = $this->filaDAOl->getFilaid($idFila[0]['filaAtual']);
+        foreach ($filauser as &$fila) {
+            $fila['qntPessoasFila'] = $this->filaDAOl->contarPessoasFila($fila['id']);
+            $fila['tempoMedio'] = $this->calculoTempoMedio($fila['id']);
+        }
         $_SESSION['filasuser'] = $filauser;
 
         echo ("A");
-        header("Location: ../View/Estabelecimento/FilaExistente.php");
+        header("Location: ../View/Usuario/FilaUsuario.php");
         exit();
     }
     public function listarFilaId($idFila)
@@ -100,7 +105,7 @@ class FilaController
         foreach ($result as $tempo) {
             $total += $tempo;
         }
-        $tempo = $total/5;
+        $tempo = $total / 5;
         return $tempo;
     }
 }
@@ -160,11 +165,10 @@ switch ($action) {
                 $_SESSION['user_id'] = $contaDao->createUser();
             }
             $userid = $_SESSION['user_id'];
-
             if (empty($filaDao->verificarFilaUsuario($userid))) {
-                if ($filaDao->entrarFila($userid, $filaid)) {
 
-                    displayMessage('Você está na fila! Lugar registrado com sucesso', '../View/Usuario/FilasPEstabelecimento');
+                if ($filaDao->entrarFila($userid, $filaid)) {
+                    displayMessage('Você está na fila! Lugar registrado com sucesso', "../Controller/FilaController.php?action=readfila_usuario&id=$userid");
 
                 } else {
                     displayMessage("$userid , $filaid ");
