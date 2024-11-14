@@ -56,6 +56,20 @@ class FilaController
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
     }
+    public function listarFilaUsuariocomp($idUsuario)
+    {
+        $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
+        $filauser = $this->filaDAOl->getFilaid($idFila[0]['filaAtual']);
+        foreach ($filauser as &$fila) {
+            $fila['qntPessoasFila'] = $this->filaDAOl->contarPessoasFila($fila['id']);
+            $fila['tempoMedio'] = $this->calculoTempoMedio($fila['id']);
+        }
+        $_SESSION['filasuser'] = $filauser;
+
+        echo ("A");
+        header("Location: ../View/Usuario/FilaUsuarioComp.php");
+        exit();
+    }
     public function listarFilaUsuario($idUsuario)
     {
         $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
@@ -83,6 +97,7 @@ class FilaController
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
+    
     public function calculoTempoMedio($filaId)
     {
 
@@ -157,6 +172,9 @@ switch ($action) {
     case 'readfila_usuario':
         $filaController->listarFilaUsuario($id);
         break;
+        case 'readfila_usuariocomp':
+            $filaController->listarFilaUsuariocomp($id);
+            break;
     case 'entrar_fila':
         $filaid = $id;
         if

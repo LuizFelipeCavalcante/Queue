@@ -1,6 +1,7 @@
 <?php
 namespace Home;
 session_start();
+unset($_SESSION["header"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
