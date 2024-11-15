@@ -24,6 +24,7 @@
             margin: 0 5px;
             transition: all 0.3s ease;
         }
+        
 
         .navbar-nav .nav-link:hover {
             background-color: #e9f5fc;

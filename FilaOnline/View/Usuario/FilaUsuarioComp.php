@@ -16,24 +16,7 @@
             background-color: #f4f7fb;
         }
 
-        .navbar-nav .nav-link {
-            color: #2e9fea !important;
-            border: 1px solid #d3d3d3;
-            border-radius: 30px;
-            padding: 8px 20px;
-            margin: 0 5px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            background-color: #e9f5fc;
-            border-color: #2e9fea;
-            color: #2e9fea !important;
-        }
-
-        .navbar-brand img {
-            max-height: 50px;
-        }
+        
 
         .container {
             background-color: #fff;
