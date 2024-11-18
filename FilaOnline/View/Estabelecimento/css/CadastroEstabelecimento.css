@@ -13,13 +13,13 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Estilo do container principal (para centralizar o conteúdo) */
+/* Estilo do container principal */
 .big-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh; /* Full height da tela */
-    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    height: 90vh; 
+    margin: 0 auto;
     margin-top: 0%;
 }
 
@@ -35,7 +35,7 @@ body {
 /* Estilo da caixa de cadastro */
 .signup-box {
     width: 100%;
-    max-width: 400px; /* Tamanho máximo */
+    max-width: 400px; 
     background-color: #ffffff;
     color: #5e5e5e;
     padding: 30px;
@@ -83,7 +83,7 @@ body {
 .btn-entrar {
     width: 100%;
     padding: 8px;
-    background-color: #66b1e3;
+    background-color: #0179e3;
     color: #ffffff;
     border: none;
     border-radius: 10px;
@@ -93,7 +93,7 @@ body {
 }
 
 .btn-entrar:hover {
-    background-color: #4fa7e2;
+    background-color: #3174d9;
 }
 
 /* Texto abaixo do formulário */

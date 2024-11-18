@@ -6,59 +6,6 @@ if (!isset($_SESSION['user_id'])) {
     ?>
     <!DOCTYPE html>
     <html lang="pt-BR">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Deslogado</title>
-        <style>
-            /* Reset básico */
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            html,
-            body {
-                height: 100%;
-                font-family: Arial, sans-serif;
-                background-color: #3a0647;
-                color: #fff;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0;
-            }
-
-            .container {
-                text-align: center;
-                background-color: #fff;
-                color: #333;
-                border-radius: 10px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .container h1 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #3a0647;
-            }
-
-            .container a {
-                color: #66b1e3;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: bold;
-                transition: color 0.3s ease;
-            }
-
-            .container a:hover {
-                color: #4fa7e2;
-            }
-        </style>
-    </head>
-
     <body>
         <div class="container">
             <h1>Deslogado</h1>
@@ -73,67 +20,17 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perfil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/Perfil.css">
     <script src="js/Cadastro.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="css/Perfil.css">
 </head>
 
 <body>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Navbar</title>
-        <!-- Bootstrap CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <style>
-            .navbar-nav .nav-link {
-                color: #2e9fea !important;
-                /* Cor personalizada para os links */
-                border: 1px solid #d3d3d3;
-                /* Borda cinza claro */
-                border-radius: 4px;
-                /* Borda arredondada */
-                padding: 8px 12px;
-                /* Espaçamento interno */
-                margin: 2px;
-                /* Espaçamento entre os links */
-                transition: background-color 0.3s, border-color 0.3s;
-                /* Transição suave para o hover */
-            }
-
-            .navbar-nav .nav-link:hover {
-                background-color: #e9f5fc;
-                /* Cor de fundo ao passar o mouse */
-                border-color: #2e9fea;
-                /* Cor da borda ao passar o mouse */
-                color: #2e9fea !important;
-                /* Cor do texto ao passar o mouse */
-            }
-
-            .navbar-brand img {
-                max-height: 50px;
-                /* Ajuste a altura da imagem do logotipo */
-            }
-
-            .navbar {
-                text-align: center;
-                /* Centraliza o texto no header */
-            }
-
-            .navbar-collapse {
-                justify-content: center;
-                /* Centraliza o conteúdo da barra de navegação */
-            }
-        </style>
-    </head>
 
     <body>
         <?php

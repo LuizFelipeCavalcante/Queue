@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <?php
     if (session_status() === PHP_SESSION_NONE) {
@@ -14,20 +13,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/FilasPEstabelecimento.css">
-<style>
-    .container {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  /* Ajuste a posição do container */
-  margin-top: 20px;
-}
-</style>
 </head>
-
 <!-- header include-->
-
 <?php
 include "../Layout/HeaderUsuario.php"
     ?>
