@@ -39,7 +39,7 @@ include "../Layout/HeaderUsuario.php"
                 <div class="col-6 col-sm-6 col-md-4 mb-4"> <!-- Alterado para col-6 -->
                     <a href="../../Controller/FilaController?action=entrar_fila&id=<?php echo htmlspecialchars($estabelecimentofila['idFila']); ?>"
                         class="card">
-                        <img src="../../img/mcdonalds.png" class="card-img-top" alt="Fila 1">
+                        <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($estabelecimentofila['img']); ?>" class="card-img-top" alt="Fila 1">
                         <div class="card-header"><?php echo htmlspecialchars($estabelecimentofila['nomefila']); ?></div>
                         <p class="spc01"><strong>Endereço:</strong>
                             <?php echo htmlspecialchars($estabelecimentofila['enderecofila']); ?></p>
@@ -57,8 +57,7 @@ include "../Layout/HeaderUsuario.php"
         <?php endif; ?>
     </div>
 </div>
-<button id="carregarConteudo">aaaaaaa</button>
-<div id="conteudo"></div>
+
 <script>
     //Teste de botar os dados sem atualzar a pagina
     var tempo = window.setInterval(carrega, 100);

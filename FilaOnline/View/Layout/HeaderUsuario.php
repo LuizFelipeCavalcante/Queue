@@ -46,12 +46,17 @@
                     <a class="nav-item nav-link" href="../Logout">
                         Sair
                     </a>
+                    <?php if (!isset($_SESSION['user_name'])): ?>
+                    <a class="nav-item nav-link text-muted"><b></b></a>
+                <?php else: ?>
                     <a class="nav-item nav-link text-primary">
                         <b><?php echo $_SESSION['user_name']; ?></b>
                     </a>
-
+                    <?php endif ?>
                     <!-- Verificação se é um estabelecimento -->
-                    <?php if ($_SESSION['estabelecimento']): ?>
+                    <?php if (!isset($_SESSION['estabelecimento'])): ?>
+                    <a class="nav-item nav-link text-muted"><b></b></a>
+                <?php else: ?>
                         <a class="nav-item nav-link text-success">
                             <i class="fas fa-store"></i> Estabelecimento
                         </a>

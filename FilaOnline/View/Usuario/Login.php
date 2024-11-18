@@ -19,7 +19,7 @@
 <body>
 
     <?php
-         include "../Layout/HeaderUsuario.php"
+         include "../Layout/header.php"
     ?>
 	<div class="big-container">
 	<div class="signup-container">
