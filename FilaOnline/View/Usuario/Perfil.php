@@ -35,7 +35,6 @@ if (!isset($_SESSION['user_id'])) {
                 text-align: center;
                 background-color: #fff;
                 color: #333;
-                padding: 30px;
                 border-radius: 10px;
                 box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             }

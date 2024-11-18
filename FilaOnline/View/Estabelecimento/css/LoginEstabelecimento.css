@@ -9,137 +9,122 @@ html {
     background-color: white;
 }
 
-.container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    /* Ajuste a posição do container */
-    margin-top: 20px;
-  }
-.big-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body {
+    font-family: 'Poppins', sans-serif;
 }
-.container {
+
+.container, .signup-box {
     background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    /* Ajuste a posição do container */
-    margin-top: 20px;
-}
-.signup-box {
-    width: 400px;
-    background-color: #ffffff;
-    color: #808080;
-    padding: 30px;
-    padding-bottom: 40px;
-    padding-top: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px #2e9fea;
     text-align: center;
 }
 
-    .signup-box h2 {
-        margin-bottom: 20px;
-    }
+.signup-box {
+    width: 400px;
+    color: #5e5e5e;
+    padding: 30px 30px 40px;
+    box-shadow: 0 0 10px #2369b3;
+}
+
+.signup-box h2 {
+    margin-bottom: 20px;
+}
 
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
 
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-    }
-
-    .btnsenha{
-        width: 10%;
-    }
-
-.btn-entrar {
+.form-group input {
     width: 100%;
-    padding: 10px;
-    background-color: #66b1e3;
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
+    padding: 8px;
     font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
-    .btn-entrar:hover {
-        background-color: #4fa7e2;
-    }
-
-.bottom-text {
-    margin-top: 20px;
-}
-
-    .bottom-text p {
-        color: #66b1e3;
-        font-size: 0.9rem;
-    }
-
-    .bottom-text a {
-        color: #808080;
-        text-decoration: underline;
-        transition: color 0.3s ease;
-    }
-
-        .bottom-text a:hover {
-            color: #9a9a9a;
-        }
-
-/* Estilo para o botão */
 .btnsenha {
+    width: 10%;
     border: none;
     background: transparent;
     cursor: pointer;
 }
 
-/* Estilo para SVGs */
-svg {
-    display: inline-block;
+.btn-entrar {
+    width: 100%;
+    padding: 10px;
+    background-color: #0179e3;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.btn-entrar:hover {
+    background-color: #3174d9;
+}
+
+.bottom-text {
+    margin-top: 20px;
+}
+
+.bottom-text p {
+    color: #66b1e3;
+    font-size: 0.9rem;
+}
+
+.bottom-text a {
+    color: #808080;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.bottom-text a:hover {
+    color: #9a9a9a;
+}
+
 .navbar-nav .nav-link {
-    color: #2e9fea !important; /* Cor personalizada para os links */
-    border: 1px solid #d3d3d3; /* Borda cinza claro */
-    border-radius: 4px; /* Borda arredondada */
-    padding: 8px 12px; /* Espaçamento interno */
-    margin: 2px; /* Espaçamento entre os links */
-    transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
+    color: #2e9fea !important;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 2px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
+
 .navbar-nav .nav-link:hover {
-    background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
-    border-color: #2e9fea; /* Cor da borda ao passar o mouse */
-    color: #2e9fea !important; /* Cor do texto ao passar o mouse */
+    background-color: #e9f5fc;
+    border-color: #2e9fea;
+    color: #2e9fea !important;
 }
+
 .navbar-brand img {
-    max-height: 50px; /* Ajuste a altura da imagem do logotipo */
+    max-height: 50px;
 }
+
 .navbar {
-    text-align: center; /* Centraliza o texto no header */
+    text-align: center;
 }
+
 .navbar-collapse {
-    justify-content: center; /* Centraliza o conteúdo da barra de navegação */
+    justify-content: center;
 }
-/* media tela de signup para celulares */
+
+.big-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
 @media (max-width: 400px) {
     .signup-box {
         width: 90%;

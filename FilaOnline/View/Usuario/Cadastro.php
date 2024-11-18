@@ -7,52 +7,17 @@
     <title>Codigo Fila</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/Login.css">
+    <link rel="stylesheet" href="css/Cadastro.css">
+    <link rel="stylesheet" href="Cadastro.js">
     <script src="js/Cadastro.js" type="text/javascript" defer></script>
-    <style>
-        /* Estilo para o botão */
-        .btnsenha {
-            border: none;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        /* Estilo para SVGs */
-        svg {
-            display: inline-block;
-        }
-        .container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  /* Ajuste a posição do container */
-  margin-top: 20px;
-}
-    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Navbar</title>
-        <!-- Bootstrap CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="Cadastro.js">
-
-    </head>
-
-    <body>
         <?php
         include "../Layout/HeaderUsuario.php"
             ?>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <div class="big-container">
             <div class="signup-container">
                 <div class="signup-box">
@@ -99,6 +64,6 @@
             </div>
         </div>
         
-    </body>
+</body>
 
 </html>
