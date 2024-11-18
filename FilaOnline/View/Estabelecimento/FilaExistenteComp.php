@@ -1,4 +1,3 @@
-
 <head>
     <?php
     if (session_status() === PHP_SESSION_NONE) {
@@ -9,34 +8,13 @@
     <title>Fila - Detalhes</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7fb;
         }
-
-        .navbar-nav .nav-link {
-            color: #2e9fea !important;
-            border: 1px solid #d3d3d3;
-            border-radius: 30px;
-            padding: 8px 20px;
-            margin: 0 5px;
-            transition: all 0.3s ease;
-        }
-        
-
-        .navbar-nav .nav-link:hover {
-            background-color: #e9f5fc;
-            border-color: #2e9fea;
-            color: #2e9fea !important;
-        }
-
-        .navbar-brand img {
-            max-height: 50px;
-        }
-
         .container {
             background-color: #fff;
             padding: 30px;
@@ -115,40 +93,57 @@
         }
     </style>
 </head>
+<div class="container">
+    <div class="logo">
+        <img src="../../img/logo01.png" alt="Logo do Site" width="150">
+    </div>
+    <div class="fila">
+        <?php
 
-<body>
-    <?php
-    include "../Layout/HeaderEstabelecimento.php";
+        $primeirapessoa = 1;
+        if (!empty($_SESSION['filaatual'])):
+            $filaPaia = false; // Isso é só para ver se tem algum usuário na fila ou não;
+            foreach (array_reverse($_SESSION['filaatual']) as $filau):
 
-    ?>
-
-    <!-- jQuery and Bootstrap JS (removido duplicado) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Conteúdo da Página -->
-     <div id= "fila">
-    
-        <?php include 'FilaExistenteComp.php'?>
-
-</div>
-    </body>
-</html>
-<script>
-const id = <?php echo $_SESSION['filaatual'][0]['idFila'];   ?>;
-document.addEventListener("DOMContentLoaded", function() {
-    setInterval(function() {
-        fetch(`../../Controller/FilaController.php?action=readfila_filaidcomp&id=${id}`)
-            .then(response => response.text())
-            .then(data => {
-                const filaElement = document.getElementById('fila');
-                if (filaElement) {  // Verifica se o elemento existe
-                    filaElement.innerHTML = data;
+                if ($primeirapessoa == count($_SESSION['filaatual'])) {
+                    echo ('<div class="pessoa-atendida">Pessoa sendo atendida</div>');
                 } else {
-                    console.error('Elemento #fila não encontrado');
+                    $primeirapessoa++;
                 }
-            })
-            .catch(error => console.error('Erro ao atualizar a fila:', error));
-    }, 5000);  // Atualiza a cada 5 segundos
-});</script>
+                ;
+
+                ?>
+                <div class="fila-item">
+                    <?php if ($filau['idUsuario'] != null) {
+                        echo htmlspecialchars($filau['idUsuario']);
+                    } else {
+                        echo "<p>Nenhuma pessoa na fila.</p>";
+                        $filaPaia = true;
+                        break;
+                    }
+                    ?>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Nenhuma pessoa na fila.</p>
+        <?php endif; ?>
+    </div>
+
+    <?php if ($filaPaia == null): ?>
+        <a href="..\..\Controller\FilaController.php?action=voltar_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
+        $id = $_SESSION['filaatual'][0]['id'];
+        echo ($id) ?>"><button class="btn">Voltar</button></a>
+        <a href="..\..\Controller\FilaController.php?action=proxima_pessoa&id=<?php $objeto = $_SESSION['filaatual'];
+        $id = $_SESSION['filaatual'][0]['id'];
+        echo ($id) ?>"><button class="btn">Próximo</button></a>
+    <?php endif; ?>
+    </d>
+</div>
+<?php
+$linkfila = $filau['id'];
+?>
+<a
+    href="../../QrCode/Qr?link=http://localhost/Queue/FilaOnline/Controller/EstabelecimentoController?id=<?php echo $linkfila ?>"><button
+        class="btn">Gerar qr code</button></a>
+
+</body>

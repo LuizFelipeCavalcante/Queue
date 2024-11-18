@@ -113,11 +113,11 @@ if (!empty($_SESSION['filas'])): ?>
                         <div class="card-header"><?php echo htmlspecialchars($fila['nome']); ?></div>
                         <div class="fila-info">
                             <p><strong>Endereço:</strong> <?php echo htmlspecialchars($fila['endereco']); ?></p>
-                            <p class="tempo-espera">Tempo de espera:<?php echo htmlspecialchars(round($fila['tempoMedio'] * $fila['qntPessoasFila'])); ?> Segundos <br> Descobre ae quanto q da kkkkk </p>
+                            <p class="tempo-espera">Tempo de espera:<?php echo htmlspecialchars(round(($fila['tempoMedio'] * $fila['qntPessoasFila'])/ 60 )); ?> Minutos </p>
                             <p class="num-pessoas">Pessoas na fila: <?php echo htmlspecialchars($fila['qntPessoasFila']); ?></p>
                             <p><strong>Inicio:</strong> <?php echo htmlspecialchars($fila['inicio']); ?> </p>
                             <p><strong>Termino:</strong> <?php echo htmlspecialchars($fila['termino']); ?> </p>
-                            <p><strong>Prévia das pessoas:</strong> </p>
+                            
                         </div>
                     </a>
                     <button class="btn" id="open-modal">Editar</button>

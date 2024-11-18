@@ -97,7 +97,19 @@ class FilaController
         header("Location: ../View/Estabelecimento/FilaExistente.php");
         exit();
     }
-    
+    public function listarFilaIdcomp($idFila)
+    {
+        $fila = $this->filaDAOl->GetFilaId($idFila);
+        if (empty($fila)) {
+        } else {
+
+            $_SESSION['filaatual'] = $fila;
+        }
+
+        echo ("A");
+        header("Location: ../View/Estabelecimento/FilaExistenteComp.php");
+        exit();
+    }
     public function calculoTempoMedio($filaId)
     {
 
@@ -169,6 +181,9 @@ switch ($action) {
     case 'readfila_filaid':
         $filaController->listarFilaId($id);
         break;
+        case 'readfila_filaidcomp':
+            $filaController->listarFilaIdcomp($id);
+            break;
     case 'readfila_usuario':
         $filaController->listarFilaUsuario($id);
         break;
