@@ -1,5 +1,5 @@
 body {
-  background-color: #f0f0f0; /* Cor de fundo mais clara para contraste */
+  background-color: #f0f0f0;
   font-family: Arial, sans-serif;
 }
 
@@ -10,7 +10,6 @@ body {
   height: 100vh;
   padding: 20px;
 }
-
 .profile-card {
   width: 100%;
   max-width: 800px;
@@ -21,32 +20,30 @@ body {
   text-align: center;
 }
 .navbar-nav .nav-link {
-  color: #2e9fea !important; /* Cor personalizada para os links */
-  border: 1px solid #d3d3d3; /* Borda cinza claro */
-  border-radius: 4px; /* Borda arredondada */
-  padding: 8px 12px; /* Espaçamento interno */
-  margin: 2px; /* Espaçamento entre os links */
-  transition: background-color 0.3s, border-color 0.3s; /* Transição suave para o hover */
+  color: #2e9fea !important;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 2px;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 .navbar-nav .nav-link:hover {
-  background-color: #e9f5fc; /* Cor de fundo ao passar o mouse */
-  border-color: #2e9fea; /* Cor da borda ao passar o mouse */
-  color: #2e9fea !important; /* Cor do texto ao passar o mouse */
+  background-color: #e9f5fc;
+  border-color: #2e9fea;
+  color: #2e9fea !important;
 }
 .navbar-brand img {
-  max-height: 50px; /* Ajuste a altura da imagem do logotipo */
+  max-height: 50px;
 }
 .navbar {
-  text-align: center; /* Centraliza o texto no header */
+  text-align: center;
 }
 .navbar-collapse {
-  justify-content: center; /* Centraliza o conteúdo da barra de navegação */
+  justify-content: center;
 }
-
 .profile-img-container {
   margin-bottom: 20px;
 }
-
 .profile-img {
   width: 120px;
   height: 120px;
@@ -55,24 +52,20 @@ body {
   object-fit: cover;
   margin-bottom: 10px;
 }
-
 .profile-username {
   font-size: 24px;
   color: #2e9fea;
   margin-bottom: 15px;
 }
-
 .form-group {
   margin-bottom: 20px;
   text-align: left;
 }
-
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
-
 .form-group input {
   width: 100%;
   padding: 10px;
@@ -85,7 +78,6 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-
 }
 .btn {
   padding: 10px 15px;
@@ -93,23 +85,19 @@ body {
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
-
 .btn-primary {
   background-color: #2e9fea;
   color: #fff;
   border: none;
 }
-
 .btn-primary:hover {
   background-color: #1e8bc3;
 }
-
 .btn-danger {
   background-color: #e74c3c;
   color: #fff;
   border: none;
 }
-
 .btn-danger:hover {
   background-color: #c0392b;
 }
