@@ -13,10 +13,10 @@
 </head>
 
 <body>
+    <link rel="stylesheet" href="css/CadastroEstabelecimento.css">
 <?php
     include "../Layout/HeaderEstabelecimento.php"
 ?>
-    
 	<div class="big-container">
 	<div class="signup-container">
         

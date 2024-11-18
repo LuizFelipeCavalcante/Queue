@@ -45,13 +45,14 @@ html {
 .form-group label {
     display: block;
     margin-bottom: 5px;
+    
 }
 
 .form-group input {
     width: 100%;
     padding: 8px;
     font-size: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid #0179e3;
     border-radius: 10px;
 }
 
