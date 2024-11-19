@@ -19,12 +19,12 @@
 <!-- header include-->
 
 <?php
-if (($_SESSION['estabelecimento'])) {
+if (isset($_SESSION['estabelecimento'])) {
     include "../Layout/HeaderEstabelecimento.php";
 } else {
     include "../Layout/HeaderUsuario.php";
 }
-if (($_SESSION['estabelecimento'])):
+if (isset($_SESSION['estabelecimento'])):
     ?>
     <!-- Lista de Filas -->
     <div class="container">

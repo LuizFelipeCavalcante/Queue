@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mx-auto text-center">
                 <!-- Link Home -->
-                <a class="nav-item nav-link active" href="../../index.php">Home <span class="sr-only">(Página atual)</span></a>
+                <a class="nav-item nav-link active" href="http://localhost/Queue/FilaOnline">Home <span class="sr-only">(Página atual)</span></a>
 
                 <!-- Condições para usuários não logados -->
                 <?php if (!isset($_SESSION['user_id'])): ?>
