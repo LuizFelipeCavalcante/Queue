@@ -53,7 +53,7 @@ switch ($action) {
             $conta->setTelefone($_POST['telefone']);
             $conta->setSenha($_POST['senha']);
 
-
+            // Coloca foto
             $file = $_FILES['foto']['tmp_name'];
             if (is_uploaded_file($file)) {
                 $imageData = file_get_contents($file);
@@ -61,14 +61,22 @@ switch ($action) {
                 $conta->setFoto($base64);
             } else {//colocar foto padrao
             }
-            if (
-                $contaDao->createConta($conta)
-            ) {
 
-                $contaController->validaConta($conta->getEmail(), $conta->getSenha());
-
-            } else {
-                displayMessage('Erro ao inserir o registro.');
+            
+            try {
+                if ($contaDao->createConta($conta)) {
+                    $contaController->validaConta($conta->getEmail(), $conta->getSenha());
+                } else {
+                    displayMessage('Erro ao inserir o registro.');
+                }
+            } catch (PDOException $e) {
+                // Verifica se o erro é de violação de chave única
+                if ($e->getCode() === '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                    displayMessage('O email informado já está em uso. Por favor, utilize outro email.');
+                } else {
+                    // Exibe uma mensagem genérica para outros erros
+                    displayMessage('Erro ao inserir o registro: ' . $e->getMessage());
+                }
             }
             
             exit();

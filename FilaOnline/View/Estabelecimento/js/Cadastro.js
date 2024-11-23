@@ -12,8 +12,21 @@ const handlePhone = (event) => {
     return value
   }
 
-// Para mostrar e esconder senha
+// Mascara de CNPJ
+const handleCnpj = (event) => {
+  let Cnpj = event.target
+  Cnpj.value = cnpjMask(telefone.value)
+}
+const cnpj(v){
+  v=v.replace(/\D/g,"")                           
+  v=v.replace(/^(\d{2})(\d)/,"$1.$2")             
+  v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") 
+  v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           
+  v=v.replace(/(\d{4})(\d)/,"$1-$2")              
+  return v
+}
 
+// Para mostrar e esconder senha
 function togglePass() {
     const senha = document.getElementById("senha");
   if (senha.type === "password") {

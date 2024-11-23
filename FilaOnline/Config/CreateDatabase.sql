@@ -5,7 +5,7 @@ use app_fila;
 create table conta (
     id INT AUTO_INCREMENT not null PRIMARY KEY,
     name VARCHAR(60),
-    email VARCHAR(100),
+    email VARCHAR(100) unique,
     telefone varchar(15),
     senha VARCHAR(40),
     foto text,
@@ -17,7 +17,7 @@ create table conta (
 create table estabelecimento(
     id INT AUTO_INCREMENT not null PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL unique,
     cnpj INT NOT NULL,
     endereco VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,

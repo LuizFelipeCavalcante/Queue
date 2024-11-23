@@ -61,7 +61,7 @@ class ContaDAOImpl implements ContaDAO
             
             return $statement->execute();
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            throw $e;
         }
     }
 

@@ -77,14 +77,24 @@ switch ($action) {
             $estabelecimento->setSenha($_POST['senha']);
 
             $conta = $estabelecimentoDao->createEstabelecimento($estabelecimento);
+ 
+        try {    
             if ($conta) {
                 $estabelecimentoController->validaConta($estabelecimento->getEmail(), $estabelecimento->getSenha());
-            break;
-                
+            break;               
             } else {
                 displayMessage('Erro ao inserir o registro.');
             }
+        } catch (PDOException $e) {
+             // Verifica se o erro é de violação de chave única
+             if ($e->getCode() === '23000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                displayMessage('O email informado já está em uso. Por favor, utilize outro email.');
+            } else {
+                // Exibe uma mensagem genérica para outros erros
+                displayMessage('Erro ao inserir o registro: ' . $e->getMessage());
+            }
         }
+    }
         break;
 
     case 'valida_conta':
