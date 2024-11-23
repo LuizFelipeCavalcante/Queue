@@ -32,6 +32,10 @@ body {
     
 }
 
+.signup-container{
+    padding-bottom: 10px;
+}
+
 /* Estilo da caixa de cadastro */
 .signup-box {
     width: 100%;
@@ -44,6 +48,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 10px #2369b3;
     text-align: center;
+    margin-top: 200px;
 }
 
 /* Cabeçalho do formulário */
@@ -151,8 +156,12 @@ body {
 @media (max-width: 1024px) {
     .signup-box {
         width: 90%;
+        margin-top: 10px;
     }
 
+    .signup-container{
+        padding-bottom: 5px;
+    }
     .navbar-nav .nav-link {
         font-size: 1rem;
         padding: 8px 15px;
@@ -166,6 +175,11 @@ body {
 @media (max-width: 768px) {
     .signup-box {
         width: 85%;
+        margin-top: 10px;
+    }
+
+    .signup-container{
+        padding-bottom: 5px;
     }
 
     .btn-entrar {
@@ -190,6 +204,7 @@ body {
     .signup-box {
         width: 90%;
         padding: 20px;
+        margin-top: 10px;
     }
 
     .btn-entrar {
@@ -233,6 +248,7 @@ body {
     .signup-box {
         width: 95%;
         padding: 15px;
+        margin-top: 10px;
     }
 
     .btn-entrar {

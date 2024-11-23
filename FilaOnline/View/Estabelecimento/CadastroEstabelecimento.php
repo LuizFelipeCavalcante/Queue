@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Codigo Fila</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="css/CadastroEstabelecimento.css">
+<link rel="stylesheet" href="css/CadastroEstabelecimentoQueue.css">
 <script src="js/CadastroEstabelecimento.js" type="text/javascript" defer></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -13,7 +12,6 @@
 </head>
 
 <body>
-    <link rel="stylesheet" href="css/CadastroEstabelecimento.css">
 <?php
     include "../Layout/HeaderEstabelecimento.php"
 ?>
