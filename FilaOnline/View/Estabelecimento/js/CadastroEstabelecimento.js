@@ -1,19 +1,3 @@
-// Mascara de Telefone 
-const handlePhone = (event) => {
-    let telefone = event.target
-    telefone.value = phoneMask(telefone.value)
-  }
-  
-  const phoneMask = (value) => {
-    if (!value) return ""
-  value = value.replace(/\D/g,"")                           
-  value = value.replace(/^(\d{2})(\d)/,"$1.$2")             
-  value = value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") 
-  value = value.replace(/\.(\d{3})(\d)/,".$1/$2")           
-  value = value.replace(/(\d{4})(\d)/,"$1-$2")              
-  return value
-  }
-
 // Mascara de CNPJ
 const handleCnpj = (event) => {
   let cnpj = event.target

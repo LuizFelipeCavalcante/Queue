@@ -38,7 +38,7 @@
 				
 
 				<label for="cnpj">CNPJ:</label>
-                <input  type="text" id="cnpj" name="cnpj" maxlength="18" onkeyup="handlePhone(event)" required>
+                <input  type="text" id="cnpj" name="cnpj" maxlength="18" onkeyup="handleCnpj(event)" required>
 	            </div>
 	            <div class="form-group">
 				
