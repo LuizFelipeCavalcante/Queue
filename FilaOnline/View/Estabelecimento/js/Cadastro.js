@@ -6,24 +6,27 @@ const handlePhone = (event) => {
   
   const phoneMask = (value) => {
     if (!value) return ""
-    value = value.replace(/\D/g,'')
-    value = value.replace(/(\d{2})(\d)/,"($1) $2")
-    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-    return value
+  value = value.replace(/\D/g,"")                           
+  value = value.replace(/^(\d{2})(\d)/,"$1.$2")             
+  value = value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") 
+  value = value.replace(/\.(\d{3})(\d)/,".$1/$2")           
+  value = value.replace(/(\d{4})(\d)/,"$1-$2")              
+  return value
   }
 
 // Mascara de CNPJ
 const handleCnpj = (event) => {
-  let Cnpj = event.target
-  Cnpj.value = cnpjMask(telefone.value)
+  let cnpj = event.target
+  cnpj.value = cnpjMask(cnpj.value)
 }
-const cnpj(v){
-  v=v.replace(/\D/g,"")                           
-  v=v.replace(/^(\d{2})(\d)/,"$1.$2")             
-  v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") 
-  v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           
-  v=v.replace(/(\d{4})(\d)/,"$1-$2")              
-  return v
+const cnpjMask = (value) => {
+  if (!value) return ""
+  value = value.replace(/\D/g,"")                           
+  value = value.replace(/^(\d{2})(\d)/,"$1.$2")             
+  value = value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") 
+  value = value.replace(/\.(\d{3})(\d)/,".$1/$2")           
+  value = value.replace(/(\d{4})(\d)/,"$1-$2")              
+  return value
 }
 
 // Para mostrar e esconder senha
