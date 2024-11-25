@@ -69,8 +69,9 @@ class FilaController
     }
     public function listarFilaUsuario($idUsuario)
     {
-        $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
-        $filauser = $this->filaDAOl->getFilaid($idFila[0]['filaAtual']);
+        try{ $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
+
+         $filauser = $this->filaDAOl->getFilaid($idFila[0]['filaAtual']);
         foreach ($filauser as &$fila) {
             $fila['qntPessoasFila'] = $this->filaDAOl->contarPessoasFila($fila['id']);
             $fila['tempoMedio'] = $this->calculoTempoMedio($fila['id']);
@@ -80,6 +81,16 @@ class FilaController
         echo ("A");
         header("Location: ../View/Usuario/FilaUsuario.php");
         exit();
+    } catch (PDOException $e) {
+        // Verifica se o erro é de violação de chave única
+        if ($e->getCode() === '42000' && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+            displayMessage('Você não está em uma fila','../View/Usuario/Estabelecimentos.php');
+        } else {
+            // Exibe uma mensagem genérica para outros erros
+            displayMessage('Você não está em uma fila: ','../View/Usuario/Estabelecimentos.php');
+        }
+    }
+
     }
     public function listarFilaId($idFila)
     {

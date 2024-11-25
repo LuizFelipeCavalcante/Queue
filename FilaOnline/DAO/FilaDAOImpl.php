@@ -88,13 +88,16 @@ class FilaDAOImpl implements FilaDAO
 
     function getFilaUsuario($idUsuario)
     {
-
+        try{
         $sql = "SELECT filaAtual from conta WHERE id = $idUsuario;";
 
         $statement = $this->conn->query($sql);
 
-
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (PDOException $e) {
+        throw $e;
+    }
     }
     function GetFilaId($idFila)
     {
