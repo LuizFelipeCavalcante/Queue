@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+// if (!isset($_SESSION['user_id'])) {
     ?>
-    <!DOCTYPE html>
+    <!-- <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -41,10 +41,10 @@ if (!isset($_SESSION['user_id'])) {
             <p><a href="../index.php">Voltar para página inicial</a></p>
         </div>
     </body>
-    </html>
+    </html> -->
     <?php
-    exit;
-}
+    // exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,8 +52,10 @@ if (!isset($_SESSION['user_id'])) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Perfil</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="css/PerfilEstab.css">
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/PerfilEstabQueue.css">
 <script src="js/Cadastro.js" type="text/javascript" defer></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -68,15 +70,17 @@ if (!isset($_SESSION['user_id'])) {
 <main>
     <div class="profile-container">
         <div class="profile-card">
+        
             
-            
-            <form class="form-horizontal" action="../../Controller/EstabelecimentoController?action=update_conta" method="post">
+            <form class="form-horizontal" action="../../Controller/EstabelecimentoController?action=update_conta" method="post" enctype="multipart/form-data">
                 <div class="profile-img-container">
-                    <img class="profile-img" src="" alt="Foto do perfil" />
+                <?php if (isset($_SESSION['logoEstabelecimento'])): ?>
+                    <img class="profile-img" src="data:image/jpeg;base64,<?php echo htmlspecialchars($_SESSION['logoEstabelecimento']); ?>" alt="Foto do perfil" />
+                    <?php endif; ?>
                     <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
                     <label class="btn btn-primary btn-block">
                         Trocar foto de perfil
-                        <input type="file" name="profile_img" accept="image/*" style="display: none;">
+                        <input type="file" name="logo" id="logo" accept="image/*" style="display: none;">
                     </label>
         
                 </div>

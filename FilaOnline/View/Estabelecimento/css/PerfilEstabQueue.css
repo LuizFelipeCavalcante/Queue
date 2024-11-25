@@ -7,11 +7,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
   padding: 20px;
 }
 .profile-card {
-  width: 100%;
+  width: 80%;
   max-width: 800px;
   background-color: #ffffff;
   color: #333;
@@ -72,6 +72,14 @@ body {
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+.form-horizontal{
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-bottom: 7%;
+  padding-top: 7%;
+  text-align: center;
+  
 }
 .container {
   background-color: #fff;

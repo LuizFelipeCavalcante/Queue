@@ -69,7 +69,7 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
     
     public function updateEstabelecimento($estabelecimento) {
         try {
-            $statement = $this->conn->prepare("UPDATE estabelecimento SET name = :nome, email = :email, cnpj = :cnpj, endereco = :endereco, descricao = :descricao WHERE id = :id");
+            $statement = $this->conn->prepare("UPDATE estabelecimento SET name = :nome, email = :email, cnpj = :cnpj, endereco = :endereco, descricao = :descricao, logo = :logo WHERE id = :id");
     
             // Use bindValue para passar os valores diretamente
             $statement->bindValue(':nome', $estabelecimento->getNome());
@@ -77,6 +77,7 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
             $statement->bindValue(':cnpj', $estabelecimento->getCnpj());
             $statement->bindValue(':endereco', $estabelecimento->getEndereco());
             $statement->bindValue(':descricao', $estabelecimento->getDescricao());
+            $statement->bindValue(':logo', $estabelecimento->getLogo());
             $statement->bindValue(':id', $estabelecimento->getId());
     
             // Executa a query

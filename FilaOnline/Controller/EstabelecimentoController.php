@@ -134,7 +134,14 @@ switch ($action) {
             $estabelecimento->setCnpj($_POST['cnpj']);
             $estabelecimento->setEndereco($_POST['endereco']);
             $estabelecimento->setDescricao($_POST['descricao']);
-            $estabelecimento->setLogo($_POST['logo']);
+
+            //colocar logo
+            $file = $_FILES['logo']['tmp_name'];
+            if (is_uploaded_file($file)) {
+                $imageData = file_get_contents($file);
+                $base64 = base64_encode($imageData);
+                $estabelecimento->setlogo($base64);}
+
             $estabelecimento->setSenha($_POST['senha']);
 
             $estabelecimento->setId($_SESSION['user_id']);
