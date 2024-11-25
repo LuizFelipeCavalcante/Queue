@@ -46,8 +46,8 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
 
     public function createEstabelecimento($estabelecimento) {
         try {
-            $statement = $this->conn->prepare("INSERT INTO estabelecimento (name, email, cnpj, endereco, descricao, senha) 
-                                               VALUES (:nome, :email, :cnpj, :endereco, :descricao, :senha)");
+            $statement = $this->conn->prepare("INSERT INTO estabelecimento (name, email, cnpj, endereco, descricao, senha, logo) 
+                                               VALUES (:nome, :email, :cnpj, :endereco, :descricao, :senha, :logo)");
     
             // Use bindValue para passar os valores diretamente
             $statement->bindValue(':nome', $estabelecimento->getNome());
@@ -56,6 +56,8 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
             $statement->bindValue(':endereco', $estabelecimento->getEndereco());
             $statement->bindValue(':descricao', $estabelecimento->getDescricao());
             $statement->bindValue(':senha', $estabelecimento->getSenha());
+            $statement->bindValue(':logo', $estabelecimento->getLogo());
+
     
             // Execute a query e retorne o resultado
             return $statement->execute();

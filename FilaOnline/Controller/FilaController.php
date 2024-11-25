@@ -40,21 +40,18 @@ class FilaController
     }
     public function listarFilasPorEstabelecimento($idEstabelecimento)
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
         // Obtém todas as filas do banco de dados via DAO
-        //mudar aqui ó
         $filas = $this->filaDAOl->getAllFilasPorEstabelecimento($idEstabelecimento);
         foreach ($filas as &$fila) {
             $fila['qntPessoasFila'] = $this->filaDAOl->contarPessoasFila($fila['id']);
             $fila['tempoMedio'] = $this->calculoTempoMedio($fila['id']);
         }
-        ;
+        
         $_SESSION['filas'] = $filas;
 
         header("Location: ../View/Estabelecimento/HomeEstabelecimento.php");
         exit();
+
     }
     public function listarFilaUsuariocomp($idUsuario)
     {
@@ -174,10 +171,11 @@ switch ($action) {
         header('Location: ../View/Estabelecimento/HomeEstabelecimento');
         break;
 
-
+//  lista todas as fila de um determinado estabelecimento
     case 'readfila_estabelecimentoid':
         $filaController->listarFilasPorEstabelecimento($id);
         break;
+
     case 'readfila_filaid':
         $filaController->listarFilaId($id);
         break;

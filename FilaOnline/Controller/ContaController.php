@@ -134,29 +134,9 @@ switch ($action) {
 
 
 //Processar Imagem
-function uploadImagem($imagem, $targetDir)
+function uploadImagem($imagem, $id)
 {
-    // Gera o caminho completo para o arquivo
-    $targetFile = $targetDir . basename($imagem["name"]);
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-    // Verifica se o arquivo é uma imagem
-    $check = getimagesize($imagem["tmp_name"]);
-    if ($check !== false) {
-        // Verifica se o diretório existe, caso contrário cria
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-
-        // Faz o upload da imagem
-        if (move_uploaded_file($imagem["tmp_name"], $targetFile)) {
-            return $targetFile; // Retorna o caminho completo da imagem
-        } else {
-            throw new Exception("Erro ao fazer upload da imagem.");
-        }
-    } else {
-        throw new Exception("Arquivo enviado não é uma imagem.");
-    }
+    
 }
 ;
 

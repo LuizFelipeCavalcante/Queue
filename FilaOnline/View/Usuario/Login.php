@@ -17,15 +17,14 @@
 </head>
 <body>
 
-    <?php
-         include "../Layout/HeaderUsuario.php"
-    ?>
+   
 	<div class="big-container">
 	<div class="signup-container">
 		<div class="signup-box">
 		<div class="btn-group" role="group" aria-label="Exemplo básico">
 			<a class="btn btn-primary" href="#" role="button">Usuario</a>
 			<a type="button" href="../Estabelecimento/LoginEstabelecimento.php" class="btn btn-outline-info">Estabelecimento</a>
+			
 		</div>
 			<div><br></div>
 	        <h2>Login</h2>
@@ -44,6 +43,9 @@
 	        <div class="bottom-text">
 	            <p>Não possui conta? <a href="Cadastro">Faça seu cadastro aqui</a></p>
 	        </div>
+			<div class="btn-group" id="voltar">
+			<a type="button" href="../../index.php" class="btn btn-outline-info">Voltar</a>
+			</div>
 	    </div>
         
 	</div>

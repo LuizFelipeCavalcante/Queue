@@ -20,9 +20,7 @@
 </head>
 
     <body>
-        <?php
-         include "../Layout/HeaderEstabelecimento.php"
-            ?>
+       
         <div class="big-container">
             <div class="signup-container">
                 <div class="signup-box">
@@ -53,6 +51,9 @@
                     <div class="bottom-text">
                         <p>Não possui conta? <a href="CadastroEstabelecimento">Faça seu cadastro aqui</a></p>
                     </div>
+                    <div class="btn-group" id="voltar">
+			<a type="button" href="../../index.php" class="btn btn-outline-info">Voltar</a>
+			</div>
                 </div>
             </div>
         </div>

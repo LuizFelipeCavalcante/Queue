@@ -14,14 +14,16 @@
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto text-center">
-                
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:history.back()">
-                        <i class="fas fa-list-alt"></i> Voltar
-                    </a>
-                </li>
-                
+               <li class=nav-item>
+            <a class="nav-item nav-link" href="Controller/EstabelecimentoController?action=readall_estabelecimento">
+                    Estabelecimentos
+                </a>
+                </li> 
+            <li class="nav-item">
+                        <a class="nav-link" href="View/Estabelecimento/LoginEstabelecimento.php">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
 
                 <!-- Condições para usuários não logados -->
                 <?php if (!isset($_SESSION['user_id'])): ?>

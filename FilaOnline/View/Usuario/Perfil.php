@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     ?>
     <!DOCTYPE html>
     <html lang="pt-BR">
+
     <body>
         <div class="container">
             <h1>Deslogado</h1>
@@ -20,6 +21,7 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,21 +41,21 @@ if (!isset($_SESSION['user_id'])) {
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <main>
             <div class="profile-container">
                 <div class="profile-card">
-                    <form class="form-horizontal" action="../Controller/ContaController?action=update_img" method="post"
-                        enctype="multipart/form-data">
-                        <div class="profile-img-container">
-                            <?php if (isset($_SESSION['foto'])): ?>
-                                <img class="profile-img"
-                                    src="data:image/jpeg;base64,<?php echo htmlspecialchars($_SESSION['foto']); ?>"
-                                    alt="Foto do perfil" id="profileImg" />
-                            <?php endif; ?>
-                            <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
 
-                        </div>
-                    </form>
+                    <div class="profile-img-container">
+                        <?php if (isset($_SESSION['foto'])): ?>
+                            <img class="profile-img"
+                                src="data:image/jpeg;base64,<?php echo htmlspecialchars($_SESSION['foto']); ?>"
+                                alt="Foto do perfil" id="profileImg" />
+                        <?php endif; ?>
+                        <h3 class="profile-username"><?php echo $_SESSION['user_name']; ?></h3>
+                    </div>
+
                     <form class="form-horizontal" action="../../Controller/ContaController?action=update_conta"
                         method="post" enctype="multipart/form-data">
                         <label class="btn btn-primary btn-block">
@@ -72,7 +74,7 @@ if (!isset($_SESSION['user_id'])) {
                                 value="<?php echo $_SESSION['email']; ?>">
                         </div>
                         <div class="form-group">
-                        <label for="telefone">Telefone:</label>
+                            <label for="telefone">Telefone:</label>
                             <input type="tel" maxlength="15" onkeyup="handlePhone(event)" class="form-control"
                                 id="telefone" name="telefone" value="<?php echo $_SESSION['telefone']; ?>"
                                 title="Número de telefone precisa ser no formato (00) 0 0000-0000" />

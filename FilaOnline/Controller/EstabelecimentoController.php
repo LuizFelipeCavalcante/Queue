@@ -35,10 +35,15 @@ class EstabelecimentoController
     {
         // Obtém todas as filas do banco de dados via DAO
         $filaestabelecimento = $this->estabelecimentoDAOl->getFilaEstabelecimento($idEstabelecimento);
-        $_SESSION['filasestabelecimento'] = $filaestabelecimento;
+        if(isset($filaestabelecimento['idFila'])){
+            $_SESSION['filasestabelecimento'] = $filaestabelecimento;
 
         header("Location: ../View/Usuario/FilasPEstabelecimento.php");
         exit();
+        }
+        else{
+        displayMessage('Estabelecimento sem fila', '../View/Usuario/Estabelecimentos.php');
+    }
     }
     public function validaConta($email, $senha)
     {
@@ -75,6 +80,15 @@ switch ($action) {
             $estabelecimento->setEndereco($_POST['endereco']);
             $estabelecimento->setDescricao($_POST['descricao']);
             $estabelecimento->setSenha($_POST['senha']);
+            // Coloca foto
+            $file = $_FILES['foto']['tmp_name'];
+            if (is_uploaded_file($file)) {
+                $imageData = file_get_contents($file);
+                $base64 = base64_encode($imageData);
+                $estabelecimento->setlogo($base64);
+            } else {//colocar foto padrao
+            }
+
 
             try {
                 $conta = $estabelecimentoDao->createEstabelecimento($estabelecimento);
