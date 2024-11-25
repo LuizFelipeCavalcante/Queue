@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" href="../../index.php">
-            <img src="../../img/logo01.png" alt="Logo" style="max-height: 45px;">
+            <img src="http://localhost/Queue/FilaOnline/img/logo01.png" alt="Logo" style="max-height: 45px;">
         </a>
 
         <!-- Toggler Button for Mobile -->

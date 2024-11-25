@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Codigo Fila</title>
-    <link rel="stylesheet" href="css/CadastroUsuario.css">
+    <link rel="stylesheet" href="css/CadastroUsuarioQueue.css">
     <script src="js/Cadastro.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

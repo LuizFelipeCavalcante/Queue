@@ -10,6 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 			<div class="signup-box">
 
 				<h2>Cadastro Estabelecimento</h2>
-				<form action="../../Controller/EstabelecimentoController?action=create_conta" method="post">
+				<form action="../../Controller/EstabelecimentoController?action=create_conta" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="nome">Nome:</label>
 						<input type="text" id="nome" name="nome" required>
@@ -60,10 +61,10 @@
 					</div>
 					<a href="/"><button class="btn-entrar" type="submit">Cadastrar</button></a>
 					<div class="bottom-text">
-						<label for="img">Foto de Perfil:</label>
-						<div>
-							<input type="file" id="foto" name="foto" accept="image/*">
-						</div>
+					<label for="img">Foto de Perfil:</label>
+                        <div>
+                            <input type="file" id="foto" name="foto" accept="image/*" >
+                        </div>
 						<p>Já possui conta? <a href="LoginEstabelecimento">Faça login aqui!</a></p>
 					</div>
 				</form>

@@ -86,9 +86,14 @@ switch ($action) {
                 $imageData = file_get_contents($file);
                 $base64 = base64_encode($imageData);
                 $estabelecimento->setlogo($base64);
-            } else {//colocar foto padrao
-            }
+                
+            } else {
+                $defaultImagePath = 'C:\wamp64\www\Queue\FilaOnline\Img\Conta.png';
 
+                $defaultImageData = file_get_contents($defaultImagePath);
+                $defaultBase64 = base64_encode($defaultImageData);
+                $estabelecimento->setlogo($defaultBase64);
+            }
 
             try {
                 $conta = $estabelecimentoDao->createEstabelecimento($estabelecimento);
@@ -129,7 +134,7 @@ switch ($action) {
             $estabelecimento->setCnpj($_POST['cnpj']);
             $estabelecimento->setEndereco($_POST['endereco']);
             $estabelecimento->setDescricao($_POST['descricao']);
-            // $estabelecimento->setLogo($_POST['logo']);
+            $estabelecimento->setLogo($_POST['logo']);
             $estabelecimento->setSenha($_POST['senha']);
 
             $estabelecimento->setId($_SESSION['user_id']);

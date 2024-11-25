@@ -39,7 +39,7 @@
                     <?php if (isset($_SESSION['user_id'])): ?>
                         
                     <a class="nav-item nav-link" href="../../Controller/FilaController?action=readfila_usuario&id=<?php echo htmlspecialchars($_SESSION['user_id'])?>">
-                        fila atual
+                       Sua Fila
                     </a>
                    
                     <?php endif ?>
@@ -54,7 +54,7 @@
                     </a>
                     <?php endif ?>
                     <!-- Verificação se é um estabelecimento -->
-                    <?php if (!isset($_SESSION['estabelecimento'])): ?>
+                    <?php if (isset($_SESSION['estabelecimento'])): ?>
                     <a class="nav-item nav-link text-muted"><b></b></a>
                 <?php else: ?>
                         <a class="nav-item nav-link text-success">

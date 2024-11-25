@@ -44,8 +44,8 @@
                                     class="btn btn-primary">
                                     <div class="card">
 
-                                        <?php if (isset($estabelecimento['img'])): ?>
-                                            <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($estabelecimento['img']); ?>"
+                                        <?php if (isset($estabelecimento['logo'])): ?>
+                                            <img src="data:image/jpeg;base64,<?php echo htmlspecialchars($estabelecimento['logo']); ?>"
                                                 class="card-img-top" alt="Fila 1">
                                         <?php else: ?>
                                             <img src="https://via.placeholder.com/150" class="card-img-top" alt="Fila 1">
