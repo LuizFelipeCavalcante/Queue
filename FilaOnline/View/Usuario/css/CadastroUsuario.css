@@ -17,13 +17,15 @@ html {
 }
 
 .signup-box {
-    width: 400px;
+    width: 100%;
+    max-width: 400px; /* Garante que o formulário não ultrapasse esse valor em telas grandes */
     background-color: #ffffff;
     color: #808080;
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px #2369b3;
     text-align: center;
+    margin: 0 auto; /* Garantir que o formulário fique centralizado */
 }
 
 .signup-box h2 {
@@ -45,7 +47,6 @@ html {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    
 }
 
 .form-group input {
@@ -125,9 +126,41 @@ html {
 }
 
 /* Media Queries */
-@media (max-width: 400px) {
+@media (max-width: 1024px) {
     .signup-box {
-        width: 90%;
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    .btn-entrar {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .signup-box {
+        width: 75%;
+        margin-top: 10px;
+    }
+
+    .btn-entrar {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .signup-box {
+        width: 70%;
         padding: 20px;
     }
 
@@ -135,4 +168,66 @@ html {
         font-size: 0.9rem;
         padding: 8px;
     }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .signup-box {
+        width: 85%;
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    .btn-entrar {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .navbar-brand img {
+        max-height: 35px;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Navbar fica em coluna em telas pequenas */
+    }
+}
+
+@media (max-width: 400px) {
+    .signup-box {
+        width: 90%;
+        padding: 15px;
+        margin-top: 10px;
+    }
+
+    .btn-entrar {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .navbar-brand img {
+        max-height: 30px;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Navbar fica em coluna em telas pequenas */
+    }
+
+    .form-group input {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}
+
