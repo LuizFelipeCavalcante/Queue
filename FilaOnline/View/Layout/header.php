@@ -20,7 +20,7 @@
                 </a>
                 </li> 
             <li class="nav-item">
-                        <a class="nav-link" href="View/Estabelecimento/LoginEstabelecimento.php">
+                        <a class="nav-link" href="View/Usuario/Login.php">
                             <i class="fas fa-sign-in-alt"></i> Login
                         </a>
                     </li>

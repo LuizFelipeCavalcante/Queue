@@ -3,16 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
     overflow-x: hidden;
     background-color: white;
 }
-
 body {
     font-family: 'Poppins', sans-serif;
 }
-
 /* Estilo do container principal */
 .big-container {
     display: flex;
@@ -22,7 +19,6 @@ body {
     margin: 0 auto;
     margin-top: 0;
 }
-
 /* Estilo do container */
 .container {
     background-color: #fff;
@@ -30,7 +26,6 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-
 /* Estilo da caixa de cadastro */
 .signup-box {
     width: 100%;
@@ -45,25 +40,21 @@ body {
     text-align: center;
     margin-top: 30px; /* Menor valor para mover para cima */
 }
-
 /* Cabeçalho do formulário */
 .signup-box h2 {
     margin-bottom: 20px;
     font-size: 1.5rem;
 }
-
 /* Estilo para os campos de entrada do formulário */
 .form-group {
     
     text-align: left;
 }
-
 .form-group label {
     display: block;
     margin-bottom: 0px;
     font-size: 10px;
 }
-
 .form-group input {
     width: 100%;
     padding: 6px;
@@ -71,14 +62,12 @@ body {
     border: 1px solid #2e9fea;
     border-radius: 10px;
 }
-
 /* Estilo do botão de senha */
 .btnsenha {
     border: none;
     background: transparent;
     cursor: pointer;
 }
-
 /* Botão principal de envio */
 .btn-entrar {
     width: 100%;
@@ -95,28 +84,22 @@ body {
 .btn-entrar:hover {
     background-color: #3174d9;
 }
-
 /* Texto abaixo do formulário */
 .bottom-text {
     margin-top: 20px;
 }
-
 .bottom-text p {
     color: #66b1e3;
     font-size: 0.9rem;
 }
-
 .bottom-text a {
     color: #808080;
     text-decoration: underline;
     transition: color 0.3s ease;
 }
-
 .bottom-text a:hover {
     color: #9a9a9a;
 }
-
-/* Estilo para a navbar */
 .navbar-nav .nav-link {
     color: #2e9fea !important;
     border: 1px solid #d3d3d3;
@@ -125,24 +108,17 @@ body {
     margin: 2px;
     transition: background-color 0.3s, border-color 0.3s;
 }
-
 .navbar-nav .nav-link:hover {
     background-color: #e9f5fc;
     border-color: #2e9fea;
     color: #2e9fea !important;
 }
-
-/* Logo na barra de navegação */
 .navbar-brand img {
     max-height: 50px;
 }
-
-/* Centraliza a navbar */
 .navbar {
     text-align: center;
 }
-
-/* Alinha os itens da navbar no centro */
 .navbar-collapse {
     justify-content: center;
 }
@@ -261,11 +237,153 @@ body {
     }
 
     .navbar-nav {
-        flex-direction: column; /* Navbar fica em coluna em telas pequenas */
+        flex-direction: column; 
     }
 
     .form-group input {
         padding: 8px;
         font-size: 0.9rem;
     }
+}
+
+/* Container geral */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}
+.text-section {
+    flex: 1; 
+    padding-right: 20px; 
+}
+/* Título */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-right: 20px;
+    flex-basis: 30%; 
+    text-align: center;
+}
+
+/* Descrição */
+.section-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    flex-basis: 40%;
+}
+.image-section img {
+    height: 400px;
+}
+/* Imagem */
+.section-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; 
+    flex-basis: 25%; 
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-section, .image-section {
+        flex: 1 100%;
+        text-align: center;
+        margin-bottom: 20px; 
+    }
+
+    .image-section img {
+        max-width: 200px; 
+    }
+}
+.background img {
+    height: 450px;
+    width: 100%;
+}
+
+@media (max-width: 767px) { /* Para dispositivos móveis em geral */
+    .background img {
+        height: auto; /* Ajusta automaticamente a altura */
+        width: 100%; /* A largura continua ocupando 100% */
+    }
+}
+
+@media (max-width: 480px) { /* Para telas menores, como celulares pequenos */
+    .background img {
+        height: auto; /* Mantém a altura automática para não deformar */
+        width: 100%; /* A largura continua ocupando 100% */
+    }
+}
+
+/* Estilo do contêiner do texto */
+.about-company {
+    background-color: #f3f8fa; /* Cor de fundo suave */
+    padding: 20px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade */
+    max-width: 700px; /* Limita a largura para um bom design em telas grandes */
+    margin: 0 auto; /* Centraliza o conteúdo */
+    font-family: 'Arial', sans-serif; /* Fonte moderna e limpa */
+}
+
+/* Estilo dos parágrafos */
+.about-company p {
+    font-size: 1.2rem; /* Tamanho de fonte confortável */
+    line-height: 1.8; /* Espaçamento entre as linhas para facilitar a leitura */
+    color: #333; /* Cor do texto, um tom de cinza escuro para boa legibilidade */
+    margin-bottom: 20px; /* Espaçamento entre os parágrafos */
+}
+
+/* Estilo para a primeira frase (destacar um pouco mais) */
+.about-company p:first-of-type {
+    font-weight: bold; /* Título em negrito */
+    font-size: 1.3rem; /* Um pouco maior que os outros parágrafos */
+    color: #2e9fea; /* Cor mais forte, usando a cor solicitada */
+}
+
+/* Adicionar hover no contêiner (efeito sutil ao passar o mouse) */
+.about-company:hover {
+    transform: scale(1.02); /* Leve aumento no tamanho ao passar o mouse */
+    transition: all 0.3s ease; /* Transição suave */
+}
+/* Estilo geral da lista de recursos */
+.feature-list {
+    background-color: #f3f8fa; /* Cor de fundo clara */
+    padding: 20px;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    max-width: 600px; /* Limita a largura para não ocupar toda a tela */
+    margin: 0 auto; /* Centraliza no layout */
+}
+
+/* Estilo de cada item da lista */
+.feature-item {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 15px; /* Espaçamento entre os tópicos */
+    padding-left: 30px; /* Espaçamento à esquerda para alinhar com o número */
+    position: relative;
+}
+
+/* Número do tópico */
+.feature-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2e9fea; /* Cor #2e9fea para os números */
+    position: absolute;
+    left: 0; /* Coloca o número à esquerda */
+    top: 0; /* Alinha o número ao topo */
+}
+
+/* Estilo ao passar o mouse sobre os itens */
+.feature-item:hover {
+    background-color: #e0f7fa; /* Cor de fundo quando passar o mouse */
+    border-radius: 8px; /* Bordas arredondadas quando o item for destacado */
+    cursor: pointer;
 }
