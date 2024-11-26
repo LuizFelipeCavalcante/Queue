@@ -69,6 +69,10 @@ class FilaController
     }
     public function listarFilaUsuario($idUsuario)
     {
+        
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } 
         try{ $idFila = $this->filaDAOl->getFilaUsuario($idUsuario);
 
          $filauser = $this->filaDAOl->getFilaid($idFila[0]['filaAtual']);
@@ -194,12 +198,20 @@ switch ($action) {
             $filaController->listarFilaIdcomp($id);
             break;
     case 'readfila_usuario':
+        
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } 
         $filaController->listarFilaUsuario($id);
         break;
         case 'readfila_usuariocomp':
             $filaController->listarFilaUsuariocomp($id);
             break;
     case 'entrar_fila':
+        
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    } 
         $filaid = $id;
         if
         ($filaDao->GetFilaId($id) != null) {

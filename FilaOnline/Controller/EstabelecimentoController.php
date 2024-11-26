@@ -35,7 +35,7 @@ class EstabelecimentoController
     {
         // Obtém todas as filas do banco de dados via DAO
         $filaestabelecimento = $this->estabelecimentoDAOl->getFilaEstabelecimento($idEstabelecimento);
-        if(isset($filaestabelecimento['idFila'])){
+        if(isset($filaestabelecimento)){
             $_SESSION['filasestabelecimento'] = $filaestabelecimento;
 
             header("Location: ../View/Usuario/FilasPEstabelecimento.php");

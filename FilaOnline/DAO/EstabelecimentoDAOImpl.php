@@ -108,12 +108,22 @@ class EstabelecimentoDAOImpl Implements EstabelecimentoDAO{
     }
     function getFilaEstabelecimento($idEstabelecimento)
     {
-
+    try {
         $sql = "SELECT estabelecimento.id, NAME nomeempresa, EMAIL, CNPJ, estabelecimento.ENDERECO enderecoestabelecimento, descricao, logo, senha, fila.id idFila, nome nomefila, tempomedio, qntpessoasfila, fila.endereco enderecofila, img, inicio, termino FROM ESTABELECIMENTO LEFT JOIN FILA ON(estabelecimento.id = fila.idEstabelecimento) WHERE estabelecimento.id = $idEstabelecimento;";
 
         $statement = $this->conn->query($sql);
 
-
+        if ($statement->rowCount() > 0) {
+            // Atualização bem-sucedida, você pode retornar o objeto atualizado
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            // Nenhuma linha foi atualizada
+            return null;
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }    
+        
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 

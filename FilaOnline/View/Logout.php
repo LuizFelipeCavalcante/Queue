@@ -2,7 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-displayMessage('Usuario deslogado com sucesso', 'http://localhost/Queue/FilaOnline/index');
+displayMessage('Usuario deslogado com sucesso', 'http://localhost/Queue/FilaOnline/index.php');
 exit;
 
 
