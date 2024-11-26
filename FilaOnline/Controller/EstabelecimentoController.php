@@ -38,12 +38,11 @@ class EstabelecimentoController
         if(isset($filaestabelecimento['idFila'])){
             $_SESSION['filasestabelecimento'] = $filaestabelecimento;
 
-        header("Location: ../View/Usuario/FilasPEstabelecimento.php");
-        exit();
+            header("Location: ../View/Usuario/FilasPEstabelecimento.php");
+            exit();
+        } else {
+            displayMessage('Estabelecimento sem fila', '../View/Usuario/Estabelecimentos.php');
         }
-        else{
-        displayMessage('Estabelecimento sem fila', '../View/Usuario/Estabelecimentos.php');
-    }
     }
     public function validaConta($email, $senha)
     {
@@ -86,18 +85,17 @@ switch ($action) {
                 $imageData = file_get_contents($file);
                 $base64 = base64_encode($imageData);
                 $estabelecimento->setlogo($base64);
-                
-            } else {
-                $defaultImagePath = 'C:\wamp64\www\Queue\FilaOnline\Img\Conta.png';
+            } else {$defaultImagePath = 'C:\wamp64\www\Queue\FilaOnline\Img\Conta.png';
 
                 $defaultImageData = file_get_contents($defaultImagePath);
                 $defaultBase64 = base64_encode($defaultImageData);
                 $estabelecimento->setlogo($defaultBase64);
             }
 
+
             try {
                 $conta = $estabelecimentoDao->createEstabelecimento($estabelecimento);
-            
+
                 if ($conta) {
                     $estabelecimentoController->validaConta($estabelecimento->getEmail(), $estabelecimento->getSenha());
                 } else {
@@ -112,7 +110,7 @@ switch ($action) {
                     displayMessage('Erro ao inserir o registro. Tente novamente mais tarde.');
                 }
             }
-            
+
         }
         break;
 
@@ -134,14 +132,11 @@ switch ($action) {
             $estabelecimento->setCnpj($_POST['cnpj']);
             $estabelecimento->setEndereco($_POST['endereco']);
             $estabelecimento->setDescricao($_POST['descricao']);
-
-            //colocar logo
             $file = $_FILES['logo']['tmp_name'];
             if (is_uploaded_file($file)) {
                 $imageData = file_get_contents($file);
                 $base64 = base64_encode($imageData);
                 $estabelecimento->setlogo($base64);}
-
             $estabelecimento->setSenha($_POST['senha']);
 
             $estabelecimento->setId($_SESSION['user_id']);

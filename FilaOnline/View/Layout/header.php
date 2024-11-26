@@ -1,7 +1,7 @@
 <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-2">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="../../index.php">
+        <a class="navbar-brand" href="http://localhost/Queue/FilaOnline/index">
             <img src="http://localhost/Queue/FilaOnline/img/logo01.png" alt="Logo" style="max-height: 45px;">
         </a>
 
